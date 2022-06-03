@@ -8,7 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="color_primary">#65CF5C</color>
-    <color name="color_primary_variant">#2E9A24</color>
+    <color name="color_primary">#65D15C</color>
+    <color name="color_primary_variant">#2F9B26</color>
+    <color name="color_number">#373737</color>
+    <color name="color_inactive_number">#00000033</color>
+    <color name="color_letter">#3AA631</color>
+    <color name="color_inactive_letter">#3AA63180</color>
 
 </resources>
