@@ -5,5 +5,25 @@
     <string name="oct">OCT</string>
     <string name="dec">DEC</string>
     <string name="hex">HEX</string>
+    <string name="show_solutions">Show solutions</string>
+    <string name="zero">0</string>
+    <string name="dot">.</string>
+    <string name="letter_a">A</string>
+    <string name="letter_b">B</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="letter_c">С</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="letter_d">D</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="letter_e">E</string>
+    <string name="letter_f">F</string>
+    <string name="ac">AC</string>
+    <string name="backspace">Backspace</string>
 
 </resources>
