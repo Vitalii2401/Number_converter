@@ -46,6 +46,129 @@
 
     <!---->
 
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/dot_selected_mode"
+        app:layout_constraintBottom_toBottomOf="@id/text_bin"
+        app:layout_constraintEnd_toStartOf="@id/start_guideline"
+        app:layout_constraintTop_toTopOf="@id/text_bin" />
+
+    <TextView
+        android:id="@+id/text_bin"
+        style="@style/textNumberSystem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bin"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+
+    <TextView
+        android:id="@+id/text_oct"
+        style="@style/textNumberSystem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="@string/oct"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_bin" />
+
+    <TextView
+        android:id="@+id/text_dec"
+        style="@style/textNumberSystem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="@string/dec"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_oct" />
+
+    <TextView
+        android:id="@+id/text_hex"
+        style="@style/textNumberSystem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="@string/hex"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_dec" />
+
+    <TextView
+        android:id="@+id/text_answer_bin"
+        style="@style/textAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_bin"
+        app:layout_constraintStart_toEndOf="@id/text_bin"
+        app:layout_constraintTop_toTopOf="@id/text_bin"
+        tools:text="10101" />
+
+    <TextView
+        android:id="@+id/text_answer_oct"
+        style="@style/textAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/text_oct"
+        app:layout_constraintStart_toStartOf="@id/text_answer_bin"
+        app:layout_constraintTop_toTopOf="@id/text_oct"
+        tools:text="25" />
+
+    <TextView
+        android:id="@+id/text_answer_dec"
+        style="@style/textAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/text_dec"
+        app:layout_constraintStart_toStartOf="@id/text_answer_bin"
+        app:layout_constraintTop_toTopOf="@id/text_dec"
+        tools:text="21" />
+
+    <TextView
+        android:id="@+id/text_answer_hex"
+        style="@style/textAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/text_hex"
+        app:layout_constraintStart_toStartOf="@id/text_answer_bin"
+        app:layout_constraintTop_toTopOf="@id/text_hex"
+        tools:text="15" />
+
+
+    <Button
+        android:id="@+id/btn_solutions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_rounded_background"
+        android:fontFamily="@font/montserrat_medium"
+        android:paddingHorizontal="12dp"
+        android:text="Show solutions"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/top_keyboard_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_keyboard_guideline" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/color_primary"
+        app:layout_constraintBottom_toBottomOf="@id/top_keyboard_guideline"
+        app:layout_constraintEnd_toStartOf="@id/btn_solutions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_keyboard_guideline" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/color_primary"
+        app:layout_constraintBottom_toBottomOf="@id/top_keyboard_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_solutions"
+        app:layout_constraintTop_toTopOf="@id/top_keyboard_guideline" />
+
     <!-- Keyboard -->
 
     <Button
@@ -233,7 +356,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_e"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
         app:layout_constraintStart_toEndOf="@+id/btn_backspace"
-        app:layout_constraintTop_toBottomOf="@+id/top_keyboard_guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
 
     <Button
         android:id="@+id/btn_backspace"
@@ -244,7 +367,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_9"
         app:layout_constraintEnd_toStartOf="@+id/btn_f"
         app:layout_constraintStart_toEndOf="@+id/btn_ac"
-        app:layout_constraintTop_toBottomOf="@+id/top_keyboard_guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
 
     <Button
         android:id="@+id/btn_ac"
@@ -255,7 +378,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_8"
         app:layout_constraintEnd_toStartOf="@+id/btn_backspace"
         app:layout_constraintStart_toEndOf="@+id/btn_7"
-        app:layout_constraintTop_toBottomOf="@+id/top_keyboard_guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
 
     <!---->
 

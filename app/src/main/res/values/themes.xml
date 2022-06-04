@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.NumberConverter" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -24,5 +24,17 @@
 
     <style name="buttonLetter" parent="buttonNumber">
         <item name="android:textColor">@color/color_letter</item>
+    </style>
+
+    <style name="textNumberSystem">
+        <item name="android:textColor">@color/color_number</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+    </style>
+
+    <style name="textAnswer">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 </resources>
