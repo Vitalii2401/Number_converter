@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/numberConverterFragment">
+
+    <fragment
+        android:id="@+id/numberConverterFragment"
+        android:name="com.vetall24.myapplication.NumberConverterFragment"
+        android:label="fragment_number_converter"
+        tools:layout="@layout/fragment_number_converter" />
+</navigation>
