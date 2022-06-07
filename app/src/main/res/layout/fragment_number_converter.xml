@@ -7,8 +7,6 @@
     android:background="@color/white"
     tools:context=".ui.numberconverter.NumberConverterFragment">
 
-    <!-- Guideline -->
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_guideline"
         android:layout_width="wrap_content"
@@ -44,7 +42,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
-    <!---->
 
     <View
         android:layout_width="10dp"
@@ -100,9 +97,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
-        app:layout_constraintBottom_toBottomOf="@id/text_bin"
-        app:layout_constraintStart_toEndOf="@id/text_bin"
-        app:layout_constraintTop_toTopOf="@id/text_bin"
+        app:layout_constraintBottom_toBottomOf="@+id/text_bin"
+        app:layout_constraintStart_toEndOf="@+id/text_bin"
+        app:layout_constraintTop_toTopOf="@+id/text_bin"
         tools:text="10101" />
 
     <TextView
@@ -110,9 +107,9 @@
         style="@style/textAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/text_oct"
-        app:layout_constraintStart_toStartOf="@id/text_answer_bin"
-        app:layout_constraintTop_toTopOf="@id/text_oct"
+        app:layout_constraintBottom_toBottomOf="@+id/text_oct"
+        app:layout_constraintStart_toStartOf="@+id/text_answer_bin"
+        app:layout_constraintTop_toTopOf="@+id/text_oct"
         tools:text="25" />
 
     <TextView
@@ -151,6 +148,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/top_keyboard_guideline" />
 
+
     <View
         android:layout_width="0dp"
         android:layout_height="2dp"
@@ -169,7 +167,6 @@
         app:layout_constraintStart_toEndOf="@id/btn_solutions"
         app:layout_constraintTop_toTopOf="@id/top_keyboard_guideline" />
 
-    <!-- Keyboard -->
 
     <Button
         android:id="@+id/btn_0"
@@ -363,12 +360,12 @@
         style="@style/buttonNumber"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/backspace"
         android:src="@drawable/ic_backspace"
         app:layout_constraintBottom_toTopOf="@+id/btn_9"
         app:layout_constraintEnd_toStartOf="@+id/btn_f"
         app:layout_constraintStart_toEndOf="@+id/btn_ac"
-        app:layout_constraintTop_toBottomOf="@+id/btn_solutions"
-        android:contentDescription="@string/backspace"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
 
     <Button
         android:id="@+id/btn_ac"
@@ -380,7 +377,5 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_backspace"
         app:layout_constraintStart_toEndOf="@+id/btn_7"
         app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
-
-    <!---->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
