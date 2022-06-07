@@ -1,10 +1,8 @@
 package com.vetall24.myapplication.ui.numberconverter
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.vetall24.myapplication.R
 import com.vetall24.myapplication.databinding.FragmentNumberConverterBinding
@@ -14,18 +12,15 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private lateinit var binding: FragmentNumberConverterBinding
     private val numberConverterViewModel by viewModels<NumberConverterViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MODE = getString(R.string.bin)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNumberConverterBinding.bind(view)
 
         handleClicks()
         updateUi()
+        selectMode()
     }
+
 
     private fun handleClicks() {
         with(binding) {
@@ -60,35 +55,47 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private fun updateUi() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
-            if(it.isEmpty())
+            if (it.isEmpty())
                 binding.textAnswerBin.text = "0"
             else
                 binding.textAnswerBin.text = it
         }
 
         numberConverterViewModel.oct.observe(viewLifecycleOwner) {
-            if(it.isEmpty())
+            if (it.isEmpty())
                 binding.textAnswerOct.text = "0"
             else
                 binding.textAnswerOct.text = it
         }
 
         numberConverterViewModel.dec.observe(viewLifecycleOwner) {
-            if(it.isEmpty())
+            if (it.isEmpty())
                 binding.textAnswerDec.text = "0"
             else
                 binding.textAnswerDec.text = it
         }
 
         numberConverterViewModel.hex.observe(viewLifecycleOwner) {
-            if(it.isEmpty())
+            if (it.isEmpty())
                 binding.textAnswerHex.text = "0"
             else
                 binding.textAnswerHex.text = it
         }
     }
 
+    private fun selectMode() {
+        with(binding) {
+            textBin.setOnClickListener { numberConverterViewModel.changeMode(MODE_BIN) }
+            textOct.setOnClickListener { numberConverterViewModel.changeMode(MODE_OCT) }
+            textDec.setOnClickListener { numberConverterViewModel.changeMode(MODE_DEC) }
+            textHex.setOnClickListener { numberConverterViewModel.changeMode(MODE_HEX) }
+        }
+    }
+
     companion object {
-        lateinit var MODE: String
+        const val MODE_BIN = "bin"
+        const val MODE_OCT = "oct"
+        const val MODE_DEC = "dec"
+        const val MODE_HEX = "hex"
     }
 }

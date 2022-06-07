@@ -7,6 +7,8 @@ import com.vetall24.myapplication.R
 
 class NumberConverterViewModel : ViewModel() {
 
+    private var mode = NumberConverterFragment.MODE_BIN
+
     private val _bin = MutableLiveData<String>()
     private val _oct = MutableLiveData<String>()
     private val _dec = MutableLiveData<String>()
@@ -18,13 +20,17 @@ class NumberConverterViewModel : ViewModel() {
     val hex: LiveData<String> = _hex
 
     fun addValue(value: String) {
-        when(NumberConverterFragment.MODE) {
+        when (mode) {
             "bin" -> _bin.value += value
             "oct" -> _oct.value += value
             "dec" -> _dec.value += value
             "hex" -> _hex.value += value
             else -> _bin.value += value
         }
+    }
+
+    fun changeMode(changedMode: String) {
+        mode = changedMode
     }
 
     init {
