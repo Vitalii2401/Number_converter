@@ -44,13 +44,8 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
             btnE.setOnClickListener { numberConverterViewModel.addValue("E") }
             btnF.setOnClickListener { numberConverterViewModel.addValue("F") }
 
-            btnBackspace.setOnClickListener {
-                // TODO
-            }
-
-            btnAc.setOnClickListener {
-                // TODO
-            }
+            btnBackspace.setOnClickListener { numberConverterViewModel.deleteValue() }
+            btnAc.setOnClickListener { numberConverterViewModel.deleteAllValue() }
         }
     }
 

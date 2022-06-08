@@ -26,13 +26,29 @@ class NumberConverterViewModel : ViewModel() {
             "oct" -> _oct.value += value
             "dec" -> _dec.value += value
             "hex" -> _hex.value += value
-            else -> _bin.value += value
+        }
+    }
+
+    fun deleteValue() {
+        when (mode) {
+            "bin" -> _bin.value = _bin.value.toString().dropLast(1)
+            "oct" -> _oct.value = _oct.value.toString().dropLast(1)
+            "dec" -> _dec.value = _dec.value.toString().dropLast(1)
+            "hex" -> _hex.value = _hex.value.toString().dropLast(1)
+        }
+    }
+
+    fun deleteAllValue() {
+        when (mode) {
+            "bin" -> _bin.value = ""
+            "oct" -> _oct.value = ""
+            "dec" -> _dec.value = ""
+            "hex" -> _hex.value = ""
         }
     }
 
     fun changeMode(changedMode: String) {
         mode = changedMode
-        Log.d("Mode", "changeMode: $mode")
     }
 
     init {
