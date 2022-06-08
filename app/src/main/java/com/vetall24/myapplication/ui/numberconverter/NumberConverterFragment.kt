@@ -3,6 +3,7 @@ package com.vetall24.myapplication.ui.numberconverter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import com.vetall24.myapplication.R
 import com.vetall24.myapplication.databinding.FragmentNumberConverterBinding
@@ -85,10 +86,82 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private fun selectMode() {
         with(binding) {
-            textBin.setOnClickListener { numberConverterViewModel.changeMode(MODE_BIN) }
-            textOct.setOnClickListener { numberConverterViewModel.changeMode(MODE_OCT) }
-            textDec.setOnClickListener { numberConverterViewModel.changeMode(MODE_DEC) }
-            textHex.setOnClickListener { numberConverterViewModel.changeMode(MODE_HEX) }
+            textBin.setOnClickListener {
+                numberConverterViewModel.changeMode(MODE_BIN)
+                changeUiAccordingToMode(MODE_BIN)
+            }
+            textOct.setOnClickListener {
+                numberConverterViewModel.changeMode(MODE_OCT)
+                changeUiAccordingToMode(MODE_OCT)
+            }
+            textDec.setOnClickListener {
+                numberConverterViewModel.changeMode(MODE_DEC)
+                changeUiAccordingToMode(MODE_DEC)
+            }
+            textHex.setOnClickListener {
+                numberConverterViewModel.changeMode(MODE_HEX)
+                changeUiAccordingToMode(MODE_HEX)
+            }
+        }
+    }
+
+    private fun changeUiAccordingToMode(mode: String) {
+        val modeIndicatorParams = binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
+        defaultState()
+        when (mode) {
+            MODE_BIN -> {
+                with(binding) {
+                    textAnswerBin.setTextAppearance(R.style.accentTextAnswer)
+                    textBin.setTextAppearance(R.style.accentTextNumberSystem)
+                    modeIndicatorParams.topToTop = textBin.id
+                    modeIndicatorParams.bottomToBottom = textBin.id
+                    modeIndicator.requestLayout()
+                }
+            }
+
+            MODE_OCT -> {
+                with(binding) {
+                    textAnswerOct.setTextAppearance(R.style.accentTextAnswer)
+                    textOct.setTextAppearance(R.style.accentTextNumberSystem)
+                    modeIndicatorParams.topToTop = textOct.id
+                    modeIndicatorParams.bottomToBottom = textOct.id
+                    modeIndicator.requestLayout()
+                }
+            }
+
+            MODE_DEC -> {
+                with(binding) {
+                    textAnswerDec.setTextAppearance(R.style.accentTextAnswer)
+                    textDec.setTextAppearance(R.style.accentTextNumberSystem)
+                    modeIndicatorParams.topToTop = textDec.id
+                    modeIndicatorParams.bottomToBottom = textDec.id
+                    modeIndicator.requestLayout()
+                }
+            }
+
+            MODE_HEX -> {
+                with(binding) {
+                    textAnswerHex.setTextAppearance(R.style.accentTextAnswer)
+                    textHex.setTextAppearance(R.style.accentTextNumberSystem)
+                    modeIndicatorParams.topToTop = textHex.id
+                    modeIndicatorParams.bottomToBottom = textHex.id
+                    modeIndicator.requestLayout()
+                }
+            }
+        }
+    }
+
+    private fun defaultState() {
+        with(binding) {
+            textBin.setTextAppearance(R.style.textNumberSystem)
+            textOct.setTextAppearance(R.style.textNumberSystem)
+            textDec.setTextAppearance(R.style.textNumberSystem)
+            textHex.setTextAppearance(R.style.textNumberSystem)
+
+            textAnswerBin.setTextAppearance(R.style.textAnswer)
+            textAnswerOct.setTextAppearance(R.style.textAnswer)
+            textAnswerDec.setTextAppearance(R.style.textAnswer)
+            textAnswerHex.setTextAppearance(R.style.textAnswer)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.vetall24.myapplication.ui.numberconverter
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,7 @@ class NumberConverterViewModel : ViewModel() {
 
     fun changeMode(changedMode: String) {
         mode = changedMode
+        Log.d("Mode", "changeMode: $mode")
     }
 
     init {

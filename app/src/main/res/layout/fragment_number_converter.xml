@@ -44,6 +44,7 @@
 
 
     <View
+        android:id="@+id/mode_indicator"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_marginEnd="8dp"
@@ -54,12 +55,12 @@
 
     <TextView
         android:id="@+id/text_bin"
-        style="@style/textNumberSystem"
+        style="@style/accentTextNumberSystem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bin"
         app:layout_constraintStart_toEndOf="@id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+        app:layout_constraintTop_toBottomOf="@id/top_guideline"/>
 
     <TextView
         android:id="@+id/text_oct"
@@ -93,7 +94,7 @@
 
     <TextView
         android:id="@+id/text_answer_bin"
-        style="@style/textAnswer"
+        style="@style/accentTextAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
