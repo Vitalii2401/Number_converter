@@ -3,7 +3,9 @@ package com.vetall24.myapplication.ui.numberconverter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.vetall24.myapplication.R
 import com.vetall24.myapplication.databinding.FragmentNumberConverterBinding
@@ -102,7 +104,9 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private fun changeUiAccordingToMode(mode: String) {
         val modeIndicatorParams = binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
+
         defaultState()
+
         when (mode) {
             MODE_BIN -> {
                 with(binding) {
@@ -111,6 +115,27 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     modeIndicatorParams.topToTop = textBin.id
                     modeIndicatorParams.bottomToBottom = textBin.id
                     modeIndicator.requestLayout()
+
+                    groupOct.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = false
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number))
+                        }
+                    }
+
+                    groupDec.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = false
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number))
+                        }
+                    }
+
+                    groupHex.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = false
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter))
+                        }
+                    }
                 }
             }
 
@@ -121,6 +146,27 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     modeIndicatorParams.topToTop = textOct.id
                     modeIndicatorParams.bottomToBottom = textOct.id
                     modeIndicator.requestLayout()
+
+                    groupOct.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = true
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                        }
+                    }
+
+                    groupDec.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = false
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number))
+                        }
+                    }
+
+                    groupHex.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = false
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter))
+                        }
+                    }
                 }
             }
 
@@ -131,6 +177,27 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     modeIndicatorParams.topToTop = textDec.id
                     modeIndicatorParams.bottomToBottom = textDec.id
                     modeIndicator.requestLayout()
+
+                    groupOct.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = true
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                        }
+                    }
+
+                    groupDec.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = true
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                        }
+                    }
+
+                    groupHex.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = false
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter))
+                        }
+                    }
                 }
             }
 
@@ -141,6 +208,27 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     modeIndicatorParams.topToTop = textHex.id
                     modeIndicatorParams.bottomToBottom = textHex.id
                     modeIndicator.requestLayout()
+
+                    groupOct.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = true
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                        }
+                    }
+
+                    groupDec.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = true
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                        }
+                    }
+
+                    groupHex.referencedIds.forEach { id ->
+                        with(view?.findViewById<Button>(id)) {
+                            this?.isClickable  = true
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_letter))
+                        }
+                    }
                 }
             }
         }

@@ -379,4 +379,22 @@
         app:layout_constraintStart_toEndOf="@+id/btn_7"
         app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_oct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btn_2,btn_3,btn_4,btn_5,btn_6,btn_7" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_dec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btn_8,btn_9" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_hex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btn_a,btn_b,btn_c,btn_d,btn_e,btn_f" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
