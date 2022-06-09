@@ -32,9 +32,17 @@
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
     </style>
 
+    <style name="accentTextNumberSystem" parent="textNumberSystem">
+        <item name="android:fontFamily">@font/montserrat_extra_bold</item>
+    </style>
+
     <style name="textAnswer">
         <item name="android:textColor">@color/color_primary</item>
         <item name="android:textSize">17sp</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="accentTextAnswer" parent="textAnswer">
+        <item name="android:textColor">@color/color_primary_variant</item>
     </style>
 </resources>
