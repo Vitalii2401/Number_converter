@@ -24,6 +24,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         handleClicks()
         updateUi()
         selectMode()
+        changeUiAccordingToMode()
     }
 
 
@@ -85,17 +86,27 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private fun selectMode() {
         with(binding) {
-            textBin.setOnClickListener { currentMode = MODE_BIN }
-            textOct.setOnClickListener { currentMode = MODE_OCT }
-            textDec.setOnClickListener { currentMode = MODE_DEC }
-            textHex.setOnClickListener { currentMode = MODE_HEX }
-
-            Log.d("Current", "selectMode: $currentMode")
+            textBin.setOnClickListener {
+                currentMode = MODE_BIN
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
+            }
+            textOct.setOnClickListener {
+                currentMode = MODE_OCT
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
+            }
+            textDec.setOnClickListener {
+                currentMode = MODE_DEC
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
+            }
+            textHex.setOnClickListener {
+                currentMode = MODE_HEX
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
+            }
         }
-
-        numberConverterViewModel.changeMode(currentMode)
-        changeUiAccordingToMode()
-
     }
 
     private fun changeUiAccordingToMode() {
