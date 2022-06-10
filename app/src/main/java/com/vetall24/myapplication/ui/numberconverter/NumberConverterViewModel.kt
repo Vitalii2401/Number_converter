@@ -1,10 +1,8 @@
 package com.vetall24.myapplication.ui.numberconverter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vetall24.myapplication.R
 
 class NumberConverterViewModel : ViewModel() {
 
