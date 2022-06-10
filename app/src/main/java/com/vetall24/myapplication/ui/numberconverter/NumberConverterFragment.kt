@@ -1,6 +1,7 @@
 package com.vetall24.myapplication.ui.numberconverter
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
@@ -14,6 +15,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private lateinit var binding: FragmentNumberConverterBinding
     private val numberConverterViewModel by viewModels<NumberConverterViewModel>()
+    private var currentMode = MODE_BIN
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,6 +24,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         handleClicks()
         updateUi()
         selectMode()
+        changeUiAccordingToMode()
     }
 
 
@@ -84,30 +87,34 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private fun selectMode() {
         with(binding) {
             textBin.setOnClickListener {
-                numberConverterViewModel.changeMode(MODE_BIN)
-                changeUiAccordingToMode(MODE_BIN)
+                currentMode = MODE_BIN
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
             }
             textOct.setOnClickListener {
-                numberConverterViewModel.changeMode(MODE_OCT)
-                changeUiAccordingToMode(MODE_OCT)
+                currentMode = MODE_OCT
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
             }
             textDec.setOnClickListener {
-                numberConverterViewModel.changeMode(MODE_DEC)
-                changeUiAccordingToMode(MODE_DEC)
+                currentMode = MODE_DEC
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
             }
             textHex.setOnClickListener {
-                numberConverterViewModel.changeMode(MODE_HEX)
-                changeUiAccordingToMode(MODE_HEX)
+                currentMode = MODE_HEX
+                numberConverterViewModel.changeMode(currentMode)
+                changeUiAccordingToMode()
             }
         }
     }
 
-    private fun changeUiAccordingToMode(mode: String) {
+    private fun changeUiAccordingToMode() {
         val modeIndicatorParams = binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
 
-        defaultState()
-
-        when (mode) {
+        noAccentState()
+        Log.d("Current", "changeUiAccordingToMode: $currentMode")
+        when (currentMode) {
             MODE_BIN -> {
                 with(binding) {
                     textAnswerBin.setTextAppearance(R.style.accentTextAnswer)
@@ -234,7 +241,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
     }
 
-    private fun defaultState() {
+    private fun noAccentState() {
         with(binding) {
             textBin.setTextAppearance(R.style.textNumberSystem)
             textOct.setTextAppearance(R.style.textNumberSystem)
