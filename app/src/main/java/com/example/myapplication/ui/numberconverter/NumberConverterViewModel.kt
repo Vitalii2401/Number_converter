@@ -1,17 +1,18 @@
-package com.vetall24.myapplication.ui.numberconverter
+package com.example.myapplication.ui.numberconverter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vetall24.myapplication.domain.usecase.BinToDecUseCase
-import com.vetall24.myapplication.domain.usecase.BinToHexUseCase
-import com.vetall24.myapplication.domain.usecase.BinToOctUseCase
+import com.example.myapplication.domain.usecase.BinToDecUseCase
+import com.example.myapplication.domain.usecase.BinToHexUseCase
+import com.example.myapplication.domain.usecase.BinToOctUseCase
+import org.koin.core.KoinApplication.Companion.init
 
-class NumberConverterViewModel : ViewModel() {
-
-    private val binToOctUseCase = BinToOctUseCase()
-    private val binToDecUseCase = BinToDecUseCase()
-    private val binToHexUseCase = BinToHexUseCase()
+class NumberConverterViewModel(
+    private val binToOctUseCase: BinToOctUseCase,
+    private val binToDecUseCase: BinToDecUseCase,
+    private val binToHexUseCase: BinToHexUseCase,
+) : ViewModel() {
 
     private var mode = NumberConverterFragment.MODE_BIN
 

@@ -1,9 +1,8 @@
-package com.vetall24.myapplication.ui
+package com.example.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.vetall24.myapplication.R
-import com.vetall24.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

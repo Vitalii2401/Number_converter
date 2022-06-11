@@ -1,4 +1,4 @@
-package com.vetall24.myapplication
+package com.example.myapplication
 
 import org.junit.Test
 

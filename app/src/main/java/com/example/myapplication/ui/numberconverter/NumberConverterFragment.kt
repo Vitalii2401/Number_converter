@@ -1,4 +1,4 @@
-package com.vetall24.myapplication.ui.numberconverter
+package com.example.myapplication.ui.numberconverter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,14 +6,14 @@ import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
-import com.vetall24.myapplication.R
-import com.vetall24.myapplication.databinding.FragmentNumberConverterBinding
+import com.example.myapplication.R
+import com.example.myapplication.databinding.FragmentNumberConverterBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private lateinit var binding: FragmentNumberConverterBinding
-    private val numberConverterViewModel by viewModels<NumberConverterViewModel>()
+    private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
     private var currentMode = MODE_BIN
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

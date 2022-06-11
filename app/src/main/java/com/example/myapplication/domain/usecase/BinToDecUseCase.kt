@@ -1,4 +1,4 @@
-package com.vetall24.myapplication.domain.usecase
+package com.example.myapplication.domain.usecase
 
 import kotlin.math.pow
 
