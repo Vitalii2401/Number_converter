@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vetall24.myapplication.domain.usecase.BinToDecUseCase
+import com.vetall24.myapplication.domain.usecase.BinToHexUseCase
 import com.vetall24.myapplication.domain.usecase.BinToOctUseCase
 
 class NumberConverterViewModel : ViewModel() {
 
     private val binToOctUseCase = BinToOctUseCase()
     private val binToDecUseCase = BinToDecUseCase()
+    private val binToHexUseCase = BinToHexUseCase()
 
     private var mode = NumberConverterFragment.MODE_BIN
 
@@ -81,6 +83,7 @@ class NumberConverterViewModel : ViewModel() {
             "bin" -> {
                 _oct.value = binToOctUseCase.execute(_bin.value.toString())
                 _dec.value = binToDecUseCase.execute(_bin.value.toString())
+                _hex.value = binToHexUseCase.execute(_bin.value.toString())
             }
         }
     }
