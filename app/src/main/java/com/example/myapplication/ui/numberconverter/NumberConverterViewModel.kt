@@ -3,16 +3,14 @@ package com.example.myapplication.ui.numberconverter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.domain.usecase.BinToDecUseCase
-import com.example.myapplication.domain.usecase.BinToHexUseCase
-import com.example.myapplication.domain.usecase.BinToOctUseCase
-import com.example.myapplication.domain.usecase.OctToBinUseCase
+import com.example.myapplication.domain.usecase.*
 
 class NumberConverterViewModel(
     private val binToOctUseCase: BinToOctUseCase,
     private val binToDecUseCase: BinToDecUseCase,
     private val binToHexUseCase: BinToHexUseCase,
     private val octToBinUseCase: OctToBinUseCase,
+    private val octToDecUseCase: OctToDecUseCase,
 ) : ViewModel() {
 
     private var mode = NumberConverterFragment.MODE_BIN
@@ -89,6 +87,7 @@ class NumberConverterViewModel(
             }
             "oct" -> {
                 _bin.value = octToBinUseCase.execute(_oct.value.toString())
+                _dec.value = octToDecUseCase.execute(_oct.value.toString())
             }
         }
     }
