@@ -3,8 +3,11 @@ package com.vetall24.myapplication.ui.numberconverter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vetall24.myapplication.domain.usecase.BinToOctUseCase
 
 class NumberConverterViewModel : ViewModel() {
+
+    private val binToOctUseCase = BinToOctUseCase()
 
     private var mode = NumberConverterFragment.MODE_BIN
 
@@ -20,33 +23,61 @@ class NumberConverterViewModel : ViewModel() {
 
     fun addValue(value: String) {
         when (mode) {
-            "bin" -> _bin.value += value
-            "oct" -> _oct.value += value
-            "dec" -> _dec.value += value
-            "hex" -> _hex.value += value
+            "bin" -> {
+                _bin.value += value
+                convert()
+            }
+            "oct" -> {
+                _oct.value += value
+                //convert()
+            }
+            "dec" -> {
+                _dec.value += value
+                //convert()
+            }
+            "hex" -> {
+                _hex.value += value
+                //convert()
+            }
         }
     }
 
     fun deleteValue() {
         when (mode) {
-            "bin" -> _bin.value = _bin.value.toString().dropLast(1)
-            "oct" -> _oct.value = _oct.value.toString().dropLast(1)
-            "dec" -> _dec.value = _dec.value.toString().dropLast(1)
-            "hex" -> _hex.value = _hex.value.toString().dropLast(1)
+            "bin" -> {
+                _bin.value = _bin.value.toString().dropLast(1)
+                convert()
+            }
+            "oct" -> {
+                _oct.value = _oct.value.toString().dropLast(1)
+                //convert()
+            }
+            "dec" -> {
+                _dec.value = _dec.value.toString().dropLast(1)
+                //convert()
+            }
+            "hex" -> {
+                _hex.value = _hex.value.toString().dropLast(1)
+                //convert()
+            }
         }
     }
 
     fun deleteAllValue() {
-        when (mode) {
-            "bin" -> _bin.value = ""
-            "oct" -> _oct.value = ""
-            "dec" -> _dec.value = ""
-            "hex" -> _hex.value = ""
-        }
+        _bin.value = ""
+        _oct.value = ""
+        _dec.value = ""
+        _hex.value = ""
     }
 
     fun changeMode(changedMode: String) {
         mode = changedMode
+    }
+
+    private fun convert() {
+        when (mode) {
+            "bin" -> _oct.value = binToOctUseCase.execute(_bin.value.toString())
+        }
     }
 
     init {

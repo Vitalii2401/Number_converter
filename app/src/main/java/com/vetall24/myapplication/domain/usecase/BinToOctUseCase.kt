@@ -1,6 +1,5 @@
 package com.vetall24.myapplication.domain.usecase
 
-import android.util.Log
 import kotlin.math.pow
 
 class BinToOctUseCase {
@@ -19,8 +18,6 @@ class BinToOctUseCase {
         }
         octResult += dec.toString()
         octResult = octResult.reversed()
-
-        Log.d("Result", "convertBinToOct: $octResult")
 
         return octResult
     }
