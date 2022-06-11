@@ -1,7 +1,6 @@
 package com.vetall24.myapplication.ui.numberconverter
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
@@ -113,7 +112,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         val modeIndicatorParams = binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
 
         noAccentState()
-        Log.d("Current", "changeUiAccordingToMode: $currentMode")
+
         when (currentMode) {
             MODE_BIN -> {
                 with(binding) {

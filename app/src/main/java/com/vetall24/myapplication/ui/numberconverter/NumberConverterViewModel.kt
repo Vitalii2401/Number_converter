@@ -3,11 +3,13 @@ package com.vetall24.myapplication.ui.numberconverter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vetall24.myapplication.domain.usecase.BinToDecUseCase
 import com.vetall24.myapplication.domain.usecase.BinToOctUseCase
 
 class NumberConverterViewModel : ViewModel() {
 
     private val binToOctUseCase = BinToOctUseCase()
+    private val binToDecUseCase = BinToDecUseCase()
 
     private var mode = NumberConverterFragment.MODE_BIN
 
@@ -76,7 +78,10 @@ class NumberConverterViewModel : ViewModel() {
 
     private fun convert() {
         when (mode) {
-            "bin" -> _oct.value = binToOctUseCase.execute(_bin.value.toString())
+            "bin" -> {
+                _oct.value = binToOctUseCase.execute(_bin.value.toString())
+                _dec.value = binToDecUseCase.execute(_bin.value.toString())
+            }
         }
     }
 
