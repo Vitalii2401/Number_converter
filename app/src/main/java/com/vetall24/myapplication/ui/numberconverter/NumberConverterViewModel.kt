@@ -1,6 +1,5 @@
 package com.vetall24.myapplication.ui.numberconverter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -80,7 +79,6 @@ class NumberConverterViewModel : ViewModel() {
     private fun convert() {
         when (mode) {
             "bin" -> {
-                Log.d("Value", "convert: ${_bin.value.toString()}\nValue livedata: ${bin.value.toString()}")
                 _oct.value = binToOctUseCase.execute(_bin.value.toString())
                 _dec.value = binToDecUseCase.execute(_bin.value.toString())
             }
