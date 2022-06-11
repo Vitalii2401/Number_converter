@@ -1,4 +1,4 @@
-package com.vetall24.myapplication.ui.numberconverter
+package com.example.myapplication.ui.numberconverter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,8 @@ import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.vetall24.myapplication.R
-import com.vetall24.myapplication.databinding.FragmentNumberConverterBinding
+import com.example.myapplication.R
+import com.example.myapplication.databinding.FragmentNumberConverterBinding
 
 class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 

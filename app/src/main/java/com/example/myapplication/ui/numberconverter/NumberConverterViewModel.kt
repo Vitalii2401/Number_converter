@@ -1,11 +1,11 @@
-package com.vetall24.myapplication.ui.numberconverter
+package com.example.myapplication.ui.numberconverter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vetall24.myapplication.domain.usecase.BinToDecUseCase
-import com.vetall24.myapplication.domain.usecase.BinToHexUseCase
-import com.vetall24.myapplication.domain.usecase.BinToOctUseCase
+import com.example.myapplication.domain.usecase.BinToDecUseCase
+import com.example.myapplication.domain.usecase.BinToHexUseCase
+import com.example.myapplication.domain.usecase.BinToOctUseCase
 
 class NumberConverterViewModel : ViewModel() {
 
