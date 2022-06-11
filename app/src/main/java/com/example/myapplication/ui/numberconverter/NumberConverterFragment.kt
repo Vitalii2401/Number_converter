@@ -6,14 +6,14 @@ import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private lateinit var binding: FragmentNumberConverterBinding
-    private val numberConverterViewModel by viewModels<NumberConverterViewModel>()
+    private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
     private var currentMode = MODE_BIN
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

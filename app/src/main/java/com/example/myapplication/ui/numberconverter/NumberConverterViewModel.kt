@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.domain.usecase.BinToDecUseCase
 import com.example.myapplication.domain.usecase.BinToHexUseCase
 import com.example.myapplication.domain.usecase.BinToOctUseCase
+import org.koin.core.KoinApplication.Companion.init
 
-class NumberConverterViewModel : ViewModel() {
-
-    private val binToOctUseCase = BinToOctUseCase()
-    private val binToDecUseCase = BinToDecUseCase()
-    private val binToHexUseCase = BinToHexUseCase()
+class NumberConverterViewModel(
+    private val binToOctUseCase: BinToOctUseCase,
+    private val binToDecUseCase: BinToDecUseCase,
+    private val binToHexUseCase: BinToHexUseCase,
+) : ViewModel() {
 
     private var mode = NumberConverterFragment.MODE_BIN
 
