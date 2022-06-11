@@ -10,4 +10,5 @@ val useCaseModule = module {
     factory<BinToHexUseCase> { BinToHexUseCase() }
     factory<OctToBinUseCase> { OctToBinUseCase() }
     factory<OctToDecUseCase> { OctToDecUseCase() }
+    factory<OctToHexUseCase> { OctToHexUseCase() }
 }
