@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.domain.usecase.BinToDecUseCase
 import com.example.myapplication.domain.usecase.BinToHexUseCase
 import com.example.myapplication.domain.usecase.BinToOctUseCase
-import org.koin.core.KoinApplication.Companion.init
+import com.example.myapplication.domain.usecase.OctToBinUseCase
 
 class NumberConverterViewModel(
     private val binToOctUseCase: BinToOctUseCase,
     private val binToDecUseCase: BinToDecUseCase,
     private val binToHexUseCase: BinToHexUseCase,
+    private val octToBinUseCase: OctToBinUseCase,
 ) : ViewModel() {
 
     private var mode = NumberConverterFragment.MODE_BIN
@@ -34,7 +35,7 @@ class NumberConverterViewModel(
             }
             "oct" -> {
                 _oct.value += value
-                //convert()
+                convert()
             }
             "dec" -> {
                 _dec.value += value
@@ -55,7 +56,7 @@ class NumberConverterViewModel(
             }
             "oct" -> {
                 _oct.value = _oct.value.toString().dropLast(1)
-                //convert()
+                convert()
             }
             "dec" -> {
                 _dec.value = _dec.value.toString().dropLast(1)
@@ -85,6 +86,9 @@ class NumberConverterViewModel(
                 _oct.value = binToOctUseCase.execute(_bin.value.toString())
                 _dec.value = binToDecUseCase.execute(_bin.value.toString())
                 _hex.value = binToHexUseCase.execute(_bin.value.toString())
+            }
+            "oct" -> {
+                _bin.value = octToBinUseCase.execute(_oct.value.toString())
             }
         }
     }
