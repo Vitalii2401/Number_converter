@@ -12,6 +12,7 @@ class NumberConverterViewModel(
     private val octToBinUseCase: OctToBinUseCase,
     private val octToDecUseCase: OctToDecUseCase,
     private val octToHexUseCase: OctToHexUseCase,
+    private val decToBinUseCase: DecToBinUseCase,
 ) : ViewModel() {
 
     private var mode = NumberConverterFragment.MODE_BIN
@@ -38,7 +39,7 @@ class NumberConverterViewModel(
             }
             "dec" -> {
                 _dec.value += value
-                //convert()
+                convert()
             }
             "hex" -> {
                 _hex.value += value
@@ -59,7 +60,7 @@ class NumberConverterViewModel(
             }
             "dec" -> {
                 _dec.value = _dec.value.toString().dropLast(1)
-                //convert()
+                convert()
             }
             "hex" -> {
                 _hex.value = _hex.value.toString().dropLast(1)
@@ -90,6 +91,9 @@ class NumberConverterViewModel(
                 _bin.value = octToBinUseCase.execute(_oct.value.toString())
                 _dec.value = octToDecUseCase.execute(_oct.value.toString())
                 _hex.value = octToHexUseCase.execute(_oct.value.toString())
+            }
+            "dec" -> {
+                _bin.value = decToBinUseCase.execute(_dec.value.toString())
             }
         }
     }
