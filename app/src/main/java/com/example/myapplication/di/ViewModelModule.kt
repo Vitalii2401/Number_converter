@@ -6,5 +6,12 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
 
-    viewModel { NumberConverterViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get())}
+    viewModel {
+        NumberConverterViewModel(
+            get(), get(), get(),
+            get(), get(), get(),
+            get(), get(), get(),
+            get(),
+        )
+    }
 }
