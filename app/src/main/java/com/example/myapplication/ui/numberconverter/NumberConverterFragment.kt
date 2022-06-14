@@ -125,21 +125,21 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number_lt))
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number_lt))
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter_green_lt))
                         }
                     }
                 }
@@ -156,21 +156,21 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number_lt))
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter_green_lt))
                         }
                     }
                 }
@@ -187,21 +187,21 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter_green_lt))
                         }
                     }
                 }
@@ -218,21 +218,21 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_number))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
                             this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_letter))
+                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_primary_green_lt))
                         }
                     }
                 }

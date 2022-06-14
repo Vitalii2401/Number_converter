@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.NumberConverter" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
+        <item name="colorPrimary">@color/color_primary_green_lt</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant_green_lt</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -19,15 +19,15 @@
         <item name="android:textSize">24sp</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textColor">@color/color_number</item>
+        <item name="android:textColor">@color/color_dark_lt</item>
     </style>
 
     <style name="buttonLetter" parent="buttonNumber">
-        <item name="android:textColor">@color/color_letter</item>
+        <item name="android:textColor">@color/color_primary_green_lt</item>
     </style>
 
     <style name="textNumberSystem">
-        <item name="android:textColor">@color/color_number</item>
+        <item name="android:textColor">@color/color_dark_lt</item>
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
     </style>
@@ -37,12 +37,12 @@
     </style>
 
     <style name="textAnswer">
-        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textColor">@color/color_primary_green_lt</item>
         <item name="android:textSize">17sp</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
     <style name="accentTextAnswer" parent="textAnswer">
-        <item name="android:textColor">@color/color_primary_variant</item>
+        <item name="android:textColor">@color/color_primary_variant_green_lt</item>
     </style>
 </resources>
