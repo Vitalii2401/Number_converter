@@ -153,7 +153,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="@color/color_primary"
+        android:background="@color/color_primary_green_lt"
         app:layout_constraintBottom_toBottomOf="@id/top_keyboard_guideline"
         app:layout_constraintEnd_toStartOf="@id/btn_solutions"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +162,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="@color/color_primary"
+        android:background="@color/color_primary_green_lt"
         app:layout_constraintBottom_toBottomOf="@id/top_keyboard_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_solutions"
