@@ -5,10 +5,12 @@ import kotlin.math.pow
 class ConvertToDecUseCase {
 
     fun execute(value: String, numberSystem: Double): String {
-        val ratio = value.split(".")
-        return (convertToDec(ratio[0], numberSystem, false) +
-                convertToDec(ratio[1], numberSystem, true)
-                ).toString()
+        return if (value.contains(".")) {
+            val ratio = value.split(".")
+            (convertToDec(ratio[0], numberSystem, false) +
+                    convertToDec(ratio[1], numberSystem, true)).toString()
+        } else
+            convertToDec(value, numberSystem, false).toString()
     }
 
     private fun convertToDec(value: String, numberSystem: Double, valAfterDot: Boolean): Double {
