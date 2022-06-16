@@ -2,13 +2,19 @@ package com.example.myapplication.domain.usecase
 
 import kotlin.math.pow
 
-class BinToOctUseCase {
+class BinToOctUseCase(
+    private val convertToDecUseCase: ConvertToDecUseCase,
+    private val convertDecToUseCase: ConvertDecToUseCase
+)  {
 
     fun execute(binValue: String): String {
-        return convertBinToOct(binValue)
+        return convertDecToUseCase.execute(
+            convertToDecUseCase.execute(binValue, 2),
+            8
+        )
     }
 
-    private fun convertBinToOct(value: String): String {
+    /*private fun convertBinToOct(value: String): String {
         var octResult = ""
         var dec = convertBinToDec(value)
 
@@ -33,5 +39,5 @@ class BinToOctUseCase {
         }
 
         return dec
-    }
+    }*/
 }

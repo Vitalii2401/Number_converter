@@ -5,9 +5,12 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
 
-    factory<BinToOctUseCase> { BinToOctUseCase() }
-    factory<BinToDecUseCase> { BinToDecUseCase() }
-    factory<BinToHexUseCase> { BinToHexUseCase() }
+    factory<ConvertToDecUseCase> { ConvertToDecUseCase() }
+    factory<ConvertDecToUseCase> { ConvertDecToUseCase() }
+
+    factory<BinToOctUseCase> { BinToOctUseCase(get(), get()) }
+    factory<BinToDecUseCase> { BinToDecUseCase(get()) }
+    factory<BinToHexUseCase> { BinToHexUseCase(get(), get()) }
     factory<OctToBinUseCase> { OctToBinUseCase() }
     factory<OctToDecUseCase> { OctToDecUseCase() }
     factory<OctToHexUseCase> { OctToHexUseCase() }
