@@ -22,7 +22,8 @@ class ConvertToDecUseCase {
             index = value.length
 
         for (it in value) {
-            decResult += numberSystem.toDouble().pow((size - index).toDouble()) * it.digitToInt()
+            decResult += numberSystem.toDouble().pow((size - index).toDouble()) * it.toString()
+                .toInt(numberSystem)
             index++
         }
 
