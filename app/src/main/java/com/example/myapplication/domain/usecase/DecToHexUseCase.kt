@@ -5,6 +5,6 @@ class DecToHexUseCase(
 ) {
 
     fun execute(decValue: String): String {
-        return convertDecToUseCase.execute(decValue, 2)
+        return convertDecToUseCase.execute(decValue, 16)
     }
 }
