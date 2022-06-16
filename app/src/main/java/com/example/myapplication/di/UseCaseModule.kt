@@ -11,12 +11,15 @@ val useCaseModule = module {
     factory<BinToOctUseCase> { BinToOctUseCase(get(), get()) }
     factory<BinToDecUseCase> { BinToDecUseCase(get()) }
     factory<BinToHexUseCase> { BinToHexUseCase(get(), get()) }
-    factory<OctToBinUseCase> { OctToBinUseCase() }
-    factory<OctToDecUseCase> { OctToDecUseCase() }
-    factory<OctToHexUseCase> { OctToHexUseCase() }
+
+    factory<OctToBinUseCase> { OctToBinUseCase(get(), get()) }
+    factory<OctToDecUseCase> { OctToDecUseCase(get()) }
+    factory<OctToHexUseCase> { OctToHexUseCase(get(), get()) }
+
     factory<DecToBinUseCase> { DecToBinUseCase() }
     factory<DecToOctUseCase> { DecToOctUseCase() }
     factory<DecToHexUseCase> { DecToHexUseCase() }
+
     factory<HexToBinUseCase> { HexToBinUseCase() }
     factory<HexToOctUseCase> { HexToOctUseCase() }
     factory<HexToDecUseCase> { HexToDecUseCase() }
