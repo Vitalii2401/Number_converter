@@ -53,4 +53,9 @@
     <style name="accentTextAnswer" parent="textAnswer">
         <item name="android:textColor">@color/color_primary_variant_green_lt</item>
     </style>
+
+    <style name="dot">
+        <item name="android:backgroundTint">@color/black</item>
+    </style>
+
 </resources>

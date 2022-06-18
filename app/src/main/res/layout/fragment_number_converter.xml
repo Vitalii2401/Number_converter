@@ -47,6 +47,7 @@
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_marginEnd="8dp"
+        style="@style/dot"
         android:background="@drawable/dot_selected_mode"
         app:layout_constraintBottom_toBottomOf="@id/text_bin"
         app:layout_constraintEnd_toStartOf="@id/start_guideline"
