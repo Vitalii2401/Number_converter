@@ -1,8 +1,14 @@
 package com.example.myapplication.domain.usecase
 
-class OctToHexUseCase {
+class OctToHexUseCase(
+    private val convertToDecUseCase: ConvertToDecUseCase,
+    private val convertDecToUseCase: ConvertDecToUseCase
+) {
 
     fun execute(octValue: String): String {
-        return octValue.toInt(8).toString(16)
+        return convertDecToUseCase.execute(
+            convertToDecUseCase.execute(octValue, 8),
+            16
+        )
     }
 }

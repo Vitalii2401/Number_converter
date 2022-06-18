@@ -1,8 +1,10 @@
 package com.example.myapplication.domain.usecase
 
-class DecToOctUseCase {
+class DecToOctUseCase(
+    private val convertDecToUseCase: ConvertDecToUseCase
+) {
 
     fun execute(decValue: String): String {
-        return decValue.toInt(10).toString(8)
+        return convertDecToUseCase.execute(decValue, 8)
     }
 }

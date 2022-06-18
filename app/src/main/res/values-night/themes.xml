@@ -26,6 +26,14 @@
         <item name="android:textColor">@color/color_primary_green_dt</item>
     </style>
 
+    <style name="buttonNumberInactive" parent="buttonNumber">
+        <item name="android:textColor">@color/color_inactive_number_dt</item>
+    </style>
+
+    <style name="buttonLetterInactive" parent="buttonNumber">
+        <item name="android:textColor">@color/color_inactive_letter_green_dt</item>
+    </style>
+
     <style name="textNumberSystem">
         <item name="android:textColor">@color/color_light_dt</item>
         <item name="android:textSize">20sp</item>

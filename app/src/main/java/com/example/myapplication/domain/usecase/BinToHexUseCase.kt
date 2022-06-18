@@ -2,13 +2,19 @@ package com.example.myapplication.domain.usecase
 
 import kotlin.math.pow
 
-class BinToHexUseCase {
+class BinToHexUseCase(
+    private val convertToDecUseCase: ConvertToDecUseCase,
+    private val convertDecToUseCase: ConvertDecToUseCase
+) {
 
     fun execute(binValue: String): String {
-        return Integer.toHexString(convertBinToDec(binValue))
+        return convertDecToUseCase.execute(
+            convertToDecUseCase.execute(binValue, 2),
+            16
+        )
     }
 
-    private fun convertBinToDec(bin: String): Int {
+   /* private fun convertBinToDec(bin: String): Int {
         var dec = 0
         var index = 0
         val size = bin.length - 1
@@ -19,5 +25,5 @@ class BinToHexUseCase {
         }
 
         return dec
-    }
+    }*/
 }

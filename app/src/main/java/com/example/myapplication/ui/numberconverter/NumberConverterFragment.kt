@@ -109,7 +109,8 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     }
 
     private fun changeUiAccordingToMode() {
-        val modeIndicatorParams = binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
+        val modeIndicatorParams =
+            binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
 
         noAccentState()
 
@@ -124,22 +125,22 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number_lt))
+                            this?.isClickable = false
+                            this?.setTextAppearance(R.style.buttonNumberInactive)
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number_lt))
+                            this?.isClickable = false
+                            this?.setTextAppearance(R.style.buttonNumberInactive)
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter_green_lt))
+                            this?.isClickable = false
+                            this?.setTextAppearance(R.style.buttonLetterInactive)
                         }
                     }
                 }
@@ -155,22 +156,22 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
+                            this?.isClickable = true
+                            this?.setTextAppearance(R.style.buttonNumber)
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_number_lt))
+                            this?.isClickable = false
+                            this?.setTextAppearance(R.style.buttonNumberInactive)
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter_green_lt))
+                            this?.isClickable = false
+                            this?.setTextAppearance(R.style.buttonLetterInactive)
                         }
                     }
                 }
@@ -186,22 +187,22 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
+                            this?.isClickable = true
+                            this?.setTextAppearance(R.style.buttonNumber)
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
+                            this?.isClickable = true
+                            this?.setTextAppearance(R.style.buttonNumber)
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = false
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_inactive_letter_green_lt))
+                            this?.isClickable = false
+                            this?.setTextAppearance(R.style.buttonLetterInactive)
                         }
                     }
                 }
@@ -217,22 +218,22 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
                     groupOct.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
+                            this?.isClickable = true
+                            this?.setTextAppearance(R.style.buttonNumber)
                         }
                     }
 
                     groupDec.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_dark_lt))
+                            this?.isClickable = true
+                            this?.setTextAppearance(R.style.buttonNumber)
                         }
                     }
 
                     groupHex.referencedIds.forEach { id ->
                         with(view?.findViewById<Button>(id)) {
-                            this?.isClickable  = true
-                            this?.setTextColor(ContextCompat.getColor(context, R.color.color_primary_green_lt))
+                            this?.isClickable = true
+                            this?.setTextAppearance(R.style.buttonLetter)
                         }
                     }
                 }

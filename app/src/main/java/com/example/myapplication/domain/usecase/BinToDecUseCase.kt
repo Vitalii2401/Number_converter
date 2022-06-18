@@ -2,13 +2,15 @@ package com.example.myapplication.domain.usecase
 
 import kotlin.math.pow
 
-class BinToDecUseCase {
+class BinToDecUseCase(
+    private val convertToDecUseCase: ConvertToDecUseCase
+) {
 
     fun execute(binValue: String): String {
-        return convertBinToDec(binValue)
+        return convertToDecUseCase.execute(binValue, 2)
     }
 
-    private fun convertBinToDec(bin: String): String {
+ /*   private fun convertBinToDec(bin: String): String {
         var decResult = 0
         var index = 0
         val size = bin.length - 1
@@ -19,5 +21,5 @@ class BinToDecUseCase {
         }
 
         return decResult.toString()
-    }
+    }*/
 }
