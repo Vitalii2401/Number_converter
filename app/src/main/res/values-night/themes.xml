@@ -24,6 +24,7 @@
 
     <style name="buttonLetter" parent="buttonNumber">
         <item name="android:textColor">@color/color_primary_green_dt</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
     </style>
 
     <style name="buttonNumberInactive" parent="buttonNumber">
@@ -32,6 +33,7 @@
 
     <style name="buttonLetterInactive" parent="buttonNumber">
         <item name="android:textColor">@color/color_inactive_letter_green_dt</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
     </style>
 
     <style name="textNumberSystem">
