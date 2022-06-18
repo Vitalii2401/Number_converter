@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.NumberConverter" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.NumberConverter" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/color_primary_green_lt</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant_green_lt</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,45 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="buttonNumber">
+        <item name="android:background">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/color_dark_lt</item>
+    </style>
+
+    <style name="buttonLetter" parent="buttonNumber">
+        <item name="android:textColor">@color/color_primary_green_lt</item>
+    </style>
+
+    <style name="buttonNumberInactive" parent="buttonNumber">
+        <item name="android:textColor">@color/color_inactive_number_lt</item>
+    </style>
+
+    <style name="buttonLetterInactive" parent="buttonNumber">
+        <item name="android:textColor">@color/color_inactive_letter_green_lt</item>
+    </style>
+
+    <style name="textNumberSystem">
+        <item name="android:textColor">@color/color_dark_lt</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+    </style>
+
+    <style name="accentTextNumberSystem" parent="textNumberSystem">
+        <item name="android:fontFamily">@font/montserrat_extra_bold</item>
+    </style>
+
+    <style name="textAnswer">
+        <item name="android:textColor">@color/color_primary_green_lt</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="accentTextAnswer" parent="textAnswer">
+        <item name="android:textColor">@color/color_primary_variant_green_lt</item>
     </style>
 </resources>
