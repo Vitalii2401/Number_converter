@@ -64,4 +64,22 @@
         <item name="android:backgroundTint">@color/black</item>
     </style>
 
+    <style name="solutionsButton">
+        <item name="android:backgroundTint">@color/color_primary_green_lt</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="inactiveSolutionsButton">
+        <item name="android:backgroundTint">@color/color_inactive_letter_green_lt</item>
+        <item name="android:textColor">@color/inactive_white</item>
+    </style>
+
+    <style name="solutionsView">
+        <item name="android:background">@color/color_primary_green_lt</item>
+    </style>
+
+    <style name="inactiveSolutionsView">
+        <item name="android:background">@color/color_inactive_letter_green_lt</item>
+    </style>
+
 </resources>

@@ -142,7 +142,7 @@
         android:paddingHorizontal="12dp"
         android:text="@string/show_solutions"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        style="@style/inactiveSolutionsButton"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +152,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="@color/color_primary_green_lt"
+        style="@style/inactiveSolutionsView"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
         app:layout_constraintEnd_toStartOf="@id/btn_solutions"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +161,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="@color/color_primary_green_lt"
+        style="@style/inactiveSolutionsView"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_solutions"
