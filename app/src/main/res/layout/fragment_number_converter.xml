@@ -44,13 +44,12 @@
 
     <View
         android:id="@+id/mode_indicator"
+        style="@style/dot"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_marginEnd="8dp"
-        style="@style/dot"
         android:background="@drawable/dot_selected_mode"
         app:layout_constraintBottom_toBottomOf="@id/text_bin"
-        app:layout_constraintEnd_toStartOf="@id/start_guideline"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintTop_toTopOf="@id/text_bin" />
 
     <TextView
@@ -58,9 +57,10 @@
         style="@style/accentTextNumberSystem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="@string/bin"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline"/>
+        app:layout_constraintStart_toEndOf="@id/mode_indicator"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
     <TextView
         android:id="@+id/text_oct"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:text="@string/oct"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintStart_toStartOf="@id/text_bin"
         app:layout_constraintTop_toBottomOf="@id/text_bin" />
 
     <TextView
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:text="@string/dec"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintStart_toStartOf="@id/text_bin"
         app:layout_constraintTop_toBottomOf="@id/text_oct" />
 
     <TextView
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:text="@string/hex"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintStart_toStartOf="@id/text_bin"
         app:layout_constraintTop_toBottomOf="@id/text_dec" />
 
     <TextView
@@ -97,9 +97,9 @@
         style="@style/accentTextAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
+        android:layout_marginStart="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/text_bin"
-        app:layout_constraintStart_toEndOf="@+id/text_bin"
+        app:layout_constraintStart_toStartOf="@+id/start_guideline"
         app:layout_constraintTop_toTopOf="@+id/text_bin"
         tools:text="10101" />
 
@@ -132,7 +132,6 @@
         app:layout_constraintStart_toStartOf="@id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@id/text_hex"
         tools:text="15" />
-
 
     <Button
         android:id="@+id/btn_solutions"
@@ -346,11 +345,11 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_f" />
 
     <Button
-        android:layout_marginTop="10dp"
         android:id="@+id/btn_f"
         style="@style/buttonLetter"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:text="@string/letter_f"
         app:layout_constraintBottom_toTopOf="@+id/btn_e"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
@@ -358,11 +357,11 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
 
     <ImageButton
-        android:layout_marginTop="10dp"
         android:id="@+id/btn_backspace"
         style="@style/buttonBackspace"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/backspace"
         android:src="@drawable/ic_backspace"
         app:layout_constraintBottom_toTopOf="@+id/btn_9"
@@ -371,11 +370,11 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
 
     <Button
-        android:layout_marginTop="10dp"
         android:id="@+id/btn_ac"
         style="@style/buttonNumber"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:text="@string/ac"
         app:layout_constraintBottom_toTopOf="@+id/btn_8"
         app:layout_constraintEnd_toStartOf="@+id/btn_backspace"
