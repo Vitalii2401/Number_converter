@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="inactive_white">#99FFFFFF</color>
     <color name="dark">#373737</color>
 
 <!-- Green colors light theme (lt) -->
@@ -20,7 +21,7 @@
     <color name="color_primary_green_dt">#2F9B26</color>
     <color name="color_primary_variant_green_dt">#65D15C</color>
     <color name="color_light_dt">#F9F9F9</color>
-    <color name="color_inactive_number_dt">#66F9F9F9</color>
+    <color name="color_inactive_number_dt">#33F9F9F9</color>
     <color name="color_inactive_letter_green_dt">#662F9B26</color>
 
 </resources>
