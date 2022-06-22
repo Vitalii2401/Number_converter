@@ -10,7 +10,7 @@ class ConvertToDecUseCase {
             (convertToDec(ratio[0], numberSystem, false) +
                     convertToDec(ratio[1], numberSystem, true)).toString()
         } else
-            convertToDec(value, numberSystem, false).toString()
+            convertToDec(value, numberSystem, false).toInt().toString()
     }
 
     private fun convertToDec(value: String, numberSystem: Int, valAfterDot: Boolean): Double {
