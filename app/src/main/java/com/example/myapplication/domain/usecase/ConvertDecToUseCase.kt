@@ -32,6 +32,8 @@ class ConvertDecToUseCase {
         repeat(precision) {
             if (decValue >= 1)
                 decValue -= decValue.toInt()
+            else if(decValue == 0.0)
+                return@repeat
 
             decValue *= numberSystem
             result += decValue.toInt().toString(numberSystem)
