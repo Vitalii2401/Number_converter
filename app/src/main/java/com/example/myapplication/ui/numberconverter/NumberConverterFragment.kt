@@ -29,7 +29,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private fun handleClicks() {
         with(binding) {
 
-            btnDot.setOnClickListener { numberConverterViewModel.addValue(".") }
+            btnDot.setOnClickListener { numberConverterViewModel.addDot() }
             btn0.setOnClickListener { numberConverterViewModel.addValue("0") }
             btn1.setOnClickListener { numberConverterViewModel.addValue("1") }
             btn2.setOnClickListener { numberConverterViewModel.addValue("2") }
