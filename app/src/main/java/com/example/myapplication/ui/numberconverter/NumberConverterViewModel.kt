@@ -33,118 +33,46 @@ class NumberConverterViewModel(
     val dec: LiveData<String> = _dec
     val hex: LiveData<String> = _hex
 
-    fun addValue(value: String) {
-        when (mode) {
-            "bin" -> {
-                if(_bin.value.toString().isEmpty() && value == "0")
-                    return
-                else
-                    _bin.value += value
-            }
-            "oct" -> {
-                if(_oct.value.toString().isEmpty() && value == "0")
-                    return
-                else
-                    _oct.value += value
-            }
-            "dec" -> {
-                if(_dec.value.toString().isEmpty() && value == "0")
-                    return
-                else
-                    _dec.value += value
-            }
-            "hex" -> {
-                if(_hex.value.toString().isEmpty() && value == "0")
-                    return
-                else
-                    _hex.value += value
-            }
+    private fun currentMode(): MutableLiveData<String> {
+        return when (mode) {
+            NumberConverterFragment.MODE_BIN -> _bin
+            NumberConverterFragment.MODE_OCT -> _oct
+            NumberConverterFragment.MODE_DEC -> _dec
+            NumberConverterFragment.MODE_HEX -> _hex
+            else -> {_bin}
         }
+    }
+
+    fun addValue(value: String) {
+        if (currentMode().value.toString().isEmpty() && value == "0")
+            return
+        else
+            currentMode().value += value
 
         convert()
     }
 
     fun addDot() {
         if (!dotAdded) {
-            when (mode) {
-                "bin" -> {
-                    if (_bin.value.toString().isEmpty())
-                        return
-                    else
-                        _bin.value += "."
-                }
-                "oct" -> {
-                    if (_oct.value.toString().isEmpty())
-                        return
-                    else
-                        _oct.value += "."
-                }
-                "dec" -> {
-                    if (_dec.value.toString().isEmpty())
-                        return
-                    else
-                        _dec.value += "."
-                }
-                "hex" -> {
-                    if (_hex.value.toString().isEmpty())
-                        return
-                    else
-                        _hex.value += "."
-                }
-            }
+            if (currentMode().value.toString().isEmpty())
+                return
+            else
+                currentMode().value += "."
 
             dotAdded = true
         }
     }
 
     fun deleteValue() {
-        when (mode) {
-            "bin" -> {
-                if(_bin.value.toString().last() == '.')
-                    dotAdded = false
-
-                _bin.value = _bin.value.toString().dropLast(1)
-
-                if(_bin.value.toString().isEmpty()) {
-                    deleteAllValue()
-                    return
-                }
-            }
-            "oct" -> {
-                if(_oct.value.toString().last() == '.')
-                    dotAdded = false
-
-                _oct.value = _oct.value.toString().dropLast(1)
-
-                if(_oct.value.toString().isEmpty()) {
-                    deleteAllValue()
-                    return
-                }
-            }
-            "dec" -> {
-                if(_dec.value.toString().last() == '.')
-                    dotAdded = false
-
-                _dec.value = _dec.value.toString().dropLast(1)
-
-                if(_dec.value.toString().isEmpty()) {
-                    deleteAllValue()
-                    return
-                }
-            }
-            "hex" -> {
-                if(_hex.value.toString().last() == '.')
-                    dotAdded = false
-
-                _hex.value = _hex.value.toString().dropLast(1)
-
-                if(_hex.value.toString().isEmpty()) {
-                    deleteAllValue()
-                    return
-                }
-            }
+        if(currentMode().value.toString().isEmpty()) {
+            deleteAllValue()
+            return
         }
 
+        if(currentMode().value.toString().last() == '.')
+            dotAdded = false
+
+        currentMode().value = currentMode().value.toString().dropLast(1)
         convert()
     }
 
@@ -192,5 +120,4 @@ class NumberConverterViewModel(
         _dec.value = ""
         _hex.value = ""
     }
-
 }
