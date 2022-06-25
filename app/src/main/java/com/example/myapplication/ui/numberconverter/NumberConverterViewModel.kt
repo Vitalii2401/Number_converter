@@ -35,43 +35,71 @@ class NumberConverterViewModel(
     fun addValue(value: String) {
         when (mode) {
             "bin" -> {
-                _bin.value += value
-                convert()
+                if(_bin.value.toString().isEmpty() && value == "0")
+                    return
+                else
+                    _bin.value += value
             }
             "oct" -> {
-                _oct.value += value
-                convert()
+                if(_oct.value.toString().isEmpty() && value == "0")
+                    return
+                else
+                    _oct.value += value
             }
             "dec" -> {
-                _dec.value += value
-                convert()
+                if(_dec.value.toString().isEmpty() && value == "0")
+                    return
+                else
+                    _dec.value += value
             }
             "hex" -> {
-                _hex.value += value
-                convert()
+                if(_hex.value.toString().isEmpty() && value == "0")
+                    return
+                else
+                    _hex.value += value
             }
         }
+
+        convert()
     }
 
     fun deleteValue() {
         when (mode) {
             "bin" -> {
                 _bin.value = _bin.value.toString().dropLast(1)
-                convert()
+
+                if(_bin.value.toString().isEmpty()) {
+                    deleteAllValue()
+                    return
+                }
             }
             "oct" -> {
                 _oct.value = _oct.value.toString().dropLast(1)
-                convert()
+
+                if(_oct.value.toString().isEmpty()) {
+                    deleteAllValue()
+                    return
+                }
             }
             "dec" -> {
                 _dec.value = _dec.value.toString().dropLast(1)
-                convert()
+
+                if(_dec.value.toString().isEmpty()) {
+                    deleteAllValue()
+                    return
+                }
             }
             "hex" -> {
                 _hex.value = _hex.value.toString().dropLast(1)
-                convert()
+
+                if(_hex.value.toString().isEmpty()) {
+                    deleteAllValue()
+                    return
+                }
             }
         }
+
+        convert()
     }
 
     fun deleteAllValue() {
