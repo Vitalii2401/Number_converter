@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.numberconverter
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,6 +34,13 @@ class NumberConverterViewModel(
     val dec: LiveData<String> = _dec
     val hex: LiveData<String> = _hex
 
+    init {
+        _bin.value = ""
+        _oct.value = ""
+        _dec.value = ""
+        _hex.value = ""
+    }
+
     private fun currentMode(): MutableLiveData<String> {
         return when (mode) {
             NumberConverterFragment.MODE_BIN -> _bin
@@ -53,26 +61,35 @@ class NumberConverterViewModel(
     }
 
     fun addDot() {
-        if (!dotAdded) {
-            if (currentMode().value.toString().isEmpty())
-                return
-            else
-                currentMode().value += "."
+        if (!dotAdded && currentMode().value.toString().isNotEmpty()) {
+            _bin.value += "."
+            _oct.value += "."
+            _dec.value += "."
+            _hex.value += "."
 
             dotAdded = true
         }
     }
 
     fun deleteValue() {
+        currentMode().value = currentMode().value.toString().dropLast(1)
+
         if(currentMode().value.toString().isEmpty()) {
             deleteAllValue()
             return
         }
 
-        if(currentMode().value.toString().last() == '.')
+        if(!currentMode().value.toString().contains(".")){
             dotAdded = false
+        } else if (currentMode().value.toString().last() == '.') {
+            _bin.value = _bin.value.toString().substringBefore(".") + "."
+            _oct.value = _oct.value.toString().substringBefore(".") + "."
+            _dec.value = _dec.value.toString().substringBefore(".") + "."
+            _hex.value = _hex.value.toString().substringBefore(".") + "."
 
-        currentMode().value = currentMode().value.toString().dropLast(1)
+            return
+        }
+
         convert()
     }
 
@@ -91,33 +108,26 @@ class NumberConverterViewModel(
 
     private fun convert() {
         when (mode) {
-            "bin" -> {
+            NumberConverterFragment.MODE_BIN -> {
                 _oct.value = binToOctUseCase.execute(_bin.value.toString())
                 _dec.value = binToDecUseCase.execute(_bin.value.toString())
                 _hex.value = binToHexUseCase.execute(_bin.value.toString())
             }
-            "oct" -> {
+            NumberConverterFragment.MODE_OCT -> {
                 _bin.value = octToBinUseCase.execute(_oct.value.toString())
                 _dec.value = octToDecUseCase.execute(_oct.value.toString())
                 _hex.value = octToHexUseCase.execute(_oct.value.toString())
             }
-            "dec" -> {
+            NumberConverterFragment.MODE_DEC -> {
                 _bin.value = decToBinUseCase.execute(_dec.value.toString())
                 _oct.value = decToOctUseCase.execute(_dec.value.toString())
                 _hex.value = decToHexUseCase.execute(_dec.value.toString())
             }
-            "hex" -> {
+            NumberConverterFragment.MODE_HEX -> {
                 _bin.value = hexToBinUseCase.execute(_hex.value.toString())
                 _oct.value = hexToOctUseCase.execute(_hex.value.toString())
                 _dec.value = hexToDecUseCase.execute(_hex.value.toString())
             }
         }
-    }
-
-    init {
-        _bin.value = ""
-        _oct.value = ""
-        _dec.value = ""
-        _hex.value = ""
     }
 }
