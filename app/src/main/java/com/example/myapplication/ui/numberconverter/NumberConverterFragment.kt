@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,7 +29,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private fun handleClicks() {
         with(binding) {
 
-            btnDot.setOnClickListener { numberConverterViewModel.addValue(".") }
+            btnDot.setOnClickListener { numberConverterViewModel.addDot() }
             btn0.setOnClickListener { numberConverterViewModel.addValue("0") }
             btn1.setOnClickListener { numberConverterViewModel.addValue("1") }
             btn2.setOnClickListener { numberConverterViewModel.addValue("2") }
@@ -55,31 +54,19 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private fun updateUi() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
-            if (it.isEmpty())
-                binding.textAnswerBin.text = "0"
-            else
-                binding.textAnswerBin.text = it
+            binding.textAnswerBin.text = it.ifEmpty { "0" }
         }
 
         numberConverterViewModel.oct.observe(viewLifecycleOwner) {
-            if (it.isEmpty())
-                binding.textAnswerOct.text = "0"
-            else
-                binding.textAnswerOct.text = it
+            binding.textAnswerOct.text = it.ifEmpty { "0" }
         }
 
         numberConverterViewModel.dec.observe(viewLifecycleOwner) {
-            if (it.isEmpty())
-                binding.textAnswerDec.text = "0"
-            else
-                binding.textAnswerDec.text = it
+            binding.textAnswerDec.text = it.ifEmpty { "0" }
         }
 
         numberConverterViewModel.hex.observe(viewLifecycleOwner) {
-            if (it.isEmpty())
-                binding.textAnswerHex.text = "0"
-            else
-                binding.textAnswerHex.text = it
+            binding.textAnswerHex.text = it.ifEmpty { "0" }
         }
     }
 
