@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Number converter</string>
+    <string name="app_name">Перетворювач чисел</string>
 
     <string name="bin">BIN</string>
     <string name="oct">OCT</string>
     <string name="dec">DEC</string>
     <string name="hex">HEX</string>
-    <string name="show_solutions">Show solutions</string>
+    <string name="show_solutions">Переглянути рішення</string>
     <string name="zero">0</string>
     <string name="dot">.</string>
     <string name="letter_a">A</string>
