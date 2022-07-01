@@ -25,5 +25,7 @@
     <string name="letter_f">F</string>
     <string name="ac">AC</string>
     <string name="backspace">Backspace</string>
+    
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -26,4 +26,6 @@
     <string name="ac">AC</string>
     <string name="backspace">Backspace</string>
 
+    <string name="action_settings">Налаштування</string>
+
 </resources>
