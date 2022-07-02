@@ -3,6 +3,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.settings.SettingsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="25dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="25dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="60dp" />
+
+    <TextView
+        android:id="@+id/settings_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        android:text="@string/settings_language"
+        style="@style/buttonNumber"/>
+
+    <TextView
+        android:id="@+id/settings_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/radio_group_language"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        android:text="@string/settings_theme"
+        style="@style/buttonNumber"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/settings_language"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/settings_language_en"
+            android:text="@string/settings_language_en"
+            style="@style/buttonNumber"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/settings_language_uk"
+            android:text="@string/settings_language_uk"
+            style="@style/buttonNumber"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radio_group_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/settings_theme"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/settings_theme_orange"
+            android:text="@string/settings_theme_orange"
+            style="@style/buttonNumber"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/settings_theme_green"
+            android:text="@string/settings_theme_green"
+            style="@style/buttonNumber"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
+
+        <RadioButton
+            android:id="@+id/settings_theme_blue"
+            android:text="@string/settings_theme_blue"
+            style="@style/buttonNumber"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
+
+        <RadioButton
+            android:id="@+id/settings_theme_violet"
+            android:text="@string/settings_theme_violet"
+            style="@style/buttonNumber"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
+
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

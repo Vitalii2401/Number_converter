@@ -28,4 +28,14 @@
 
     <string name="action_settings">Налаштування</string>
 
+    <string name="settings_language">Мова</string>
+    <string name="settings_language_en">Англійська</string>
+    <string name="settings_language_uk">Українська</string>
+
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_orange">Оранжевий</string>
+    <string name="settings_theme_green">Зелений</string>
+    <string name="settings_theme_blue">Синій</string>
+    <string name="settings_theme_violet">Фіолетовий</string>
+
 </resources>
