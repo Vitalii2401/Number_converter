@@ -1,10 +1,14 @@
 package com.example.myapplication.ui.numberconverter
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,6 +19,21 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
     private var currentMode = MODE_BIN
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.settings_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        findNavController().navigate(R.id.settingsFragment)
+        return true
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNumberConverterBinding.bind(view)
@@ -24,7 +43,6 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         selectMode()
         changeUiAccordingToMode()
     }
-
 
     private fun handleClicks() {
         with(binding) {

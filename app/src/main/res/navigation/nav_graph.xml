@@ -8,6 +8,11 @@
     <fragment
         android:id="@+id/numberConverterFragment"
         android:name="com.example.myapplication.ui.numberconverter.NumberConverterFragment"
-        android:label="fragment_number_converter"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_number_converter" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.myapplication.ui.settings.SettingsFragment"
+        android:label="@string/action_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
