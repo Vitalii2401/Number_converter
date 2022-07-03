@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Default colors -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -10,18 +11,32 @@
     <color name="inactive_white">#99FFFFFF</color>
     <color name="dark">#373737</color>
 
-<!-- Green colors light theme (lt) -->
-    <color name="color_primary_green_lt">#65D15C</color>
-    <color name="color_primary_variant_green_lt">#2F9B26</color>
+    <!-- Colors light theme (lt) -->
     <color name="color_dark_lt">#373737</color>
     <color name="color_inactive_number_lt">#33373737</color>
-    <color name="color_inactive_letter_green_lt">#6665D15C</color>
 
-<!-- Green colors dark theme (dt) -->
-    <color name="color_primary_green_dt">#2F9B26</color>
-    <color name="color_primary_variant_green_dt">#65D15C</color>
+    <!-- Colors dark theme (dt) -->
     <color name="color_light_dt">#F9F9F9</color>
     <color name="color_inactive_number_dt">#33F9F9F9</color>
+
+    <!-- Green colors light theme -->
+    <color name="color_primary_green_lt">#65D15C</color>
+    <color name="color_primary_variant_green_lt">#2F9B26</color>
+    <color name="color_inactive_letter_green_lt">#6665D15C</color>
+
+    <!-- Dark theme -->
+    <color name="color_primary_green_dt">#2F9B26</color>
+    <color name="color_primary_variant_green_dt">#65D15C</color>
     <color name="color_inactive_letter_green_dt">#662F9B26</color>
+
+    <!-- Orange colors light theme -->
+    <color name="color_primary_orange_lt">#F89A2D</color>
+    <color name="color_primary_variant_orange_lt">#D07205</color>
+    <color name="color_inactive_letter_orange_lt">#66F89A2D</color>
+
+    <!-- Dark theme -->
+    <color name="color_primary_orange_dt">#D07205</color>
+    <color name="color_primary_variant_orange_dt">#F39528</color>
+    <color name="color_inactive_letter_orange_dt">#66D07205</color>
 
 </resources>
