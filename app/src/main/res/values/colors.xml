@@ -39,4 +39,24 @@
     <color name="color_primary_variant_orange_dt">#F39528</color>
     <color name="color_inactive_letter_orange_dt">#66D07205</color>
 
+    <!-- Blue colors light theme -->
+    <color name="color_primary_blue_lt">#69ABDB</color>
+    <color name="color_primary_variant_blue_lt">#2E70A0</color>
+    <color name="color_inactive_letter_blue_lt">#6669ABDB</color>
+
+    <!-- Dark theme -->
+    <color name="color_primary_blue_dt">#2E70A0</color>
+    <color name="color_primary_variant_blue_dt">#69ABDB</color>
+    <color name="color_inactive_letter_blue_dt">#662E70A0</color>
+
+    <!-- Purple colors light theme -->
+    <color name="color_primary_purple_lt">#DD72D9</color>
+    <color name="color_primary_variant_purple_lt">#A63BA2</color>
+    <color name="color_inactive_letter_purple_lt">#66DD72D9</color>
+
+    <!-- Dark theme -->
+    <color name="color_primary_purple_dt">#AE43AA</color>
+    <color name="color_primary_variant_purple_dt">#DD72D9</color>
+    <color name="color_inactive_letter_purple_dt">#66AE43AA</color>
+
 </resources>
