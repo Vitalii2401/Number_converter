@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Number converter</string>
 
+    <!-- Convert -->
     <string name="bin">BIN</string>
     <string name="oct">OCT</string>
     <string name="dec">DEC</string>
@@ -25,5 +26,28 @@
     <string name="letter_f">F</string>
     <string name="ac">AC</string>
     <string name="backspace">Backspace</string>
+
+    <!-- Settings fragment -->
+    <string name="fragment_settings_name">Settings</string>
+
+    <string name="settings_language">Language</string>
+    <string name="settings_language_en">English</string>
+    <string name="settings_language_uk">Ukrainian</string>
+    <string-array name="language_array">
+        <item>English</item>
+        <item>Ukrainian</item>
+    </string-array>
+
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_orange">Orange</string>
+    <string name="settings_theme_green">Green</string>
+    <string name="settings_theme_blue">Blue</string>
+    <string name="settings_theme_violet">Violet</string>
+    <string-array name="theme_array">
+        <item>Orange</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Violet</item>
+    </string-array>
 
 </resources>
