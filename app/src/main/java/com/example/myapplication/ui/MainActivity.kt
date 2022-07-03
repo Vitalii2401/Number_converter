@@ -20,11 +20,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initNav()
+    }
+
+    private fun initNav() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         navController = navHost.navController
 
         NavigationUI.setupActionBarWithNavController(this, navController)
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
