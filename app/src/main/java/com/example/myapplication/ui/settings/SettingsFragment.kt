@@ -29,10 +29,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val languagePreferences = findPreference<ListPreference>(PREF_TITLE_LANG)
         val themePreferences = findPreference<ListPreference>(PREF_TITLE_THEME)
 
-
+        languagePreferences?.let {
+            initLanguagePref(language, it)
+            it.setOnPreferenceChangeListener { _, newValue ->
+                handleChangeLanguage(newValue.toString())
+                true
+            }
+        }
     }
 
-    private fun initLanguagePref(language: String, it: ListPreference) {
+    private fun initLanguagePref(language: String?, it: ListPreference) {
         val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
         val languageCode = when(language) {
             LANGUAGE_EN -> arrayLanguage[0]
@@ -41,6 +47,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         it.value = languageCode
+    }
+
+    private fun handleChangeLanguage(newLanguage: String) {
+        val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
+        val languageCode = when(newLanguage) {
+            arrayLanguage[0] -> LANGUAGE_EN
+            arrayLanguage[1] -> LANGUAGE_UK
+            else -> LANGUAGE_EN
+        }
+
+        requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE).edit().putString(
+            PREF_TITLE_LANG, languageCode).apply()
+
+        requireActivity().recreate()
     }
 
     companion object {
