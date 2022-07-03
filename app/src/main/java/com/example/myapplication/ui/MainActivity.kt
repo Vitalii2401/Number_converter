@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.utility.LocaleService
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +32,9 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
-
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase?.let { LocaleService.updateBaseContextLocale(it) })
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
