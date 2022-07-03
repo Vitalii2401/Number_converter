@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.NumberConverter" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="Theme.NumberConverterGreen" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary_green_dt</item>
         <item name="colorPrimaryVariant">@color/color_primary_variant_green_dt</item>

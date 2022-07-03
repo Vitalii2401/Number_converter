@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
+import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.myapplication.R
 import java.util.*
 
 object LocaleService {
@@ -49,7 +51,8 @@ object LocaleService {
         val theme = sharedPreferences.get(PREF_TITLE_THEME, THEME_DEFAULT)
         when (theme) {
             THEME_DEFAULT -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                ContextThemeWrapper(context, R.style.Theme_NumberConverterGreen)
+                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             else -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

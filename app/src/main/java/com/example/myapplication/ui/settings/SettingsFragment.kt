@@ -6,7 +6,6 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.myapplication.R
 import com.example.myapplication.utility.*
-import org.intellij.lang.annotations.Language
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -36,6 +35,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
         }
+
+        themePreferences?.let {
+            initThemePref(theme, it)
+        }
     }
 
     private fun initLanguagePref(language: String?, it: ListPreference) {
@@ -47,6 +50,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         it.value = languageCode
+    }
+
+    private fun initThemePref(theme: String?, it: ListPreference) {
+        it.value = theme
     }
 
     private fun handleChangeLanguage(newLanguage: String) {
