@@ -6,12 +6,54 @@
         <item name="colorPrimaryVariant">@color/color_primary_variant_green_lt</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/color_inactive_letter_green_lt</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Theme orange -->
+    <style name="Theme.NumberConverterOrange" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary_orange_lt</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant_orange_lt</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_inactive_letter_orange_lt</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <!-- Theme blue -->
+    <style name="Theme.NumberConverterBlue" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary_blue_lt</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant_blue_lt</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_inactive_letter_blue_lt</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <!-- Theme purple -->
+    <style name="Theme.NumberConverterPurple" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary_purple_lt</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant_purple_lt</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_inactive_letter_purple_lt</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="buttonNumber">
@@ -27,7 +69,7 @@
     </style>
 
     <style name="buttonLetter" parent="buttonNumber">
-        <item name="android:textColor">@color/color_primary_green_lt</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
     </style>
 
@@ -36,7 +78,7 @@
     </style>
 
     <style name="buttonLetterInactive" parent="buttonNumber">
-        <item name="android:textColor">@color/color_inactive_letter_green_lt</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
     </style>
 
@@ -51,14 +93,14 @@
     </style>
 
     <style name="textAnswer">
-        <item name="android:textColor">@color/color_primary_green_lt</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textSize">17sp</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:maxLines">2</item>
     </style>
 
     <style name="accentTextAnswer" parent="textAnswer">
-        <item name="android:textColor">@color/color_primary_variant_green_lt</item>
+        <item name="android:textColor">?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="dot">
@@ -66,21 +108,21 @@
     </style>
 
     <style name="solutionsButton">
-        <item name="android:backgroundTint">@color/color_primary_green_lt</item>
+        <item name="android:backgroundTint">?attr/colorPrimary</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="inactiveSolutionsButton">
-        <item name="android:backgroundTint">@color/color_inactive_letter_green_lt</item>
+        <item name="android:backgroundTint">?attr/colorSecondary</item>
         <item name="android:textColor">@color/inactive_white</item>
     </style>
 
     <style name="solutionsView">
-        <item name="android:background">@color/color_primary_green_lt</item>
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 
     <style name="inactiveSolutionsView">
-        <item name="android:background">@color/color_inactive_letter_green_lt</item>
+        <item name="android:background">?attr/colorSecondary</item>
     </style>
 
 </resources>
