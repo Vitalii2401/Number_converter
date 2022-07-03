@@ -9,10 +9,13 @@
         android:id="@+id/numberConverterFragment"
         android:name="com.example.myapplication.ui.numberconverter.NumberConverterFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_number_converter" />
+        tools:layout="@layout/fragment_number_converter" >
+        <action
+            android:id="@+id/action_numberConverterFragment_to_settingsFragment3"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.myapplication.ui.settings.SettingsFragment"
-        android:label="@string/action_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:label="SettingsFragment" />
 </navigation>

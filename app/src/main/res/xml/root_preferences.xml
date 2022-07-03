@@ -1,4 +1,17 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
+    <ListPreference
+        app:entries="@array/language_array"
+        app:entryValues="@array/language_array"
+        app:title="@string/settings_language"
+        app:key="appLanguage"
+        app:useSimpleSummaryProvider="true"/>
+
+    <ListPreference
+        app:entries="@array/theme_array"
+        app:entryValues="@array/theme_array"
+        app:title="@string/settings_theme"
+        app:key="appTheme"
+        app:useSimpleSummaryProvider="true"/>
 
 </PreferenceScreen>

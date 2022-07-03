@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Перетворювач чисел</string>
 
+    <!-- Convert -->
     <string name="bin">BIN</string>
     <string name="oct">OCT</string>
     <string name="dec">DEC</string>
@@ -26,16 +27,26 @@
     <string name="ac">AC</string>
     <string name="backspace">Backspace</string>
 
-    <string name="action_settings">Налаштування</string>
-
+    <!-- Settings fragment -->
+    <string name="fragment_settings_name">Налаштування</string>
     <string name="settings_language">Мова</string>
     <string name="settings_language_en">Англійська</string>
     <string name="settings_language_uk">Українська</string>
+    <string-array name="language_array">
+        <item>Англійська</item>
+        <item>Українська</item>
+    </string-array>
 
     <string name="settings_theme">Тема</string>
     <string name="settings_theme_orange">Оранжевий</string>
     <string name="settings_theme_green">Зелений</string>
     <string name="settings_theme_blue">Синій</string>
     <string name="settings_theme_violet">Фіолетовий</string>
+    <string-array name="theme_array">
+        <item>Оранжевий</item>
+        <item>Зелений</item>
+        <item>Синій</item>
+        <item>Фіолетовий</item>
+    </string-array>
 
 </resources>
