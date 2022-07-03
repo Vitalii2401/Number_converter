@@ -96,14 +96,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         requireActivity().recreate()
     }
-
-
-    companion object {
-        const val LANGUAGE_EN = "en"
-        const val LANGUAGE_UK = "uk"
-        const val THEME_ORANGE = "Orange"
-        const val THEME_GREEN = "Green"
-        const val THEME_BLUE = "Blue"
-        const val THEME_VIOLET = "Violet"
-    }
 }

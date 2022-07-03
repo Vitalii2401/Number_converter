@@ -50,12 +50,13 @@ object LocaleService {
         val sharedPreferences = context.getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
         val theme = sharedPreferences.get(PREF_TITLE_THEME, THEME_DEFAULT)
         when (theme) {
-            THEME_DEFAULT -> {
-                ContextThemeWrapper(context, R.style.Theme_NumberConverterGreen)
-                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+            THEME_ORANGE -> ContextThemeWrapper(context, R.style.Theme_NumberConverterGreen)
+            THEME_BLUE -> ContextThemeWrapper(context, R.style.Theme_NumberConverterBlue)
+            THEME_VIOLET -> ContextThemeWrapper(context, R.style.Theme_NumberConverterPurpl)
+            //THEME_DEFAULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             else -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                ContextThemeWrapper(context, R.style.Theme_NumberConverterGreen)
+                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
     }
