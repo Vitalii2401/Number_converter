@@ -38,6 +38,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         themePreferences?.let {
             initThemePref(theme, it)
+            it.setOnPreferenceChangeListener { _, newValue ->
+                handleChangeTheme(newValue.toString())
+                true
+            }
         }
     }
 
@@ -53,7 +57,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun initThemePref(theme: String?, it: ListPreference) {
-        it.value = theme
+        val arrayTheme = requireContext().resources.getStringArray(R.array.theme_array)
+        it.value = when (theme) {
+            THEME_ORANGE -> arrayTheme[0]
+            THEME_GREEN -> arrayTheme[1]
+            THEME_BLUE -> arrayTheme[2]
+            THEME_VIOLET -> arrayTheme[3]
+            else -> arrayTheme[1]
+        }
     }
 
     private fun handleChangeLanguage(newLanguage: String) {
@@ -70,8 +81,29 @@ class SettingsFragment : PreferenceFragmentCompat() {
         requireActivity().recreate()
     }
 
+    private fun handleChangeTheme(newTheme: String) {
+        val arrayTheme = requireContext().resources.getStringArray(R.array.theme_array)
+        val theme = when (newTheme) {
+            arrayTheme[0] -> THEME_ORANGE
+            arrayTheme[1] -> THEME_GREEN
+            arrayTheme[2] -> THEME_BLUE
+            arrayTheme[3] -> THEME_VIOLET
+            else -> THEME_GREEN
+        }
+
+        requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE).edit().putString(
+            PREF_TITLE_THEME, theme).apply()
+
+        requireActivity().recreate()
+    }
+
+
     companion object {
         const val LANGUAGE_EN = "en"
         const val LANGUAGE_UK = "uk"
+        const val THEME_ORANGE = "Orange"
+        const val THEME_GREEN = "Green"
+        const val THEME_BLUE = "Blue"
+        const val THEME_VIOLET = "Violet"
     }
 }
