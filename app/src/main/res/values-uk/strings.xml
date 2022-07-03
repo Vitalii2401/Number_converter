@@ -29,6 +29,7 @@
 
     <!-- Settings fragment -->
     <string name="fragment_settings_name">Налаштування</string>
+
     <string name="settings_language">Мова</string>
     <string name="settings_language_en">Англійська</string>
     <string name="settings_language_uk">Українська</string>
