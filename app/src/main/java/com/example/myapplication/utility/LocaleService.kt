@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
+import android.util.Log
 import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.AppCompatDrawableManager
 import com.example.myapplication.R
 import java.util.*
 
@@ -29,7 +31,6 @@ object LocaleService {
     ): Context {
         val configuration: Configuration = context.resources.configuration
         configuration.setLocale(locale)
-        updateAppTheme(context)
         return context.createConfigurationContext(configuration)
     }
 
@@ -42,22 +43,17 @@ object LocaleService {
         val configuration: Configuration = resources.configuration
         configuration.locale = locale
         resources.updateConfiguration(configuration, resources.displayMetrics)
-        updateAppTheme(context)
         return context
     }
 
-    private fun updateAppTheme(context: Context) {
+    fun updateAppTheme(context: Context) {
         val sharedPreferences = context.getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
         val theme = sharedPreferences.get(PREF_TITLE_THEME, THEME_DEFAULT)
         when (theme) {
-            THEME_ORANGE -> ContextThemeWrapper(context, R.style.Theme_NumberConverterGreen)
-            THEME_BLUE -> ContextThemeWrapper(context, R.style.Theme_NumberConverterBlue)
-            THEME_VIOLET -> ContextThemeWrapper(context, R.style.Theme_NumberConverterPurpl)
-            //THEME_DEFAULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            else -> {
-                ContextThemeWrapper(context, R.style.Theme_NumberConverterGreen)
-                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
+            THEME_ORANGE -> context.setTheme(R.style.Theme_NumberConverterOrange)
+            THEME_BLUE -> context.setTheme(R.style.Theme_NumberConverterBlue)
+            THEME_VIOLET -> context.setTheme(R.style.Theme_NumberConverterPurple)
+            else -> context.setTheme(R.style.Theme_NumberConverterGreen)
         }
     }
 
