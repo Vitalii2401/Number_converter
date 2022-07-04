@@ -31,7 +31,6 @@ object LocaleService {
     ): Context {
         val configuration: Configuration = context.resources.configuration
         configuration.setLocale(locale)
-        updateAppTheme(context)
         return context.createConfigurationContext(configuration)
     }
 
@@ -44,11 +43,10 @@ object LocaleService {
         val configuration: Configuration = resources.configuration
         configuration.locale = locale
         resources.updateConfiguration(configuration, resources.displayMetrics)
-        updateAppTheme(context)
         return context
     }
 
-    private fun updateAppTheme(context: Context) {
+    fun updateAppTheme(context: Context) {
         val sharedPreferences = context.getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
         val theme = sharedPreferences.get(PREF_TITLE_THEME, THEME_DEFAULT)
         when (theme) {
