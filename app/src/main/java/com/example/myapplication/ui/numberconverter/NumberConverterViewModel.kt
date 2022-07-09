@@ -21,13 +21,14 @@ class NumberConverterViewModel(
     private val hexToDecUseCase: HexToDecUseCase,
 ) : ViewModel() {
 
-    private var mode = NumberConverterFragment.MODE_BIN
     private var dotAdded = false
 
     private val _bin = MutableLiveData<String>()
     private val _oct = MutableLiveData<String>()
     private val _dec = MutableLiveData<String>()
     private val _hex = MutableLiveData<String>()
+
+    var mode = NumberConverterFragment.MODE_BIN
 
     val bin: LiveData<String> = _bin
     val oct: LiveData<String> = _oct

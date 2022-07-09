@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Number converter</string>
+    <string name="app_name">Перетворювач чисел</string>
 
     <!-- Convert -->
     <string name="bin">BIN</string>
     <string name="oct">OCT</string>
     <string name="dec">DEC</string>
     <string name="hex">HEX</string>
-    <string name="show_solutions">Show solutions</string>
+    <string name="show_solutions">Переглянути рішення</string>
     <string name="zero">0</string>
     <string name="dot">.</string>
     <string name="letter_a">A</string>
@@ -28,26 +28,26 @@
     <string name="backspace">Backspace</string>
 
     <!-- Settings fragment -->
-    <string name="fragment_settings_name">Settings</string>
+    <string name="fragment_settings_name">Налаштування</string>
 
-    <string name="settings_language">Language</string>
-    <string name="settings_language_en">English</string>
-    <string name="settings_language_uk">Ukrainian</string>
+    <string name="settings_language">Мова</string>
+    <string name="settings_language_en">Англійська</string>
+    <string name="settings_language_uk">Українська</string>
     <string-array name="language_array">
-        <item>English</item>
-        <item>Ukrainian</item>
+        <item>Англійська</item>
+        <item>Українська</item>
     </string-array>
 
-    <string name="settings_theme">Theme</string>
-    <string name="settings_theme_orange">Orange</string>
-    <string name="settings_theme_green">Green</string>
-    <string name="settings_theme_blue">Blue</string>
-    <string name="settings_theme_violet">Violet</string>
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_orange">Оранжевий</string>
+    <string name="settings_theme_green">Зелений</string>
+    <string name="settings_theme_blue">Синій</string>
+    <string name="settings_theme_violet">Фіолетовий</string>
     <string-array name="theme_array">
-        <item>Orange</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Violet</item>
+        <item>Оранжевий</item>
+        <item>Зелений</item>
+        <item>Синій</item>
+        <item>Фіолетовий</item>
     </string-array>
 
 </resources>
