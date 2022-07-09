@@ -17,7 +17,6 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private lateinit var binding: FragmentNumberConverterBinding
     private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
-    private var currentMode = MODE_BIN
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,23 +90,19 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private fun selectMode() {
         with(binding) {
             textBin.setOnClickListener {
-                currentMode = MODE_BIN
-                numberConverterViewModel.changeMode(currentMode)
+                numberConverterViewModel.mode = MODE_BIN
                 changeUiAccordingToMode()
             }
             textOct.setOnClickListener {
-                currentMode = MODE_OCT
-                numberConverterViewModel.changeMode(currentMode)
+                numberConverterViewModel.mode = MODE_OCT
                 changeUiAccordingToMode()
             }
             textDec.setOnClickListener {
-                currentMode = MODE_DEC
-                numberConverterViewModel.changeMode(currentMode)
+                numberConverterViewModel.mode = MODE_DEC
                 changeUiAccordingToMode()
             }
             textHex.setOnClickListener {
-                currentMode = MODE_HEX
-                numberConverterViewModel.changeMode(currentMode)
+                numberConverterViewModel.mode = MODE_HEX
                 changeUiAccordingToMode()
             }
         }
@@ -119,7 +114,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
         noAccentState()
 
-        when (currentMode) {
+        when (numberConverterViewModel.mode) {
             MODE_BIN -> {
                 with(binding) {
                     textAnswerBin.setTextAppearance(R.style.accentTextAnswer)
