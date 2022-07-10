@@ -1,5 +1,7 @@
 package com.example.myapplication.domain.usecase
 
+import java.util.*
+
 class ConvertDecToUseCase {
 
     fun execute(value: String, numberSystem: Int): String {
@@ -29,10 +31,17 @@ class ConvertDecToUseCase {
         var result = ""
         var decValue = value
 
+        val valueFormat = value.toString().length - 2
+
         repeat(precision) {
             if (decValue >= 1)
                 decValue -= decValue.toInt()
-            else if(decValue == 0.0)
+
+            if(decValue == 0.0)
+                return@repeat
+
+            var tmp = String.format(Locale.ENGLISH,"%.${valueFormat}f", decValue)
+            if(it != 0 &&  tmp == value.toString())
                 return@repeat
 
             decValue *= numberSystem
