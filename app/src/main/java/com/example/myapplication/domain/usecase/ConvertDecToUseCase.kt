@@ -1,14 +1,14 @@
 package com.example.myapplication.domain.usecase
 
-import java.util.*
+import java.math.BigDecimal
 
 class ConvertDecToUseCase {
 
     fun execute(value: String, numberSystem: Int): String {
         return if (value.contains(".")) {
-            val decValue = value.toDouble()
+            val decValue = value.toBigDecimal()
             convertDecTo(decValue.toInt(), numberSystem) + "." +
-                    convertFractionalDecTo(decValue - decValue.toInt(), numberSystem, 7)
+                    convertFractionalDecTo(decValue.minus(decValue.toInt().toBigDecimal()), numberSystem, 25)
         } else
             convertDecTo(value.toInt(), numberSystem)
     }
@@ -27,24 +27,21 @@ class ConvertDecToUseCase {
         return result.reversed()
     }
 
-    private fun convertFractionalDecTo(value: Double, numberSystem: Int, precision: Int): String {
+    private fun convertFractionalDecTo(value: BigDecimal, numberSystem: Int, precision: Int): String {
         var result = ""
         var decValue = value
 
-        val valueFormat = value.toString().length - 2
-
         repeat(precision) {
-            if (decValue >= 1)
-                decValue -= decValue.toInt()
+            if (decValue >= BigDecimal.ONE)
+                decValue = decValue.minus(decValue.toInt().toBigDecimal())
 
-            if(decValue == 0.0)
+            if(decValue.toDouble() == 0.0)
                 return@repeat
 
-            var tmp = String.format(Locale.ENGLISH,"%.${valueFormat}f", decValue)
-            if(it != 0 &&  tmp == value.toString())
+            if(it != 0 &&  decValue == value)
                 return@repeat
 
-            decValue *= numberSystem
+            decValue = decValue.multiply(numberSystem.toBigDecimal())
             result += decValue.toInt().toString(numberSystem)
         }
 
