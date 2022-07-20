@@ -5,13 +5,15 @@
         app:entryValues="@array/language_array"
         app:title="@string/settings_language"
         app:key="appLanguage"
-        app:useSimpleSummaryProvider="true"/>
+        app:useSimpleSummaryProvider="true"
+        app:icon="@drawable/ic_language"/>
 
     <ListPreference
         app:entries="@array/theme_array"
         app:entryValues="@array/theme_array"
         app:title="@string/settings_theme"
         app:key="appTheme"
-        app:useSimpleSummaryProvider="true"/>
+        app:useSimpleSummaryProvider="true"
+        app:icon="@drawable/ic_brush"/>
 
 </PreferenceScreen>
