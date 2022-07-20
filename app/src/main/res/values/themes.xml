@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="alertDialogTheme">@style/Theme.Dialog</item>
     </style>
 
     <!-- Theme orange -->
@@ -26,6 +28,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="alertDialogTheme">@style/Theme.Dialog</item>
     </style>
 
     <!-- Theme blue -->
@@ -40,6 +44,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="alertDialogTheme">@style/Theme.Dialog</item>
     </style>
 
     <!-- Theme purple -->
@@ -54,6 +60,13 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="alertDialogTheme">@style/Theme.Dialog</item>
+    </style>
+
+    <style name="Theme.Dialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="colorAccent">?attr/colorPrimaryVariant</item>
+        <!--<item name="colorPrimary">?attr/colorPrimary</item>-->
     </style>
 
     <style name="buttonNumber">
