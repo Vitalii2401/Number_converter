@@ -117,8 +117,8 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         when (numberConverterViewModel.mode) {
             MODE_BIN -> {
                 with(binding) {
-                    textAnswerBin.setTextAppearance(R.style.accentTextAnswer)
-                    textBin.setTextAppearance(R.style.accentTextNumberSystem)
+                    textAnswerBin.setTextAppearance(R.style.textAccentAnswer)
+                    textBin.setTextAppearance(R.style.textAccentNumberSystem)
                     modeIndicatorParams.topToTop = textBin.id
                     modeIndicatorParams.bottomToBottom = textBin.id
                     modeIndicator.requestLayout()
@@ -148,8 +148,8 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
             MODE_OCT -> {
                 with(binding) {
-                    textAnswerOct.setTextAppearance(R.style.accentTextAnswer)
-                    textOct.setTextAppearance(R.style.accentTextNumberSystem)
+                    textAnswerOct.setTextAppearance(R.style.textAccentAnswer)
+                    textOct.setTextAppearance(R.style.textAccentNumberSystem)
                     modeIndicatorParams.topToTop = textOct.id
                     modeIndicatorParams.bottomToBottom = textOct.id
                     modeIndicator.requestLayout()
@@ -179,8 +179,8 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
             MODE_DEC -> {
                 with(binding) {
-                    textAnswerDec.setTextAppearance(R.style.accentTextAnswer)
-                    textDec.setTextAppearance(R.style.accentTextNumberSystem)
+                    textAnswerDec.setTextAppearance(R.style.textAccentAnswer)
+                    textDec.setTextAppearance(R.style.textAccentNumberSystem)
                     modeIndicatorParams.topToTop = textDec.id
                     modeIndicatorParams.bottomToBottom = textDec.id
                     modeIndicator.requestLayout()
@@ -210,8 +210,8 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
             MODE_HEX -> {
                 with(binding) {
-                    textAnswerHex.setTextAppearance(R.style.accentTextAnswer)
-                    textHex.setTextAppearance(R.style.accentTextNumberSystem)
+                    textAnswerHex.setTextAppearance(R.style.textAccentAnswer)
+                    textHex.setTextAppearance(R.style.textAccentNumberSystem)
                     modeIndicatorParams.topToTop = textHex.id
                     modeIndicatorParams.bottomToBottom = textHex.id
                     modeIndicator.requestLayout()

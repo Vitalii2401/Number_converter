@@ -53,7 +53,7 @@
 
     <TextView
         android:id="@+id/text_bin"
-        style="@style/accentTextNumberSystem"
+        style="@style/textAccentNumberSystem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -97,7 +97,7 @@
 
     <TextView
         android:id="@+id/text_answer_bin"
-        style="@style/accentTextAnswer"
+        style="@style/textAccentAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -145,7 +145,7 @@
         android:id="@+id/view_line"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        style="@style/solutionsView"
+        style="@style/viewLine"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
