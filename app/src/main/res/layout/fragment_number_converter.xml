@@ -134,6 +134,7 @@
         style="@style/textAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="@id/text_hex"
         app:layout_constraintStart_toStartOf="@id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@id/text_hex"
