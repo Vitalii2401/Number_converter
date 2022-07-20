@@ -44,7 +44,6 @@
 
     <View
         android:id="@+id/mode_indicator"
-        style="@style/dot"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:background="@drawable/dot_selected_mode"
@@ -342,7 +341,7 @@
 
     <ImageButton
         android:id="@+id/btn_backspace"
-        style="@style/buttonBackspace"
+        style="@style/buttonNumber"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
