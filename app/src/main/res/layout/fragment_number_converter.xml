@@ -54,52 +54,62 @@
     <TextView
         android:id="@+id/text_bin"
         style="@style/textAccentNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:text="@string/bin"
         app:layout_constraintStart_toEndOf="@id/mode_indicator"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline"/>
+        app:layout_constraintTop_toBottomOf="@id/top_guideline"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_bin"
+        app:layout_constraintBottom_toTopOf="@id/text_oct"/>
 
     <TextView
         android:id="@+id/text_oct"
         style="@style/textNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
         android:text="@string/oct"
         app:layout_constraintStart_toStartOf="@id/text_bin"
         app:layout_constraintTop_toBottomOf="@id/text_bin"
-        app:layout_constraintBottom_toTopOf="@+id/text_dec"/>
+        app:layout_constraintBottom_toTopOf="@+id/text_dec"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_oct"/>
 
     <TextView
         android:id="@+id/text_dec"
+        android:gravity="center_vertical"
         style="@style/textNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
         android:text="@string/dec"
         app:layout_constraintStart_toStartOf="@id/text_bin"
         app:layout_constraintTop_toBottomOf="@id/text_oct"
-        app:layout_constraintBottom_toTopOf="@+id/text_hex"/>
+        app:layout_constraintBottom_toTopOf="@+id/text_hex"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_dec"/>
 
     <TextView
         android:id="@+id/text_hex"
         style="@style/textNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
         android:text="@string/hex"
         app:layout_constraintStart_toStartOf="@id/text_bin"
         app:layout_constraintTop_toBottomOf="@id/text_dec"
         app:layout_constraintBottom_toTopOf="@+id/view_line"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_hex"
         android:layout_marginBottom="30dp"/>
 
     <TextView
         android:id="@+id/text_answer_bin"
         style="@style/textAccentAnswer"
+        android:gravity="center_vertical"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/text_bin"
         app:layout_constraintStart_toStartOf="@+id/start_guideline"
@@ -110,8 +120,9 @@
     <TextView
         android:id="@+id/text_answer_oct"
         style="@style/textAnswer"
+        android:gravity="center_vertical"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/text_oct"
         app:layout_constraintStart_toStartOf="@+id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@+id/text_oct"
@@ -121,8 +132,9 @@
     <TextView
         android:id="@+id/text_answer_dec"
         style="@style/textAnswer"
+        android:gravity="center_vertical"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/text_dec"
         app:layout_constraintStart_toStartOf="@id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@id/text_dec"
@@ -132,14 +144,39 @@
     <TextView
         android:id="@+id/text_answer_hex"
         style="@style/textAnswer"
+        android:gravity="center_vertical"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="@id/text_hex"
         app:layout_constraintStart_toStartOf="@id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@id/text_hex"
         app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         tools:text="15" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_bin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_bin, text_answer_bin"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_oct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_oct, text_answer_oct"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_dec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_dec, text_answer_dec"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_hex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_hex, text_answer_hex"/>
 
     <View
         android:id="@+id/view_line"
