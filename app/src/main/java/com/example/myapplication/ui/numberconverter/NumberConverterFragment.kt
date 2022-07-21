@@ -1,14 +1,15 @@
 package com.example.myapplication.ui.numberconverter
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
@@ -20,11 +21,23 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private lateinit var binding: FragmentNumberConverterBinding
     private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
 
+    /*-- Fragment --*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentNumberConverterBinding.bind(view)
+
+        handleKeyboardClicks()
+        updateAnswers()
+        selectMode()
+        updateUiAccordingToMode()
+    }
+
+    /*-- Options menu --*/
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.settings_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -35,20 +48,10 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         return true
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentNumberConverterBinding.bind(view)
-
-        handleClicks()
-        updateUi()
-        selectMode()
-        changeUiAccordingToMode()
-    }
-
-    private fun handleClicks() {
+    /*-- Custom fun --*/
+    private fun handleKeyboardClicks() {
         with(binding) {
 
-            btnDot.setOnClickListener { numberConverterViewModel.addDot() }
             btn0.setOnClickListener { numberConverterViewModel.addValue("0") }
             btn1.setOnClickListener { numberConverterViewModel.addValue("1") }
             btn2.setOnClickListener { numberConverterViewModel.addValue("2") }
@@ -67,11 +70,12 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
             btnF.setOnClickListener { numberConverterViewModel.addValue("F") }
 
             btnBackspace.setOnClickListener { numberConverterViewModel.deleteValue() }
+            btnDot.setOnClickListener { numberConverterViewModel.addDot() }
             btnAc.setOnClickListener { numberConverterViewModel.deleteAllValue() }
         }
     }
 
-    private fun updateUi() {
+    private fun updateAnswers() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
             binding.textAnswerBin.text = it.ifEmpty { "0" }
         }
@@ -93,161 +97,77 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         with(binding) {
             groupModeBin.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_BIN
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
 
             groupModeOct.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_OCT
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
 
             groupModeDec.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_DEC
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
 
             groupModeHex.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_HEX
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
         }
-
     }
 
-    private fun changeUiAccordingToMode() {
-        val modeIndicatorParams =
-            binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
-
-        noAccentState()
+    private fun updateUiAccordingToMode() {
+        resetTextStyleToDefault()
 
         when (numberConverterViewModel.mode) {
             MODE_BIN -> {
                 with(binding) {
-                    textAnswerBin.setTextAppearance(R.style.textAccentAnswer)
-                    textBin.setTextAppearance(R.style.textAccentNumberSystem)
-                    modeIndicatorParams.topToTop = textBin.id
-                    modeIndicatorParams.bottomToBottom = textBin.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textBin)
+                    changeTextStyleToAccented(textBin, textAnswerBin)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonNumberInactive)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonNumberInactive)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonLetterInactive)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, false, R.style.buttonNumberInactive)
+                    changeButtonsClickableOnKeyboard(groupDec, false, R.style.buttonNumberInactive)
+                    changeButtonsClickableOnKeyboard(groupHex, false, R.style.buttonLetterInactive)
                 }
             }
 
             MODE_OCT -> {
                 with(binding) {
-                    textAnswerOct.setTextAppearance(R.style.textAccentAnswer)
-                    textOct.setTextAppearance(R.style.textAccentNumberSystem)
-                    modeIndicatorParams.topToTop = textOct.id
-                    modeIndicatorParams.bottomToBottom = textOct.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textOct)
+                    changeTextStyleToAccented(textOct, textAnswerOct)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonNumberInactive)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonLetterInactive)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupDec, false, R.style.buttonNumberInactive)
+                    changeButtonsClickableOnKeyboard(groupHex, false, R.style.buttonLetterInactive)
                 }
             }
 
             MODE_DEC -> {
                 with(binding) {
-                    textAnswerDec.setTextAppearance(R.style.textAccentAnswer)
-                    textDec.setTextAppearance(R.style.textAccentNumberSystem)
-                    modeIndicatorParams.topToTop = textDec.id
-                    modeIndicatorParams.bottomToBottom = textDec.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textDec)
+                    changeTextStyleToAccented(textDec, textAnswerDec)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonLetterInactive)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupDec, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupHex, false, R.style.buttonLetterInactive)
                 }
             }
 
             MODE_HEX -> {
                 with(binding) {
-                    textAnswerHex.setTextAppearance(R.style.textAccentAnswer)
-                    textHex.setTextAppearance(R.style.textAccentNumberSystem)
-                    modeIndicatorParams.topToTop = textHex.id
-                    modeIndicatorParams.bottomToBottom = textHex.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textHex)
+                    changeTextStyleToAccented(textHex, textAnswerHex)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonLetter)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupDec, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupHex, true, R.style.buttonLetter)
                 }
             }
         }
     }
 
-    private fun noAccentState() {
+    private fun resetTextStyleToDefault() {
         with(binding) {
             textBin.setTextAppearance(R.style.textNumberSystem)
             textOct.setTextAppearance(R.style.textNumberSystem)
@@ -258,6 +178,29 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
             textAnswerOct.setTextAppearance(R.style.textAnswer)
             textAnswerDec.setTextAppearance(R.style.textAnswer)
             textAnswerHex.setTextAppearance(R.style.textAnswer)
+        }
+    }
+
+    private fun changeTextStyleToAccented(textMode: TextView, textAnswer: TextView){
+        textMode.setTextAppearance(R.style.textAccentNumberSystem)
+        textAnswer.setTextAppearance(R.style.textAccentAnswer)
+    }
+
+    private fun changeModeIndicatorParams(connectedTextView: TextView) {
+        val modeIndicatorParams = binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
+
+        modeIndicatorParams.topToTop = connectedTextView.id
+        modeIndicatorParams.bottomToBottom = connectedTextView.id
+
+        binding.modeIndicator.requestLayout()
+    }
+
+    private fun changeButtonsClickableOnKeyboard(groupButtons: Group, isClickable: Boolean, style: Int) {
+        groupButtons.referencedIds.forEach { id ->
+            with(view?.findViewById<Button>(id)) {
+                this?.isClickable = isClickable
+                this?.setTextAppearance(style)
+            }
         }
     }
 

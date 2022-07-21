@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.numberconverter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,19 +20,19 @@ class NumberConverterViewModel(
     private val hexToDecUseCase: HexToDecUseCase,
 ) : ViewModel() {
 
-    private var dotAdded = false
-
     private val _bin = MutableLiveData<String>()
     private val _oct = MutableLiveData<String>()
     private val _dec = MutableLiveData<String>()
     private val _hex = MutableLiveData<String>()
 
-    var mode = NumberConverterFragment.MODE_BIN
-
     val bin: LiveData<String> = _bin
     val oct: LiveData<String> = _oct
     val dec: LiveData<String> = _dec
     val hex: LiveData<String> = _hex
+
+    private var dotAdded = false
+
+    var mode = NumberConverterFragment.MODE_BIN
 
     init {
         _bin.value = ""
