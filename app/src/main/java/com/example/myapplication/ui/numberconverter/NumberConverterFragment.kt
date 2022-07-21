@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.numberconverter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
+import com.example.myapplication.utility.setAllOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
@@ -89,23 +91,27 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private fun selectMode() {
         with(binding) {
-            textBin.setOnClickListener {
+            groupModeBin.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_BIN
                 changeUiAccordingToMode()
             }
-            textOct.setOnClickListener {
+
+            groupModeOct.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_OCT
                 changeUiAccordingToMode()
             }
-            textDec.setOnClickListener {
+
+            groupModeDec.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_DEC
                 changeUiAccordingToMode()
             }
-            textHex.setOnClickListener {
+
+            groupModeHex.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_HEX
                 changeUiAccordingToMode()
             }
         }
+
     }
 
     private fun changeUiAccordingToMode() {

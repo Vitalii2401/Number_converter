@@ -1,6 +1,8 @@
 package com.example.myapplication.utility
 
 import android.content.SharedPreferences
+import android.view.View
+import androidx.constraintlayout.widget.Group
 
 inline fun <reified T> SharedPreferences.get(key: String, defaultValue: T): T {
     when (T::class) {
@@ -38,3 +40,8 @@ inline fun <reified T> SharedPreferences.put(key: String, value: T) {
     editor.commit()
 }
 
+fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
+    referencedIds.forEach { id ->
+        rootView.findViewById<View>(id).setOnClickListener(listener)
+    }
+}
