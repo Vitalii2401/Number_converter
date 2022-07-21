@@ -30,8 +30,7 @@ class NumberConverterViewModel(
     val dec: LiveData<String> = _dec
     val hex: LiveData<String> = _hex
 
-    private var dotAdded = false
-
+    private var isDotAdded = false
     var mode = NumberConverterFragment.MODE_BIN
 
     init {
@@ -41,47 +40,46 @@ class NumberConverterViewModel(
         _hex.value = ""
     }
 
-    private fun currentMode(): MutableLiveData<String> {
-        return when (mode) {
-            NumberConverterFragment.MODE_BIN -> _bin
-            NumberConverterFragment.MODE_OCT -> _oct
-            NumberConverterFragment.MODE_DEC -> _dec
-            NumberConverterFragment.MODE_HEX -> _hex
-            else -> {_bin}
-        }
+    private fun getCurrentMode(): MutableLiveData<String> = when (mode) {
+        NumberConverterFragment.MODE_OCT -> _oct
+        NumberConverterFragment.MODE_DEC -> _dec
+        NumberConverterFragment.MODE_HEX -> _hex
+        else -> _bin
     }
 
-    fun addValue(value: String) {
-        if (currentMode().value.toString().isEmpty() && value == "0")
-            return
-        else
-            currentMode().value += value
+    private fun getCurrentValue(): String = getCurrentMode().value.toString()
 
+    fun addValue(value: String) {
+        if (getCurrentValue().isEmpty() && value == "0")
+            return
+
+        getCurrentMode().value += value
         convert()
     }
 
     fun addDot() {
-        if (!dotAdded && currentMode().value.toString().isNotEmpty()) {
-            _bin.value += "."
-            _oct.value += "."
-            _dec.value += "."
-            _hex.value += "."
+        if(isDotAdded && getCurrentValue().isEmpty())
+            return
 
-            dotAdded = true
-        }
+        _bin.value += "."
+        _oct.value += "."
+        _dec.value += "."
+        _hex.value += "."
+
+        isDotAdded = true
     }
 
     fun deleteValue() {
-        currentMode().value = currentMode().value.toString().dropLast(1)
+        getCurrentMode().value = getCurrentValue().dropLast(1)
 
-        if(currentMode().value.toString().isEmpty()) {
+        if(getCurrentValue().isEmpty()) {
             deleteAllValue()
             return
         }
 
-        if(!currentMode().value.toString().contains(".")){
-            dotAdded = false
-        } else if (currentMode().value.toString().last() == '.') {
+        if(!getCurrentValue().contains(".")){
+            isDotAdded = false
+        } else if (getCurrentValue().last() == '.') {
             _bin.value = _bin.value.toString().substringBefore(".") + "."
             _oct.value = _oct.value.toString().substringBefore(".") + "."
             _dec.value = _dec.value.toString().substringBefore(".") + "."
@@ -99,11 +97,7 @@ class NumberConverterViewModel(
         _dec.value = ""
         _hex.value = ""
 
-        dotAdded = false
-    }
-
-    fun changeMode(changedMode: String) {
-        mode = changedMode
+        isDotAdded = false
     }
 
     private fun convert() {
