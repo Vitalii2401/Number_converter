@@ -58,7 +58,7 @@ class NumberConverterViewModel(
     }
 
     fun addDot() {
-        if(isDotAdded && getCurrentValue().isEmpty())
+        if(isDotAdded || getCurrentValue().isEmpty())
             return
 
         _bin.value += "."
