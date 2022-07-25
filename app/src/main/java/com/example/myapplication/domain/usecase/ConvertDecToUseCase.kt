@@ -4,25 +4,25 @@ import java.math.BigDecimal
 
 class ConvertDecToUseCase {
 
-    fun execute(value: String, numberSystem: Int): String {
-        return if (value.contains(".")) {
+    fun execute(value: String, numberSystem: Int): String =
+        if (value.contains(".")) {
             val decValue = value.toBigDecimal()
-            convertDecTo(decValue.toInt(), numberSystem) + "." +
+            convertDecTo(decValue.toInt().toBigDecimal(), numberSystem) + "." +
                     convertFractionalDecTo(decValue.minus(decValue.toInt().toBigDecimal()), numberSystem, 25)
         } else
-            convertDecTo(value.toInt(), numberSystem)
-    }
+            convertDecTo(value.toBigDecimal(), numberSystem)
 
-    private fun convertDecTo(value: Int, numberSystem: Int): String {
+
+    private fun convertDecTo(value: BigDecimal, numberSystem: Int): String {
         var result = ""
         var decValue = value
 
-        while (decValue >= numberSystem) {
-            result += (decValue % numberSystem).toString(numberSystem)
-            decValue /= numberSystem
+        while (decValue >= numberSystem.toBigDecimal()) {
+            result += (decValue.rem(numberSystem.toBigDecimal())).toInt().toString(numberSystem)
+            decValue = decValue.divide(numberSystem.toBigDecimal())
         }
 
-        result += decValue.toString(numberSystem)
+        result += decValue.toInt().toString(numberSystem)
 
         return result.reversed()
     }
