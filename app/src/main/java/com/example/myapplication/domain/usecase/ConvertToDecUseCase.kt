@@ -11,13 +11,14 @@ class ConvertToDecUseCase {
             (convertToDec(ratio[0], numberSystem, false) +
                     convertToDec(ratio[1], numberSystem, true))
                 .toString()
-        } else
+        } else {
             convertToDec(value, numberSystem, false).toString()
+        }
 
 
-    private fun convertToDec(value: String, numberSystem: Int, valAfterDot: Boolean): BigDecimal {
+    private fun convertToDec(value: String, numberSystem: Int, isValueAfterDot: Boolean): BigDecimal {
         var result = BigDecimal(0)
-        var index = if(valAfterDot) value.length else 0
+        var index = if(isValueAfterDot) value.length else 0
         val size = value.length - 1
 
         var multiplyValue: BigDecimal
