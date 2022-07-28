@@ -1,6 +1,9 @@
 package com.example.myapplication.ui.numberconverter
 
 import android.os.Bundle
+import android.text.TextUtils
+import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -78,18 +81,22 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private fun updateAnswers() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
             binding.textAnswerBin.text = it.ifEmpty { "0" }
+            binding.horizontalScrollBin.fullScroll(View.FOCUS_RIGHT)
         }
 
         numberConverterViewModel.oct.observe(viewLifecycleOwner) {
             binding.textAnswerOct.text = it.ifEmpty { "0" }
+            binding.horizontalScrollOct.fullScroll(View.FOCUS_RIGHT)
         }
 
         numberConverterViewModel.dec.observe(viewLifecycleOwner) {
             binding.textAnswerDec.text = it.ifEmpty { "0" }
+            binding.horizontalScrollDec.fullScroll(View.FOCUS_RIGHT)
         }
 
         numberConverterViewModel.hex.observe(viewLifecycleOwner) {
             binding.textAnswerHex.text = it.ifEmpty { "0" }
+            binding.horizontalScrollHex.fullScroll(View.FOCUS_RIGHT)
         }
     }
 
