@@ -1,16 +1,16 @@
 package com.example.myapplication.domain.usecase
 
 import com.example.myapplication.utility.PRECISION
-import java.math.BigDecimal
+import java.math.*
 
 class ConvertDecToUseCase {
 
     fun execute(value: String, numberSystem: Int): String =
         if (value.contains(".")) {
             val bigDecimalValue = value.toBigDecimal()
-            val intValue = bigDecimalValue.toInt().toBigDecimal()
+            val intValue = bigDecimalValue.toBigInteger().toBigDecimal()
             convertDecTo(intValue, numberSystem) + "." +
-                    convertFractionalDecTo(bigDecimalValue.minus(intValue), numberSystem)
+                    convertFractionalDecTo(bigDecimalValue.subtract(intValue), numberSystem)
         } else {
             convertDecTo(value.toBigDecimal(), numberSystem)
         }
@@ -21,11 +21,11 @@ class ConvertDecToUseCase {
         var decValue = value
 
         while (decValue >= numberSystem.toBigDecimal()) {
-            result += (decValue.rem(numberSystem.toBigDecimal())).toInt().toString(numberSystem)
+            result += (decValue.rem(numberSystem.toBigDecimal())).toBigInteger().toString(numberSystem)
             decValue = decValue.divide(numberSystem.toBigDecimal())
         }
 
-        result += decValue.toInt().toString(numberSystem)
+        result += decValue.toBigInteger().toString(numberSystem)
 
         return result.reversed()
     }
@@ -36,16 +36,16 @@ class ConvertDecToUseCase {
 
         repeat(PRECISION) {
             if (decValue >= BigDecimal.ONE)
-                decValue = decValue.minus(decValue.toInt().toBigDecimal())
+                decValue = decValue.subtract(decValue.toBigInteger().toBigDecimal())
 
-            if(decValue.toDouble() == 0.0)
+            if(decValue.compareTo(BigDecimal.ZERO) == 0)
                 return@repeat
 
 /*            if(it != 0 &&  decValue == value)
                 return@repeat*/
 
             decValue = decValue.multiply(numberSystem.toBigDecimal())
-            result += decValue.toInt().toString(numberSystem)
+            result += decValue.toBigInteger().toString(numberSystem)
         }
 
         return result

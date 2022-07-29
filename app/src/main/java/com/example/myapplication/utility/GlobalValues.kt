@@ -17,4 +17,4 @@ const val THEME_DEFAULT = THEME_GREEN
 
 const val DEPRECATION = "DEPRECATION"
 
-const val PRECISION = 25
+var PRECISION = 10

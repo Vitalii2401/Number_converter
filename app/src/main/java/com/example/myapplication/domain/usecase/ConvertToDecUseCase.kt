@@ -1,15 +1,17 @@
 package com.example.myapplication.domain.usecase
 
+import com.example.myapplication.utility.PRECISION
 import java.math.BigDecimal
 import java.math.MathContext
+import java.math.RoundingMode
 
 class ConvertToDecUseCase {
 
     fun execute(value: String, numberSystem: Int): String =
         if (value.contains(".")) {
             val ratio = value.split(".")
-            (convertToDec(ratio[0], numberSystem, false) +
-                    convertToDec(ratio[1], numberSystem, true))
+            (convertToDec(ratio[0], numberSystem, false).add(
+                convertToDec(ratio[1], numberSystem, true)))
                 .toString()
         } else {
             convertToDec(value, numberSystem, false).toString()

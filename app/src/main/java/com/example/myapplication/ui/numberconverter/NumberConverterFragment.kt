@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
+import com.example.myapplication.utility.PRECISION
 import com.example.myapplication.utility.setAllOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -90,7 +91,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
 
         numberConverterViewModel.dec.observe(viewLifecycleOwner) {
-            binding.textAnswerDec.text = it.ifEmpty { "0" }
+            binding.textAnswerDec.text = if(it.isEmpty()) "0" else String.format("%.${PRECISION}f", it.toBigDecimal())
             binding.horizontalScrollDec.fullScroll(View.FOCUS_RIGHT)
         }
 
