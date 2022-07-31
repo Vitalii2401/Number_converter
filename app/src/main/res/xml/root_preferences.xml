@@ -18,7 +18,7 @@
 
     <SwitchPreference
         app:title="Night mode"
-        app:key="nightMode"
+        app:key="nightDayTheme"
         app:icon="@drawable/ic_night_day_mode"/>
 
 </PreferenceScreen>

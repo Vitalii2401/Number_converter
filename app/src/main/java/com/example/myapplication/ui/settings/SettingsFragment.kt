@@ -1,9 +1,13 @@
 package com.example.myapplication.ui.settings
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.example.myapplication.R
 import com.example.myapplication.utility.*
 
@@ -20,13 +24,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val language = sharedPreferences.getString(PREF_TITLE_LANG, LANGUAGE_DEFAULT)
         val theme = sharedPreferences.getString(PREF_TITLE_THEME, THEME_DEFAULT)
+        val themeDayNight = context?.resources?.configuration?.isNightModeActive
 
-        setupListPref(language, theme)
+        setupPreferences(language, theme, themeDayNight)
     }
 
-    private fun setupListPref(language: String?, theme: String?) {
+    private fun setupPreferences(language: String?, theme: String?, themeDayNight: Boolean?) {
         val languagePreferences = findPreference<ListPreference>(PREF_TITLE_LANG)
         val themePreferences = findPreference<ListPreference>(PREF_TITLE_THEME)
+        val themeNightDayPreferences = findPreference<SwitchPreference>(PREF_TITLE_NIGHT_DAY_THEME)
 
         languagePreferences?.let {
             initLanguagePref(language, it)
@@ -42,6 +48,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 handleChangeTheme(newValue.toString())
                 true
             }
+        }
+
+        themeNightDayPreferences?.let {
+            initNightDayThemePref(themeDayNight, it)
+            it.setOnPreferenceChangeListener { _ , newValue ->
+                if(newValue as Boolean){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+                true
+            }
+
+            requireActivity().recreate()
         }
     }
 
@@ -64,6 +84,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             THEME_BLUE -> arrayTheme[2]
             THEME_VIOLET -> arrayTheme[3]
             else -> arrayTheme[1]
+        }
+    }
+
+    private fun initNightDayThemePref(themeDayNight: Boolean?, it: SwitchPreference) {
+        if (themeDayNight != null) {
+            it.isChecked = themeDayNight
         }
     }
 
