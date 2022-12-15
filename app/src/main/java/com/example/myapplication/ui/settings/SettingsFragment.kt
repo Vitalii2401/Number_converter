@@ -1,9 +1,9 @@
 package com.example.myapplication.ui.settings
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
@@ -16,110 +16,111 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-        getSharedPref()
+        setupPreferences()
     }
 
-    private fun getSharedPref() {
-        val sharedPreferences = requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
+    private fun getSharedPref(): SharedPreferences =
+        requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
 
-        val language = sharedPreferences.getString(PREF_TITLE_LANG, LANGUAGE_DEFAULT)
-        val theme = sharedPreferences.getString(PREF_TITLE_THEME, THEME_DEFAULT)
-        val themeDayNight = context?.resources?.configuration?.isNightModeActive
+    private fun isUsingNightModeResources(): Boolean =
+        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            else -> false
+        }
 
-        setupPreferences(language, theme, themeDayNight)
-    }
+    private fun setupPreferences() {
 
-    private fun setupPreferences(language: String?, theme: String?, themeDayNight: Boolean?) {
-        val languagePreferences = findPreference<ListPreference>(PREF_TITLE_LANG)
-        val themePreferences = findPreference<ListPreference>(PREF_TITLE_THEME)
-        val themeNightDayPreferences = findPreference<SwitchPreference>(PREF_TITLE_NIGHT_DAY_THEME)
+        /* Get current preferences */
+        val currentLanguage = getSharedPref().getString(PREF_TITLE_LANG, LANGUAGE_DEFAULT)
+        val currentTheme = getSharedPref().getString(PREF_TITLE_THEME, THEME_DEFAULT)
 
-        languagePreferences?.let {
-            initLanguagePref(language, it)
+        /* Find preferences */
+        val languagePreference = findPreference<ListPreference>(PREF_TITLE_LANG)
+        val themePreference = findPreference<ListPreference>(PREF_TITLE_THEME)
+        val nightModePreference = findPreference<SwitchPreference>(PREF_TITLE_NIGHT_MODE)
+
+        languagePreference?.let {
+            initLanguagePref(currentLanguage, it)
             it.setOnPreferenceChangeListener { _, newValue ->
-                handleChangeLanguage(newValue.toString())
+                changeLanguage(newValue.toString())
                 true
             }
         }
 
-        themePreferences?.let {
-            initThemePref(theme, it)
+        themePreference?.let {
+            initThemePref(currentTheme, it)
             it.setOnPreferenceChangeListener { _, newValue ->
-                handleChangeTheme(newValue.toString())
+                changeTheme(newValue.toString())
                 true
             }
         }
 
-        themeNightDayPreferences?.let {
-            initNightDayThemePref(themeDayNight, it)
+        nightModePreference?.let {
+            initNightModePref(it)
             it.setOnPreferenceChangeListener { _ , newValue ->
-                if(newValue as Boolean){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
+                changeNightMode(newValue as Boolean)
                 true
             }
-
-            requireActivity().recreate()
         }
     }
 
-    private fun initLanguagePref(language: String?, it: ListPreference) {
+    /* Init preferences */
+    private fun initLanguagePref(language: String?, languageListPref: ListPreference) {
         val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
         val languageCode = when(language) {
-            LANGUAGE_EN -> arrayLanguage[0]
             LANGUAGE_UK -> arrayLanguage[1]
             else -> arrayLanguage[0]
         }
 
-        it.value = languageCode
+        languageListPref.value = languageCode
     }
 
-    private fun initThemePref(theme: String?, it: ListPreference) {
+    private fun initThemePref(theme: String?, themeListPref: ListPreference) {
         val arrayTheme = requireContext().resources.getStringArray(R.array.theme_array)
-        it.value = when (theme) {
+        themeListPref.value = when (theme) {
             THEME_ORANGE -> arrayTheme[0]
-            THEME_GREEN -> arrayTheme[1]
             THEME_BLUE -> arrayTheme[2]
             THEME_VIOLET -> arrayTheme[3]
             else -> arrayTheme[1]
         }
     }
 
-    private fun initNightDayThemePref(themeDayNight: Boolean?, it: SwitchPreference) {
-        if (themeDayNight != null) {
-            it.isChecked = themeDayNight
-        }
+    private fun initNightModePref(nightModePref: SwitchPreference) {
+        nightModePref.isChecked= isUsingNightModeResources()
     }
 
-    private fun handleChangeLanguage(newLanguage: String) {
+    /* Change preferences */
+    private fun changeLanguage(newLanguage: String) {
         val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
         val languageCode = when(newLanguage) {
-            arrayLanguage[0] -> LANGUAGE_EN
             arrayLanguage[1] -> LANGUAGE_UK
             else -> LANGUAGE_EN
         }
 
-        requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE).edit().putString(
-            PREF_TITLE_LANG, languageCode).apply()
-
+        getSharedPref().put(PREF_TITLE_LANG, languageCode)
         requireActivity().recreate()
     }
 
-    private fun handleChangeTheme(newTheme: String) {
+    private fun changeTheme(newTheme: String) {
         val arrayTheme = requireContext().resources.getStringArray(R.array.theme_array)
         val theme = when (newTheme) {
             arrayTheme[0] -> THEME_ORANGE
-            arrayTheme[1] -> THEME_GREEN
             arrayTheme[2] -> THEME_BLUE
             arrayTheme[3] -> THEME_VIOLET
             else -> THEME_GREEN
         }
 
-        requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE).edit().putString(
-            PREF_TITLE_THEME, theme).apply()
-
+        getSharedPref().put(PREF_TITLE_THEME, theme)
         requireActivity().recreate()
+    }
+
+    private fun changeNightMode(isNightMode: Boolean) {
+        val nightModeMask = when (isNightMode) {
+            true -> AppCompatDelegate.MODE_NIGHT_YES
+            else -> AppCompatDelegate.MODE_NIGHT_NO
+        }
+
+        getSharedPref().put(PREF_TITLE_NIGHT_MODE, nightModeMask)
+        AppCompatDelegate.setDefaultNightMode(nightModeMask)
     }
 }
