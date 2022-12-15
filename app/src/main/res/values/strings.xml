@@ -50,4 +50,5 @@
         <item>Violet</item>
     </string-array>
 
+    <string name="settings_night_mode">Night mode</string>
 </resources>

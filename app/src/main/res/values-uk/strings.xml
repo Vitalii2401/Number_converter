@@ -50,4 +50,5 @@
         <item>Фіолетовий</item>
     </string-array>
 
+    <string name="settings_night_mode">Темний режим</string>
 </resources>

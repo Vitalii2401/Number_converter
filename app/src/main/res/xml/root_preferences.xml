@@ -17,7 +17,7 @@
         app:icon="@drawable/ic_brush"/>
 
     <SwitchPreference
-        app:title="Night mode"
+        app:title="@string/settings_night_mode"
         app:key="nightMode"
         app:icon="@drawable/ic_night_day_mode"/>
 
