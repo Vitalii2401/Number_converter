@@ -8,7 +8,9 @@ class HexToBinUseCase(
     fun execute(hexValue: String): String {
         return convertDecToUseCase.execute(
             convertToDecUseCase.execute(hexValue, 16),
-            2
+            2,
+            256
         )
+
     }
 }

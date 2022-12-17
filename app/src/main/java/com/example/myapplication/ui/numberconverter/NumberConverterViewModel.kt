@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.domain.usecase.*
+import com.example.myapplication.utility.PRECISION
 
 class NumberConverterViewModel(
     private val binToOctUseCase: BinToOctUseCase,
@@ -113,9 +114,9 @@ class NumberConverterViewModel(
                 _hex.value = octToHexUseCase.execute(_oct.value.toString())
             }
             NumberConverterFragment.MODE_DEC -> {
-                _bin.value = decToBinUseCase.execute(_dec.value.toString())
-                _oct.value = decToOctUseCase.execute(_dec.value.toString())
-                _hex.value = decToHexUseCase.execute(_dec.value.toString())
+                _bin.value = decToBinUseCase.execute(_dec.value.toString(), PRECISION)
+                _oct.value = decToOctUseCase.execute(_dec.value.toString(), PRECISION)
+                _hex.value = decToHexUseCase.execute(_dec.value.toString(), PRECISION)
             }
             NumberConverterFragment.MODE_HEX -> {
                 _bin.value = hexToBinUseCase.execute(_hex.value.toString())

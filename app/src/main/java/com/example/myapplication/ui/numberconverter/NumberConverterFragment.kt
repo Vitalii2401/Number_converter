@@ -91,7 +91,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
 
         numberConverterViewModel.dec.observe(viewLifecycleOwner) {
-            binding.textAnswerDec.text = if(it.isEmpty()) "0" else String.format("%.${PRECISION}f", it.toBigDecimal())
+            binding.textAnswerDec.text = it.ifEmpty { "0" }
             binding.horizontalScrollDec.fullScroll(View.FOCUS_RIGHT)
         }
 
