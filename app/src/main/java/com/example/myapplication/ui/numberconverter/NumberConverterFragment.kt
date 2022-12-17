@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.navigation.fragment.findNavController
@@ -98,6 +99,11 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         numberConverterViewModel.hex.observe(viewLifecycleOwner) {
             binding.textAnswerHex.text = it.ifEmpty { "0" }
             binding.horizontalScrollHex.fullScroll(View.FOCUS_RIGHT)
+        }
+
+        numberConverterViewModel.isFull.observe(viewLifecycleOwner) {
+            if (it)
+                Toast.makeText(requireContext(), "Digit limit reached", Toast.LENGTH_SHORT).show()
         }
     }
 

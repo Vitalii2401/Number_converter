@@ -1,7 +1,5 @@
 package com.example.myapplication.domain.usecase
 
-import android.util.Log
-import kotlin.math.pow
 
 class BinToHexUseCase(
     private val convertToDecUseCase: ConvertToDecUseCase,
@@ -9,14 +7,11 @@ class BinToHexUseCase(
 ) {
 
     fun execute(binValue: String): String {
-        val res = convertDecToUseCase.execute(
+        return convertDecToUseCase.execute(
             convertToDecUseCase.execute(binValue, 2),
             16,
             256
         )
-        Log.d("Test", "execute convert to dec -> ${convertToDecUseCase.execute(binValue, 2)} ")
-        Log.d("Test", "execute result -> ${res}")
-        return res
     }
 
    /* private fun convertBinToDec(bin: String): Int {
