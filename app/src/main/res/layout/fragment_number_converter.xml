@@ -54,169 +54,153 @@
     <TextView
         android:id="@+id/text_bin"
         style="@style/textAccentNumberSystem"
-        android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
         android:text="@string/bin"
+        app:layout_constraintBottom_toTopOf="@id/text_oct"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_bin"
         app:layout_constraintStart_toEndOf="@id/mode_indicator"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline"
-        app:layout_constraintEnd_toStartOf="@id/horizontal_scroll_bin"
-        app:layout_constraintBottom_toTopOf="@id/text_oct"/>
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
     <TextView
         android:id="@+id/text_oct"
         style="@style/textNumberSystem"
-        android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="11dp"
+        android:gravity="center_vertical"
         android:text="@string/oct"
-        app:layout_constraintStart_toStartOf="@id/text_bin"
-        app:layout_constraintTop_toBottomOf="@id/text_bin"
         app:layout_constraintBottom_toTopOf="@+id/text_dec"
-        app:layout_constraintEnd_toStartOf="@id/horizontal_scroll_oct"/>
+        app:layout_constraintEnd_toStartOf="@id/text_answer_oct"
+        app:layout_constraintStart_toStartOf="@id/text_bin"
+        app:layout_constraintTop_toBottomOf="@id/text_bin" />
 
     <TextView
         android:id="@+id/text_dec"
-        android:gravity="center_vertical"
         style="@style/textNumberSystem"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="11dp"
+        android:gravity="center_vertical"
         android:text="@string/dec"
-        app:layout_constraintStart_toStartOf="@id/text_bin"
-        app:layout_constraintTop_toBottomOf="@id/text_oct"
         app:layout_constraintBottom_toTopOf="@+id/text_hex"
-        app:layout_constraintEnd_toStartOf="@id/horizontal_scroll_dec"/>
+        app:layout_constraintEnd_toStartOf="@id/text_answer_dec"
+        app:layout_constraintStart_toStartOf="@id/text_bin"
+        app:layout_constraintTop_toBottomOf="@id/text_oct" />
 
     <TextView
         android:id="@+id/text_hex"
         style="@style/textNumberSystem"
-        android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="11dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_vertical"
         android:text="@string/hex"
-        app:layout_constraintStart_toStartOf="@id/text_bin"
-        app:layout_constraintTop_toBottomOf="@id/text_dec"
         app:layout_constraintBottom_toTopOf="@+id/view_line"
-        app:layout_constraintEnd_toStartOf="@id/horizontal_scroll_hex"
-        android:layout_marginBottom="30dp"/>
+        app:layout_constraintEnd_toStartOf="@id/text_answer_hex"
+        app:layout_constraintStart_toStartOf="@id/text_bin"
+        app:layout_constraintTop_toBottomOf="@id/text_dec" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontal_scroll_bin"
+    <TextView
+        android:id="@+id/text_answer_bin"
+        style="@style/textAccentAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/text_bin"
-        app:layout_constraintStart_toStartOf="@+id/start_guideline"
-        app:layout_constraintTop_toTopOf="@+id/text_bin"
-        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         android:layout_marginStart="100dp"
-        android:scrollbars="horizontal">
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/text_bin"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintTop_toTopOf="@+id/text_bin"
+        tools:text="10101" />
 
-        <TextView
-            android:id="@+id/text_answer_bin"
-            style="@style/textAccentAnswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="10101" />
 
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:id="@+id/horizontal_scroll_oct"
+    <TextView
+        android:id="@+id/text_answer_oct"
+        style="@style/textAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/text_oct"
-        app:layout_constraintStart_toStartOf="@+id/horizontal_scroll_bin"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@+id/text_oct"
-        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
-        android:scrollbars="horizontal">
-
-        <TextView
-            android:id="@+id/text_answer_oct"
-            style="@style/textAnswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="25" />
-
-    </HorizontalScrollView>
+        tools:text="25" />
 
 
-    <HorizontalScrollView
-        android:id="@+id/horizontal_scroll_dec"
+    <TextView
+        android:id="@+id/text_answer_dec"
+        style="@style/textAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/text_dec"
-        app:layout_constraintStart_toStartOf="@id/horizontal_scroll_bin"
-        app:layout_constraintTop_toTopOf="@id/text_dec"
         app:layout_constraintEnd_toEndOf="@+id/end_guideline"
-        android:scrollbars="horizontal">
+        app:layout_constraintStart_toStartOf="@id/text_answer_bin"
+        app:layout_constraintTop_toTopOf="@id/text_dec"
+        tools:text="21" />
 
-        <TextView
-            android:id="@+id/text_answer_dec"
-            style="@style/textAnswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="21" />
 
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:id="@+id/horizontal_scroll_hex"
+    <TextView
+        android:id="@+id/text_answer_hex"
+        style="@style/textAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/text_hex"
-        app:layout_constraintStart_toStartOf="@id/horizontal_scroll_bin"
-        app:layout_constraintTop_toTopOf="@id/text_hex"
         app:layout_constraintEnd_toEndOf="@+id/end_guideline"
-        android:scrollbars="horizontal">
-
-        <TextView
-            android:id="@+id/text_answer_hex"
-            style="@style/textAnswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            tools:text="15" />
-
-    </HorizontalScrollView>
-
+        app:layout_constraintStart_toStartOf="@id/text_answer_bin"
+        app:layout_constraintTop_toTopOf="@id/text_hex"
+        tools:text="15" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_mode_bin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="text_bin, horizontal_scroll_bin"/>
+        app:constraint_referenced_ids="text_bin, text_answer_bin" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_mode_oct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="text_oct, horizontal_scroll_oct"/>
+        app:constraint_referenced_ids="text_oct, text_answer_oct" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_mode_dec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="text_dec, horizontal_scroll_dec"/>
+        app:constraint_referenced_ids="text_dec, text_answer_dec" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_mode_hex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="text_hex, horizontal_scroll_hex"/>
+        app:constraint_referenced_ids="text_hex, text_answer_hex" />
 
 
     <View
         android:id="@+id/view_line"
+        style="@style/viewLine"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        style="@style/viewLine"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/center_guideline" />
 
 
@@ -424,10 +408,10 @@
     <Button
         android:id="@+id/btn_ac"
         style="@style/buttonNumber"
-        android:fontFamily="@font/montserrat_semi_bold"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_semi_bold"
         android:text="@string/ac"
         app:layout_constraintBottom_toTopOf="@+id/btn_8"
         app:layout_constraintEnd_toStartOf="@+id/btn_backspace"

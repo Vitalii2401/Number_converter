@@ -40,7 +40,7 @@ inline fun <reified T> SharedPreferences.put(key: String, value: T) {
     editor.commit()
 }
 
-fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
+fun Group.setAllOnClickListener(listener: (view: View) -> Unit) {
     referencedIds.forEach { id ->
         rootView.findViewById<View>(id).setOnClickListener(listener)
     }

@@ -1,23 +1,16 @@
 package com.example.myapplication.ui.numberconverter
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
-import com.example.myapplication.utility.PRECISION
 import com.example.myapplication.utility.setAllOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,6 +28,12 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNumberConverterBinding.bind(view)
+
+        binding.textAnswerBin.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerOct.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerDec.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerHex.movementMethod = ScrollingMovementMethod()
+
 
         handleKeyboardClicks()
         updateAnswers()
@@ -83,28 +82,34 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private fun updateAnswers() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
             binding.textAnswerBin.text = it.ifEmpty { "0" }
-            binding.horizontalScrollBin.fullScroll(View.FOCUS_RIGHT)
+            binding.textAnswerBin.scrollX = getScrollValue(binding.textAnswerBin)
         }
 
         numberConverterViewModel.oct.observe(viewLifecycleOwner) {
             binding.textAnswerOct.text = it.ifEmpty { "0" }
-            binding.horizontalScrollOct.fullScroll(View.FOCUS_RIGHT)
+            binding.textAnswerOct.scrollX = getScrollValue(binding.textAnswerOct)
         }
 
         numberConverterViewModel.dec.observe(viewLifecycleOwner) {
             binding.textAnswerDec.text = it.ifEmpty { "0" }
-            binding.horizontalScrollDec.fullScroll(View.FOCUS_RIGHT)
+            binding.textAnswerDec.scrollX = getScrollValue(binding.textAnswerDec)
         }
 
         numberConverterViewModel.hex.observe(viewLifecycleOwner) {
             binding.textAnswerHex.text = it.ifEmpty { "0" }
-            binding.horizontalScrollHex.fullScroll(View.FOCUS_RIGHT)
+            binding.textAnswerHex.scrollX = getScrollValue(binding.textAnswerHex)
         }
 
         numberConverterViewModel.isFull.observe(viewLifecycleOwner) {
             if (it)
                 Toast.makeText(requireContext(), "Digit limit reached", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun getScrollValue(textView: TextView): Int {
+        val widthText = textView.paint.measureText(textView.text.toString()).toInt()
+        val widthView = textView.width
+        return if (widthView > widthText || widthView == 0) 0 else widthText - widthView
     }
 
     private fun selectMode() {
@@ -195,13 +200,14 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
     }
 
-    private fun changeTextStyleToAccented(textMode: TextView, textAnswer: TextView){
+    private fun changeTextStyleToAccented(textMode: TextView, textAnswer: TextView) {
         textMode.setTextAppearance(R.style.textAccentNumberSystem)
         textAnswer.setTextAppearance(R.style.textAccentAnswer)
     }
 
     private fun changeModeIndicatorParams(connectedTextView: TextView) {
-        val modeIndicatorParams = binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
+        val modeIndicatorParams =
+            binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
 
         modeIndicatorParams.topToTop = connectedTextView.id
         modeIndicatorParams.bottomToBottom = connectedTextView.id
@@ -209,7 +215,11 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         binding.modeIndicator.requestLayout()
     }
 
-    private fun changeButtonsClickableOnKeyboard(groupButtons: Group, isClickable: Boolean, style: Int) {
+    private fun changeButtonsClickableOnKeyboard(
+        groupButtons: Group,
+        isClickable: Boolean,
+        style: Int
+    ) {
         groupButtons.referencedIds.forEach { id ->
             with(view?.findViewById<Button>(id)) {
                 this?.isClickable = isClickable
