@@ -22,6 +22,17 @@ object LocaleService {
         return updateResourcesLocaleLegacy(context, locale)
     }
 
+    fun updateAppTheme(context: Context) {
+        when (getTheme(context)) {
+            THEME_ORANGE -> context.setTheme(R.style.Theme_NumberConverterOrange)
+            THEME_BLUE -> context.setTheme(R.style.Theme_NumberConverterBlue)
+            THEME_VIOLET -> context.setTheme(R.style.Theme_NumberConverterPurple)
+            else -> context.setTheme(R.style.Theme_NumberConverterGreen)
+        }
+
+        AppCompatDelegate.setDefaultNightMode(getNightModeMask(context))
+    }
+
     @TargetApi(Build.VERSION_CODES.N)
     private fun updateResourcesLocale(
         context: Context,
@@ -44,16 +55,6 @@ object LocaleService {
         return context
     }
 
-    fun updateAppTheme(context: Context) {
-        when (getTheme(context)) {
-            THEME_ORANGE -> context.setTheme(R.style.Theme_NumberConverterOrange)
-            THEME_BLUE -> context.setTheme(R.style.Theme_NumberConverterBlue)
-            THEME_VIOLET -> context.setTheme(R.style.Theme_NumberConverterPurple)
-            else -> context.setTheme(R.style.Theme_NumberConverterGreen)
-        }
-
-        AppCompatDelegate.setDefaultNightMode(getNightModeMask(context))
-    }
 
     private fun getSharedPref(context: Context): SharedPreferences =
         context.getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
