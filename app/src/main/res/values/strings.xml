@@ -32,10 +32,10 @@
 
     <string name="settings_language">Language</string>
     <string name="settings_language_en">English</string>
-    <string name="settings_language_uk">Ukrainian</string>
+    <string name="settings_language_uk">Українська</string>
     <string-array name="language_array">
         <item>English</item>
-        <item>Ukrainian</item>
+        <item>Українська</item>
     </string-array>
 
     <string name="settings_theme">Theme</string>
@@ -47,7 +47,7 @@
         <item>Orange</item>
         <item>Green</item>
         <item>Blue</item>
-        <item>Violet</item>
+        <item>Purple</item>
     </string-array>
 
     <string name="settings_night_mode">Night mode</string>
