@@ -74,7 +74,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         clipboard.setPrimaryClip(ClipData.newPlainText(RESULT, text))
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
-            Toast.makeText(requireContext(), "Text $text copied to clipboard", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), getString(R.string.toast_clipboard, text), Toast.LENGTH_SHORT)
                 .show()
     }
 
@@ -138,8 +138,13 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
 
         numberConverterViewModel.isFull.observe(viewLifecycleOwner) {
-            if (it)
-                Toast.makeText(requireContext(), "Digit limit reached", Toast.LENGTH_SHORT).show()
+            if (it) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.toast_digit_limit),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

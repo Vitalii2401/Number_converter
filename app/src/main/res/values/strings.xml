@@ -51,4 +51,8 @@
     </string-array>
 
     <string name="settings_night_mode">Night mode</string>
+
+    <!-- Toast -->
+    <string name="toast_clipboard">Text "%s" copied to clipboard</string>
+    <string name="toast_digit_limit">"Digit limit reached</string>
 </resources>
