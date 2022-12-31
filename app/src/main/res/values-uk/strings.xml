@@ -53,6 +53,6 @@
     <string name="settings_night_mode">Темний режим</string>
 
     <!-- Toast -->
-    <string name="toast_clipboard">Текст "%s" скопійовано до буферу обміну</string>
+    <string name="toast_clipboard">Текст \"%s\" скопійовано до буферу обміну</string>
     <string name="toast_digit_limit">Досягнуто ліміту цифр</string>
 </resources>
