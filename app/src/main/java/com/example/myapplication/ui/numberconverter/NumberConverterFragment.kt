@@ -3,6 +3,7 @@ package com.example.myapplication.ui.numberconverter
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.*
@@ -71,7 +72,10 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private fun copyToClipboard(text: String) {
         clipboard.setPrimaryClip(ClipData.newPlainText(RESULT, text))
-        Toast.makeText(requireContext(), "Text $text copied to clipboard", Toast.LENGTH_SHORT).show()
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+            Toast.makeText(requireContext(), "Text $text copied to clipboard", Toast.LENGTH_SHORT)
+                .show()
     }
 
     /*-- Options menu --*/
