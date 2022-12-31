@@ -26,13 +26,13 @@ class NumberConverterViewModel(
     private val _oct = MutableLiveData<String>()
     private val _dec = MutableLiveData<String>()
     private val _hex = MutableLiveData<String>()
-    private val _isFull = MutableLiveData<Boolean>()
+    private val _isDigitLimit = MutableLiveData<Boolean>()
 
     val bin: LiveData<String> = _bin
     val oct: LiveData<String> = _oct
     val dec: LiveData<String> = _dec
     val hex: LiveData<String> = _hex
-    val isFull: LiveData<Boolean> = _isFull
+    val isDigitLimit: LiveData<Boolean> = _isDigitLimit
 
     private var isDotAdded = false
     var mode = NumberConverterFragment.MODE_BIN
@@ -42,7 +42,7 @@ class NumberConverterViewModel(
         _oct.value = ""
         _dec.value = ""
         _hex.value = ""
-        _isFull.value = false
+        _isDigitLimit.value = false
     }
 
     private fun getCurrentMode(): MutableLiveData<String> = when (mode) {
@@ -54,17 +54,19 @@ class NumberConverterViewModel(
 
     private fun getCurrentValue(): String = getCurrentMode().value.toString()
 
+    private fun checkDigitLimit(): Boolean {
+        _isDigitLimit.value = (_hex.value?.length ?: 0) + 1 >= 64
+        return _isDigitLimit.value as Boolean
+    }
+
     fun addValue(value: String) {
-        Log.d("Test", "Length -> ${getCurrentValue().length + 1}")
-        if (getCurrentValue().length + 1 >= 64) {
-            _isFull.value = true
+        if (checkDigitLimit()) {
             return
-        } else {
-            _isFull.value = false
         }
 
-        if (getCurrentValue().isEmpty() && value == "0")
+        if (getCurrentValue().isEmpty() && value == "0") {
             return
+        }
 
         getCurrentMode().value += value
         convert()
@@ -102,6 +104,7 @@ class NumberConverterViewModel(
         }
 
         convert()
+        checkDigitLimit()
     }
 
     fun deleteAllValue() {
@@ -111,6 +114,7 @@ class NumberConverterViewModel(
         _hex.value = ""
 
         isDotAdded = false
+        checkDigitLimit()
     }
 
     private fun convert() {

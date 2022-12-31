@@ -137,7 +137,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
             binding.textAnswerHex.scrollX = getScrollValue(binding.textAnswerHex)
         }
 
-        numberConverterViewModel.isFull.observe(viewLifecycleOwner) {
+        numberConverterViewModel.isDigitLimit.observe(viewLifecycleOwner) {
             if (it) {
                 Toast.makeText(
                     requireContext(),
