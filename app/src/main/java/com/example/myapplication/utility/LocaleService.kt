@@ -60,7 +60,7 @@ object LocaleService {
         context.getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
 
     private fun getLanguage(context: Context): String =
-        getSharedPref(context).get(PREF_TITLE_LANG, LANGUAGE_DEFAULT)
+        getSharedPref(context).get(PREF_TITLE_LANG, Locale.getDefault().language)
 
     private fun getTheme(context: Context): String =
         getSharedPref(context).get(PREF_TITLE_THEME, THEME_DEFAULT)

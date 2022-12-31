@@ -10,6 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.example.myapplication.R
 import com.example.myapplication.utility.*
+import java.util.*
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -31,7 +32,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun setupPreferences() {
 
         /* Get current preferences */
-        val currentLanguage = getSharedPref().getString(PREF_TITLE_LANG, LANGUAGE_DEFAULT)
+        val currentLanguage = getSharedPref().getString(PREF_TITLE_LANG, Locale.getDefault().language)
         val currentTheme = getSharedPref().getString(PREF_TITLE_THEME, THEME_DEFAULT)
 
         /* Find preferences */
