@@ -1,6 +1,7 @@
 package com.example.myapplication.domain.usecase
 
 import java.math.*
+import java.util.*
 
 class ConvertDecToUseCase {
 
@@ -22,16 +23,17 @@ class ConvertDecToUseCase {
         }
 
         while (integerValue >= toNumberSystem) {
-            result += (integerValue.rem(toNumberSystem)).toInt().toString(toNumberSystem.toInt())
+            result += (integerValue.rem(toNumberSystem)).toInt().toString(toNumberSystem.toInt()).uppercase(
+                Locale.ENGLISH)
             integerValue = integerValue.divide(toNumberSystem)
         }
 
-        result += integerValue.toBigInteger().toString(toNumberSystem.toInt())
+        result += integerValue.toBigInteger().toString(toNumberSystem.toInt()).uppercase(Locale.ENGLISH)
         result = result.reversed()
 
         while (precisions > 0 && isFractional) {
             fractionalValue = fractionalValue.multiply(toNumberSystem)
-            result += fractionalValue.toBigInteger().toString(toNumberSystem.toInt())
+            result += fractionalValue.toBigInteger().toString(toNumberSystem.toInt()).uppercase(Locale.ENGLISH)
 
             if (fractionalValue >= BigDecimal.ONE)
                 fractionalValue =
