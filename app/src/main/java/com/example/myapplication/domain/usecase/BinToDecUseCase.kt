@@ -1,7 +1,5 @@
 package com.example.myapplication.domain.usecase
 
-import kotlin.math.pow
-
 class BinToDecUseCase(
     private val convertToDecUseCase: ConvertToDecUseCase
 ) {

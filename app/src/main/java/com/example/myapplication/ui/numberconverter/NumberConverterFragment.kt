@@ -1,28 +1,84 @@
 package com.example.myapplication.ui.numberconverter
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.text.method.ScrollingMovementMethod
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.View
-import android.widget.Button
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
+import com.example.myapplication.utility.setAllOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
 
     private lateinit var binding: FragmentNumberConverterBinding
     private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
+    private val clipboard by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
 
+    /*-- Fragment --*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentNumberConverterBinding.bind(view)
+
+        binding.textAnswerBin.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerOct.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerDec.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerHex.movementMethod = ScrollingMovementMethod()
+
+
+        handleKeyboardClicks()
+        updateAnswers()
+        selectMode()
+        updateUiAccordingToMode()
+        longClick()
+    }
+
+    private fun longClick() {
+        with(binding) {
+            textAnswerBin.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerOct.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerDec.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerHex.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+        }
+    }
+
+    private fun copyToClipboard(text: String) {
+        clipboard.setPrimaryClip(ClipData.newPlainText(RESULT, text))
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+            Toast.makeText(requireContext(), getString(R.string.toast_clipboard, text), Toast.LENGTH_SHORT)
+                .show()
+    }
+
+    /*-- Options menu --*/
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.settings_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -33,20 +89,10 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         return true
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentNumberConverterBinding.bind(view)
-
-        handleClicks()
-        updateUi()
-        selectMode()
-        changeUiAccordingToMode()
-    }
-
-    private fun handleClicks() {
+    /*-- Custom fun --*/
+    private fun handleKeyboardClicks() {
         with(binding) {
 
-            btnDot.setOnClickListener { numberConverterViewModel.addDot() }
             btn0.setOnClickListener { numberConverterViewModel.addValue("0") }
             btn1.setOnClickListener { numberConverterViewModel.addValue("1") }
             btn2.setOnClickListener { numberConverterViewModel.addValue("2") }
@@ -65,183 +111,124 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
             btnF.setOnClickListener { numberConverterViewModel.addValue("F") }
 
             btnBackspace.setOnClickListener { numberConverterViewModel.deleteValue() }
+            btnDot.setOnClickListener { numberConverterViewModel.addDot() }
             btnAc.setOnClickListener { numberConverterViewModel.deleteAllValue() }
         }
     }
 
-    private fun updateUi() {
+    private fun updateAnswers() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
             binding.textAnswerBin.text = it.ifEmpty { "0" }
+            binding.textAnswerBin.scrollX = getScrollValue(binding.textAnswerBin)
         }
 
         numberConverterViewModel.oct.observe(viewLifecycleOwner) {
             binding.textAnswerOct.text = it.ifEmpty { "0" }
+            binding.textAnswerOct.scrollX = getScrollValue(binding.textAnswerOct)
         }
 
         numberConverterViewModel.dec.observe(viewLifecycleOwner) {
             binding.textAnswerDec.text = it.ifEmpty { "0" }
+            binding.textAnswerDec.scrollX = getScrollValue(binding.textAnswerDec)
         }
 
         numberConverterViewModel.hex.observe(viewLifecycleOwner) {
             binding.textAnswerHex.text = it.ifEmpty { "0" }
+            binding.textAnswerHex.scrollX = getScrollValue(binding.textAnswerHex)
         }
+
+        numberConverterViewModel.isDigitLimit.observe(viewLifecycleOwner) {
+            if (it) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.toast_digit_limit),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun getScrollValue(textView: TextView): Int {
+        val widthText = textView.paint.measureText(textView.text.toString()).toInt()
+        val widthView = textView.width
+        return if (widthView > widthText || widthView == 0) 0 else widthText - widthView
     }
 
     private fun selectMode() {
         with(binding) {
-            textBin.setOnClickListener {
+            groupModeBin.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_BIN
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
-            textOct.setOnClickListener {
+
+            groupModeOct.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_OCT
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
-            textDec.setOnClickListener {
+
+            groupModeDec.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_DEC
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
-            textHex.setOnClickListener {
+
+            groupModeHex.setAllOnClickListener {
                 numberConverterViewModel.mode = MODE_HEX
-                changeUiAccordingToMode()
+                updateUiAccordingToMode()
             }
         }
     }
 
-    private fun changeUiAccordingToMode() {
-        val modeIndicatorParams =
-            binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
-
-        noAccentState()
+    private fun updateUiAccordingToMode() {
+        resetTextStyleToDefault()
 
         when (numberConverterViewModel.mode) {
             MODE_BIN -> {
                 with(binding) {
-                    textAnswerBin.setTextAppearance(R.style.accentTextAnswer)
-                    textBin.setTextAppearance(R.style.accentTextNumberSystem)
-                    modeIndicatorParams.topToTop = textBin.id
-                    modeIndicatorParams.bottomToBottom = textBin.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textBin)
+                    changeTextStyleToAccented(textBin, textAnswerBin)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonNumberInactive)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonNumberInactive)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonLetterInactive)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, false, R.style.buttonNumberInactive)
+                    changeButtonsClickableOnKeyboard(groupDec, false, R.style.buttonNumberInactive)
+                    changeButtonsClickableOnKeyboard(groupHex, false, R.style.buttonLetterInactive)
                 }
             }
 
             MODE_OCT -> {
                 with(binding) {
-                    textAnswerOct.setTextAppearance(R.style.accentTextAnswer)
-                    textOct.setTextAppearance(R.style.accentTextNumberSystem)
-                    modeIndicatorParams.topToTop = textOct.id
-                    modeIndicatorParams.bottomToBottom = textOct.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textOct)
+                    changeTextStyleToAccented(textOct, textAnswerOct)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonNumberInactive)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonLetterInactive)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupDec, false, R.style.buttonNumberInactive)
+                    changeButtonsClickableOnKeyboard(groupHex, false, R.style.buttonLetterInactive)
                 }
             }
 
             MODE_DEC -> {
                 with(binding) {
-                    textAnswerDec.setTextAppearance(R.style.accentTextAnswer)
-                    textDec.setTextAppearance(R.style.accentTextNumberSystem)
-                    modeIndicatorParams.topToTop = textDec.id
-                    modeIndicatorParams.bottomToBottom = textDec.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textDec)
+                    changeTextStyleToAccented(textDec, textAnswerDec)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = false
-                            this?.setTextAppearance(R.style.buttonLetterInactive)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupDec, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupHex, false, R.style.buttonLetterInactive)
                 }
             }
 
             MODE_HEX -> {
                 with(binding) {
-                    textAnswerHex.setTextAppearance(R.style.accentTextAnswer)
-                    textHex.setTextAppearance(R.style.accentTextNumberSystem)
-                    modeIndicatorParams.topToTop = textHex.id
-                    modeIndicatorParams.bottomToBottom = textHex.id
-                    modeIndicator.requestLayout()
+                    changeModeIndicatorParams(textHex)
+                    changeTextStyleToAccented(textHex, textAnswerHex)
 
-                    groupOct.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupDec.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonNumber)
-                        }
-                    }
-
-                    groupHex.referencedIds.forEach { id ->
-                        with(view?.findViewById<Button>(id)) {
-                            this?.isClickable = true
-                            this?.setTextAppearance(R.style.buttonLetter)
-                        }
-                    }
+                    changeButtonsClickableOnKeyboard(groupOct, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupDec, true, R.style.buttonNumber)
+                    changeButtonsClickableOnKeyboard(groupHex, true, R.style.buttonLetter)
                 }
             }
         }
     }
 
-    private fun noAccentState() {
+    private fun resetTextStyleToDefault() {
         with(binding) {
             textBin.setTextAppearance(R.style.textNumberSystem)
             textOct.setTextAppearance(R.style.textNumberSystem)
@@ -255,10 +242,40 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
     }
 
+    private fun changeTextStyleToAccented(textMode: TextView, textAnswer: TextView) {
+        textMode.setTextAppearance(R.style.textAccentNumberSystem)
+        textAnswer.setTextAppearance(R.style.textAccentAnswer)
+    }
+
+    private fun changeModeIndicatorParams(connectedTextView: TextView) {
+        val modeIndicatorParams =
+            binding.modeIndicator.layoutParams as ConstraintLayout.LayoutParams
+
+        modeIndicatorParams.topToTop = connectedTextView.id
+        modeIndicatorParams.bottomToBottom = connectedTextView.id
+
+        binding.modeIndicator.requestLayout()
+    }
+
+    private fun changeButtonsClickableOnKeyboard(
+        groupButtons: Group,
+        isClickable: Boolean,
+        style: Int
+    ) {
+        groupButtons.referencedIds.forEach { id ->
+            with(view?.findViewById<Button>(id)) {
+                this?.isClickable = isClickable
+                this?.setTextAppearance(style)
+            }
+        }
+    }
+
     companion object {
         const val MODE_BIN = "bin"
         const val MODE_OCT = "oct"
         const val MODE_DEC = "dec"
         const val MODE_HEX = "hex"
+
+        const val RESULT = "result"
     }
 }

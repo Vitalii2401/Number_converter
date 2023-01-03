@@ -44,7 +44,6 @@
 
     <View
         android:id="@+id/mode_indicator"
-        style="@style/dot"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:background="@drawable/dot_selected_mode"
@@ -54,125 +53,154 @@
 
     <TextView
         android:id="@+id/text_bin"
-        style="@style/accentTextNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textAccentNumberSystem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
         android:text="@string/bin"
+        app:layout_constraintBottom_toTopOf="@id/text_oct"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_bin"
         app:layout_constraintStart_toEndOf="@id/mode_indicator"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline"/>
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
     <TextView
         android:id="@+id/text_oct"
         style="@style/textNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
+        android:gravity="center_vertical"
         android:text="@string/oct"
+        app:layout_constraintBottom_toTopOf="@+id/text_dec"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_oct"
         app:layout_constraintStart_toStartOf="@id/text_bin"
-        app:layout_constraintTop_toBottomOf="@id/text_bin"
-        app:layout_constraintBottom_toTopOf="@+id/text_dec"/>
+        app:layout_constraintTop_toBottomOf="@id/text_bin" />
 
     <TextView
         android:id="@+id/text_dec"
         style="@style/textNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
+        android:gravity="center_vertical"
         android:text="@string/dec"
+        app:layout_constraintBottom_toTopOf="@+id/text_hex"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_dec"
         app:layout_constraintStart_toStartOf="@id/text_bin"
-        app:layout_constraintTop_toBottomOf="@id/text_oct"
-        app:layout_constraintBottom_toTopOf="@+id/text_hex"/>
+        app:layout_constraintTop_toBottomOf="@id/text_oct" />
 
     <TextView
         android:id="@+id/text_hex"
         style="@style/textNumberSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_vertical"
         android:text="@string/hex"
+        app:layout_constraintBottom_toTopOf="@+id/view_line"
+        app:layout_constraintEnd_toStartOf="@id/text_answer_hex"
         app:layout_constraintStart_toStartOf="@id/text_bin"
-        app:layout_constraintTop_toBottomOf="@id/text_dec"
-        app:layout_constraintBottom_toTopOf="@+id/btn_solutions"
-        android:layout_marginBottom="30dp"/>
+        app:layout_constraintTop_toBottomOf="@id/text_dec" />
 
     <TextView
         android:id="@+id/text_answer_bin"
-        style="@style/accentTextAnswer"
+        style="@style/textAccentAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/text_bin"
-        app:layout_constraintStart_toStartOf="@+id/start_guideline"
-        app:layout_constraintTop_toTopOf="@+id/text_bin"
         app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintTop_toTopOf="@+id/text_bin"
         tools:text="10101" />
+
 
     <TextView
         android:id="@+id/text_answer_oct"
         style="@style/textAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/text_oct"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         app:layout_constraintStart_toStartOf="@+id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@+id/text_oct"
-        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         tools:text="25" />
+
 
     <TextView
         android:id="@+id/text_answer_dec"
         style="@style/textAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/text_dec"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@id/text_dec"
-        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         tools:text="21" />
+
 
     <TextView
         android:id="@+id/text_answer_hex"
         style="@style/textAnswer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/text_hex"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/text_answer_bin"
         app:layout_constraintTop_toTopOf="@id/text_hex"
-        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
         tools:text="15" />
 
-    <Button
-        android:id="@+id/btn_solutions"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_bin"
         android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:background="@drawable/btn_rounded_background"
-        android:fontFamily="@font/montserrat_medium"
-        android:paddingHorizontal="12dp"
-        android:text="@string/show_solutions"
-        android:textAllCaps="false"
-        style="@style/inactiveSolutionsButton"
-        app:layout_constraintBottom_toBottomOf="@id/center_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/center_guideline" />
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_bin, text_answer_bin" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_oct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_oct, text_answer_oct" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_dec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_dec, text_answer_dec" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mode_hex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_hex, text_answer_hex" />
 
 
     <View
+        android:id="@+id/view_line"
+        style="@style/viewLine"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        style="@style/inactiveSolutionsView"
-        app:layout_constraintBottom_toBottomOf="@id/center_guideline"
-        app:layout_constraintEnd_toStartOf="@id/btn_solutions"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/center_guideline" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        style="@style/inactiveSolutionsView"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_solutions"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/center_guideline" />
 
 
@@ -362,11 +390,11 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_e"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
         app:layout_constraintStart_toEndOf="@+id/btn_backspace"
-        app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
+        app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
     <ImageButton
         android:id="@+id/btn_backspace"
-        style="@style/buttonBackspace"
+        style="@style/buttonNumber"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -375,20 +403,20 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_9"
         app:layout_constraintEnd_toStartOf="@+id/btn_f"
         app:layout_constraintStart_toEndOf="@+id/btn_ac"
-        app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
+        app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
     <Button
         android:id="@+id/btn_ac"
         style="@style/buttonNumber"
-        android:fontFamily="@font/montserrat_semi_bold"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_semi_bold"
         android:text="@string/ac"
         app:layout_constraintBottom_toTopOf="@+id/btn_8"
         app:layout_constraintEnd_toStartOf="@+id/btn_backspace"
         app:layout_constraintStart_toEndOf="@+id/btn_7"
-        app:layout_constraintTop_toBottomOf="@+id/btn_solutions" />
+        app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_oct"

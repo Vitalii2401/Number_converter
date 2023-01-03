@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.domain.usecase.*
+import com.example.myapplication.utility.PRECISION
 
 class NumberConverterViewModel(
     private val binToOctUseCase: BinToOctUseCase,
@@ -21,68 +22,79 @@ class NumberConverterViewModel(
     private val hexToDecUseCase: HexToDecUseCase,
 ) : ViewModel() {
 
-    private var dotAdded = false
-
     private val _bin = MutableLiveData<String>()
     private val _oct = MutableLiveData<String>()
     private val _dec = MutableLiveData<String>()
     private val _hex = MutableLiveData<String>()
-
-    var mode = NumberConverterFragment.MODE_BIN
+    private val _isDigitLimit = MutableLiveData<Boolean>()
 
     val bin: LiveData<String> = _bin
     val oct: LiveData<String> = _oct
     val dec: LiveData<String> = _dec
     val hex: LiveData<String> = _hex
+    val isDigitLimit: LiveData<Boolean> = _isDigitLimit
+
+    private var isDotAdded = false
+    var mode = NumberConverterFragment.MODE_BIN
 
     init {
         _bin.value = ""
         _oct.value = ""
         _dec.value = ""
         _hex.value = ""
+        _isDigitLimit.value = false
     }
 
-    private fun currentMode(): MutableLiveData<String> {
-        return when (mode) {
-            NumberConverterFragment.MODE_BIN -> _bin
-            NumberConverterFragment.MODE_OCT -> _oct
-            NumberConverterFragment.MODE_DEC -> _dec
-            NumberConverterFragment.MODE_HEX -> _hex
-            else -> {_bin}
-        }
+    private fun getCurrentMode(): MutableLiveData<String> = when (mode) {
+        NumberConverterFragment.MODE_OCT -> _oct
+        NumberConverterFragment.MODE_DEC -> _dec
+        NumberConverterFragment.MODE_HEX -> _hex
+        else -> _bin
+    }
+
+    private fun getCurrentValue(): String = getCurrentMode().value.toString()
+
+    private fun checkDigitLimit(): Boolean {
+        _isDigitLimit.value = (_hex.value?.length ?: 0) + 1 >= 64
+        return _isDigitLimit.value as Boolean
     }
 
     fun addValue(value: String) {
-        if (currentMode().value.toString().isEmpty() && value == "0")
+        if (checkDigitLimit()) {
             return
-        else
-            currentMode().value += value
+        }
 
+        if (getCurrentValue().isEmpty() && value == "0") {
+            return
+        }
+
+        getCurrentMode().value += value
         convert()
     }
 
     fun addDot() {
-        if (!dotAdded && currentMode().value.toString().isNotEmpty()) {
-            _bin.value += "."
-            _oct.value += "."
-            _dec.value += "."
-            _hex.value += "."
+        if(isDotAdded || getCurrentValue().isEmpty())
+            return
 
-            dotAdded = true
-        }
+        _bin.value += "."
+        _oct.value += "."
+        _dec.value += "."
+        _hex.value += "."
+
+        isDotAdded = true
     }
 
     fun deleteValue() {
-        currentMode().value = currentMode().value.toString().dropLast(1)
+        getCurrentMode().value = getCurrentValue().dropLast(1)
 
-        if(currentMode().value.toString().isEmpty()) {
+        if(getCurrentValue().isEmpty()) {
             deleteAllValue()
             return
         }
 
-        if(!currentMode().value.toString().contains(".")){
-            dotAdded = false
-        } else if (currentMode().value.toString().last() == '.') {
+        if(!getCurrentValue().contains(".")){
+            isDotAdded = false
+        } else if (getCurrentValue().last() == '.') {
             _bin.value = _bin.value.toString().substringBefore(".") + "."
             _oct.value = _oct.value.toString().substringBefore(".") + "."
             _dec.value = _dec.value.toString().substringBefore(".") + "."
@@ -92,6 +104,7 @@ class NumberConverterViewModel(
         }
 
         convert()
+        checkDigitLimit()
     }
 
     fun deleteAllValue() {
@@ -100,11 +113,8 @@ class NumberConverterViewModel(
         _dec.value = ""
         _hex.value = ""
 
-        dotAdded = false
-    }
-
-    fun changeMode(changedMode: String) {
-        mode = changedMode
+        isDotAdded = false
+        checkDigitLimit()
     }
 
     private fun convert() {
@@ -120,9 +130,9 @@ class NumberConverterViewModel(
                 _hex.value = octToHexUseCase.execute(_oct.value.toString())
             }
             NumberConverterFragment.MODE_DEC -> {
-                _bin.value = decToBinUseCase.execute(_dec.value.toString())
-                _oct.value = decToOctUseCase.execute(_dec.value.toString())
-                _hex.value = decToHexUseCase.execute(_dec.value.toString())
+                _bin.value = decToBinUseCase.execute(_dec.value.toString(), PRECISION)
+                _oct.value = decToOctUseCase.execute(_dec.value.toString(), PRECISION)
+                _hex.value = decToHexUseCase.execute(_dec.value.toString(), PRECISION)
             }
             NumberConverterFragment.MODE_HEX -> {
                 _bin.value = hexToBinUseCase.execute(_hex.value.toString())
