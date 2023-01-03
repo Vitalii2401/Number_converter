@@ -4,7 +4,7 @@ class DecToBinUseCase(
     private val convertDecToUseCase: ConvertDecToUseCase
 ) {
 
-    fun execute(decValue: String): String {
-        return convertDecToUseCase.execute(decValue, 2)
+    fun execute(decValue: String, precision: Int): String {
+        return convertDecToUseCase.execute(decValue, 2, precision)
     }
 }

@@ -8,7 +8,8 @@ class OctToHexUseCase(
     fun execute(octValue: String): String {
         return convertDecToUseCase.execute(
             convertToDecUseCase.execute(octValue, 8),
-            16
+            16,
+            256
         )
     }
 }

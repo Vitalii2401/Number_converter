@@ -10,7 +10,8 @@ class BinToOctUseCase(
     fun execute(binValue: String): String {
         return convertDecToUseCase.execute(
             convertToDecUseCase.execute(binValue, 2),
-            8
+            8,
+            256
         )
     }
 

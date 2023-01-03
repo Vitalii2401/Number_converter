@@ -1,32 +1,29 @@
 package com.example.myapplication.domain.usecase
 
-import kotlin.math.pow
+import java.math.BigDecimal
+import java.math.MathContext
 
 class ConvertToDecUseCase {
 
-    fun execute(value: String, numberSystem: Int): String {
-        return if (value.contains(".")) {
-            val ratio = value.split(".")
-            (convertToDec(ratio[0], numberSystem, false) +
-                    convertToDec(ratio[1], numberSystem, true)).toString()
-        } else
-            convertToDec(value, numberSystem, false).toInt().toString()
+    fun execute(value: String, fromNumberSystem: Int): String {
+        return convertToDec(value, fromNumberSystem).toString()
     }
 
-    private fun convertToDec(value: String, numberSystem: Int, valAfterDot: Boolean): Double {
-        var decResult = 0.0
-        var index = 0
-        val size = value.length - 1
-
-        if (valAfterDot)
-            index = value.length
+    private fun convertToDec(inputValue: String, fromNumberSystem: Int): BigDecimal {
+        var result = BigDecimal(0)
+        var powerValue =
+            if (inputValue.contains('.')) inputValue.indexOf('.') - 1 else inputValue.length - 1
+        val value = inputValue.replace(".", "")
 
         for (it in value) {
-            decResult += numberSystem.toDouble().pow((size - index).toDouble()) * it.toString()
-                .toInt(numberSystem)
-            index++
+            val multiplyValue = (it.toString().toInt(fromNumberSystem)).toBigDecimal()
+            val addedValue = fromNumberSystem.toBigDecimal().pow(powerValue, MathContext.DECIMAL128)
+                .multiply(multiplyValue)
+
+            result = result.add(addedValue)
+            powerValue--
         }
 
-        return decResult
+        return result
     }
 }

@@ -31,10 +31,10 @@
     <string name="fragment_settings_name">Налаштування</string>
 
     <string name="settings_language">Мова</string>
-    <string name="settings_language_en">Англійська</string>
+    <string name="settings_language_en">English</string>
     <string name="settings_language_uk">Українська</string>
     <string-array name="language_array">
-        <item>Англійська</item>
+        <item>English</item>
         <item>Українська</item>
     </string-array>
 
@@ -44,10 +44,15 @@
     <string name="settings_theme_blue">Синій</string>
     <string name="settings_theme_violet">Фіолетовий</string>
     <string-array name="theme_array">
-        <item>Оранжевий</item>
-        <item>Зелений</item>
-        <item>Синій</item>
-        <item>Фіолетовий</item>
+        <item>Оранжева</item>
+        <item>Зелена</item>
+        <item>Синя</item>
+        <item>Фіолетова</item>
     </string-array>
 
+    <string name="settings_night_mode">Темний режим</string>
+
+    <!-- Toast -->
+    <string name="toast_clipboard">Текст \"%s\" скопійовано до буферу обміну</string>
+    <string name="toast_digit_limit">Досягнуто ліміту цифр</string>
 </resources>
