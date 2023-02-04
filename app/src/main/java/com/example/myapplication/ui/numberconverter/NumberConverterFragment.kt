@@ -6,11 +6,16 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
-import android.view.*
-import androidx.fragment.app.Fragment
-import android.widget.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
@@ -23,7 +28,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
     private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
     private val clipboard by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
 
-    /*-- Fragment --*/
+    /* Fragment */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -33,52 +38,14 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNumberConverterBinding.bind(view)
 
-        binding.textAnswerBin.movementMethod = ScrollingMovementMethod()
-        binding.textAnswerOct.movementMethod = ScrollingMovementMethod()
-        binding.textAnswerDec.movementMethod = ScrollingMovementMethod()
-        binding.textAnswerHex.movementMethod = ScrollingMovementMethod()
-
-
-        handleKeyboardClicks()
+        keyboardClicks()
         updateAnswers()
         selectMode()
-        updateUiAccordingToMode()
-        longClick()
+        copyAnswer()
+        setup()
     }
 
-    private fun longClick() {
-        with(binding) {
-            textAnswerBin.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-
-            textAnswerOct.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-
-            textAnswerDec.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-
-            textAnswerHex.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-        }
-    }
-
-    private fun copyToClipboard(text: String) {
-        clipboard.setPrimaryClip(ClipData.newPlainText(RESULT, text))
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
-            Toast.makeText(requireContext(), getString(R.string.toast_clipboard, text), Toast.LENGTH_SHORT)
-                .show()
-    }
-
-    /*-- Options menu --*/
+    /* Options menu */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.settings_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -89,10 +56,9 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         return true
     }
 
-    /*-- Custom fun --*/
-    private fun handleKeyboardClicks() {
+    /* Keyboard clicks */
+    private fun keyboardClicks() {
         with(binding) {
-
             btn0.setOnClickListener { numberConverterViewModel.addValue("0") }
             btn1.setOnClickListener { numberConverterViewModel.addValue("1") }
             btn2.setOnClickListener { numberConverterViewModel.addValue("2") }
@@ -116,6 +82,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
     }
 
+    /* Update answers */
     private fun updateAnswers() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
             binding.textAnswerBin.text = it.ifEmpty { "0" }
@@ -154,6 +121,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         return if (widthView > widthText || widthView == 0) 0 else widthText - widthView
     }
 
+    /* Select mode and update UI */
     private fun selectMode() {
         with(binding) {
             groupModeBin.setAllOnClickListener {
@@ -268,6 +236,52 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
                 this?.setTextAppearance(style)
             }
         }
+    }
+
+    /* Copy answer to clipboard */
+    private fun copyAnswer() {
+        with(binding) {
+            textAnswerBin.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerOct.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerDec.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerHex.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+        }
+    }
+
+    private fun copyToClipboard(text: String) {
+        clipboard.setPrimaryClip(ClipData.newPlainText(RESULT, text))
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.toast_clipboard, text),
+                Toast.LENGTH_SHORT
+            ).show()
+    }
+
+    /* Setup */
+    private fun setup() {
+        binding.textAnswerBin.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerOct.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerDec.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerHex.movementMethod = ScrollingMovementMethod()
+
+        updateUiAccordingToMode()
     }
 
     companion object {
