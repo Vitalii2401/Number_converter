@@ -1,7 +1,6 @@
 package com.example.myapplication.utility
 
 import android.content.res.Configuration
-import java.util.*
 
 const val PREF_DB_NAME = "app"
 const val PREF_TITLE_LANG = "appLanguage"

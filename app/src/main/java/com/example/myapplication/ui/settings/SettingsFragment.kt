@@ -32,7 +32,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun setupPreferences() {
 
         /* Get current preferences */
-        val currentLanguage = getSharedPref().getString(PREF_TITLE_LANG, Locale.getDefault().language)
+        val currentLanguage =
+            getSharedPref().getString(PREF_TITLE_LANG, Locale.getDefault().language)
         val currentTheme = getSharedPref().getString(PREF_TITLE_THEME, THEME_DEFAULT)
 
         /* Find preferences */
@@ -58,7 +59,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         nightModePreference?.let {
             initNightModePref(it)
-            it.setOnPreferenceChangeListener { _ , newValue ->
+            it.setOnPreferenceChangeListener { _, newValue ->
                 changeNightMode(newValue as Boolean)
                 true
             }
@@ -68,7 +69,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     /* Init preferences */
     private fun initLanguagePref(language: String?, languageListPref: ListPreference) {
         val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
-        val languageCode = when(language) {
+        val languageCode = when (language) {
             LANGUAGE_UK -> arrayLanguage[1]
             else -> arrayLanguage[0]
         }
@@ -87,13 +88,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun initNightModePref(nightModePref: SwitchPreference) {
-        nightModePref.isChecked= isUsingNightModeResources()
+        nightModePref.isChecked = isUsingNightModeResources()
     }
 
     /* Change preferences */
     private fun changeLanguage(newLanguage: String) {
         val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
-        val languageCode = when(newLanguage) {
+        val languageCode = when (newLanguage) {
             arrayLanguage[1] -> LANGUAGE_UK
             else -> LANGUAGE_EN
         }
