@@ -10,9 +10,12 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.example.myapplication.R
 import com.example.myapplication.utility.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class SettingsFragment : PreferenceFragmentCompat() {
+
+    private val settingsViewModel by viewModel<SettingsViewModel>()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -99,7 +102,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             else -> LANGUAGE_EN
         }
 
-        getSharedPref().put(PREF_TITLE_LANG, languageCode)
+        settingsViewModel.changeLanguage(languageCode)
         requireActivity().recreate()
     }
 
@@ -112,7 +115,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             else -> THEME_GREEN
         }
 
-        getSharedPref().put(PREF_TITLE_THEME, theme)
+        settingsViewModel.changeTheme(theme)
         requireActivity().recreate()
     }
 
@@ -122,7 +125,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             else -> AppCompatDelegate.MODE_NIGHT_NO
         }
 
-        getSharedPref().put(PREF_TITLE_NIGHT_MODE, nightModeMask)
+        settingsViewModel.changeNightModeMask(nightModeMask)
         AppCompatDelegate.setDefaultNightMode(nightModeMask)
     }
 }
