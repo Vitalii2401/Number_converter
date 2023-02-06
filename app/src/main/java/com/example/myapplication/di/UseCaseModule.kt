@@ -23,4 +23,6 @@ val useCaseModule = module {
     factory<HexToBinUseCase> { HexToBinUseCase(get(), get()) }
     factory<HexToDecUseCase> { HexToDecUseCase(get()) }
     factory<HexToOctUseCase> { HexToOctUseCase(get(), get()) }
+
+    factory<GetAppThemeUseCase> { GetAppThemeUseCase(get()) }
 }
