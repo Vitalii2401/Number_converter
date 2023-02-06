@@ -11,4 +11,16 @@ class AppSettingsDataSourceImpl(
     override fun getTheme(): String = appSettings.getTheme()
 
     override fun getNightModeMask(): Int = appSettings.getNightModeMask()
+
+    override fun changeAppLanguage(newLanguage: String) {
+        appSettings.changeLanguage(newLanguage)
+    }
+
+    override fun changeAppTheme(newTheme: String) {
+        appSettings.changeTheme(newTheme)
+    }
+
+    override fun changeNightModeMask(newNightModeMask: Int) {
+        appSettings.changeNightModeMask(newNightModeMask)
+    }
 }

@@ -22,4 +22,16 @@ class AppSettings(private val application: Application) {
     fun getNightModeMask(): Int {
         return sharedPreferences.getInt(PREF_TITLE_NIGHT_MODE, NIGHT_MODE_DEFAULT)
     }
+
+    fun changeLanguage(language: String) {
+        sharedPreferences.edit().putString(PREF_TITLE_LANG, language).apply()
+    }
+
+    fun changeTheme(theme: String) {
+        sharedPreferences.edit().putString(PREF_TITLE_THEME, theme).apply()
+    }
+
+    fun changeNightModeMask(nightModeMask: Int) {
+        sharedPreferences.edit().putInt(PREF_TITLE_NIGHT_MODE, nightModeMask).apply()
+    }
 }

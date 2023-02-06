@@ -12,4 +12,16 @@ class AppRepositoryImpl(
     override fun getAppTheme(): String = appSettingsDataSource.getTheme()
 
     override fun getNightModeMask(): Int = appSettingsDataSource.getNightModeMask()
+
+    override fun changeAppLanguage(newLanguage: String) {
+        appSettingsDataSource.changeAppLanguage(newLanguage)
+    }
+
+    override fun changeAppTheme(newTheme: String) {
+        appSettingsDataSource.changeAppTheme(newTheme)
+    }
+
+    override fun changeNightModeMask(newNightModeMask: Int) {
+        appSettingsDataSource.changeNightModeMask(newNightModeMask)
+    }
 }
