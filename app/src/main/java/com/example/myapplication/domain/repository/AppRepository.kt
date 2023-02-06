@@ -1,6 +1,6 @@
 package com.example.myapplication.domain.repository
 
-interface NumberConverterRepository {
+interface AppRepository {
 
     fun getAppLanguage(): String
 
