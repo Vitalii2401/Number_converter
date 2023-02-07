@@ -23,4 +23,12 @@ val useCaseModule = module {
     factory<HexToBinUseCase> { HexToBinUseCase(get(), get()) }
     factory<HexToDecUseCase> { HexToDecUseCase(get()) }
     factory<HexToOctUseCase> { HexToOctUseCase(get(), get()) }
+
+    factory<GetAppThemeUseCase> { GetAppThemeUseCase(get()) }
+
+    factory<ChangeAppThemeUseCase> { ChangeAppThemeUseCase(get()) }
+    factory<ChangeAppLanguageUseCase> { ChangeAppLanguageUseCase(get()) }
+    factory<ChangeAppNightModeMaskUseCase> { ChangeAppNightModeMaskUseCase(get()) }
+    factory<GetAppNightModeMaskUseCase> { GetAppNightModeMaskUseCase(get()) }
+    factory<GetAppLanguageUseCase> { GetAppLanguageUseCase(get()) }
 }

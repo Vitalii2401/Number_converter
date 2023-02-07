@@ -23,12 +23,12 @@ object LocaleService {
     }
 
     fun updateAppTheme(context: Context) {
-        when (getTheme(context)) {
+        /*when (getTheme(context)) {
             THEME_ORANGE -> context.setTheme(R.style.Theme_NumberConverterOrange)
             THEME_BLUE -> context.setTheme(R.style.Theme_NumberConverterBlue)
             THEME_VIOLET -> context.setTheme(R.style.Theme_NumberConverterPurple)
             else -> context.setTheme(R.style.Theme_NumberConverterGreen)
-        }
+        }*/
 
         AppCompatDelegate.setDefaultNightMode(getNightModeMask(context))
     }
