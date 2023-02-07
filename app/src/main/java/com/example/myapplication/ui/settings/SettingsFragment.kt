@@ -15,7 +15,21 @@ import java.util.*
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
+    interface OnSettingsChanged {
+
+        fun applySettingsChanges()
+    }
+
     private val settingsViewModel by viewModel<SettingsViewModel>()
+    private lateinit var onSettingsChanged: OnSettingsChanged
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnSettingsChanged) {
+            onSettingsChanged = context
+        }
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -103,7 +117,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         settingsViewModel.changeLanguage(languageCode)
-        requireActivity().recreate()
+        onSettingsChanged.applySettingsChanges()
     }
 
     private fun changeTheme(newTheme: String) {
@@ -116,7 +130,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         settingsViewModel.changeTheme(theme)
-        requireActivity().recreate()
+        onSettingsChanged.applySettingsChanges()
     }
 
     private fun changeNightMode(isNightMode: Boolean) {
@@ -126,6 +140,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         settingsViewModel.changeNightModeMask(nightModeMask)
-        AppCompatDelegate.setDefaultNightMode(nightModeMask)
+        onSettingsChanged.applySettingsChanges()
     }
 }

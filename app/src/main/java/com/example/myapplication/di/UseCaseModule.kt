@@ -29,4 +29,6 @@ val useCaseModule = module {
     factory<ChangeAppThemeUseCase> { ChangeAppThemeUseCase(get()) }
     factory<ChangeAppLanguageUseCase> { ChangeAppLanguageUseCase(get()) }
     factory<ChangeAppNightModeMaskUseCase> { ChangeAppNightModeMaskUseCase(get()) }
+    factory<GetAppNightModeMaskUseCase> { GetAppNightModeMaskUseCase(get()) }
+    factory<GetAppLanguageUseCase> { GetAppLanguageUseCase(get()) }
 }
