@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), OnSettingsChanged {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setAppSettings()
-        LocaleService.updateAppTheme(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
