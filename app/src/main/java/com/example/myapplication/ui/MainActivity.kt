@@ -10,7 +10,6 @@ import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.settings.SettingsFragment.OnSettingsChanged
-import com.example.myapplication.utility.LocaleService
 import com.example.myapplication.utility.THEME_BLUE
 import com.example.myapplication.utility.THEME_ORANGE
 import com.example.myapplication.utility.THEME_VIOLET
@@ -18,15 +17,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), OnSettingsChanged {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
+    private lateinit var navController: NavController
     private val mainViewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setAppSettings()
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initNav()
