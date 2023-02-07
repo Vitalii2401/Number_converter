@@ -1,7 +1,6 @@
 package com.example.myapplication.ui.settings
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
@@ -11,7 +10,6 @@ import androidx.preference.SwitchPreference
 import com.example.myapplication.R
 import com.example.myapplication.utility.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -37,21 +35,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupPreferences()
     }
 
-    private fun getSharedPref(): SharedPreferences =
-        requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
-
-    private fun isUsingNightModeResources(): Boolean =
-        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> true
-            else -> false
-        }
-
     private fun setupPreferences() {
-
-        /* Get current preferences */
-        val currentLanguage =
-            getSharedPref().getString(PREF_TITLE_LANG, Locale.getDefault().language)
-        val currentTheme = getSharedPref().getString(PREF_TITLE_THEME, THEME_DEFAULT)
 
         /* Find preferences */
         val languagePreference = findPreference<ListPreference>(PREF_TITLE_LANG)
@@ -59,7 +43,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val nightModePreference = findPreference<SwitchPreference>(PREF_TITLE_NIGHT_MODE)
 
         languagePreference?.let {
-            initLanguagePref(currentLanguage, it)
+            initLanguagePref(settingsViewModel.currentLanguage, it)
             it.setOnPreferenceChangeListener { _, newValue ->
                 changeLanguage(newValue.toString())
                 true
@@ -67,7 +51,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         themePreference?.let {
-            initThemePref(currentTheme, it)
+            initThemePref(settingsViewModel.currentTheme, it)
             it.setOnPreferenceChangeListener { _, newValue ->
                 changeTheme(newValue.toString())
                 true
@@ -82,6 +66,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
     }
+
+    private fun isUsingNightModeResources(): Boolean =
+        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            else -> false
+        }
 
     /* Init preferences */
     private fun initLanguagePref(language: String?, languageListPref: ListPreference) {
@@ -117,7 +107,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         settingsViewModel.changeLanguage(languageCode)
-        onSettingsChanged.applySettingsChanges()
+        applyChanges()
     }
 
     private fun changeTheme(newTheme: String) {
@@ -130,7 +120,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         settingsViewModel.changeTheme(theme)
-        onSettingsChanged.applySettingsChanges()
+        applyChanges()
     }
 
     private fun changeNightMode(isNightMode: Boolean) {
@@ -140,6 +130,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         settingsViewModel.changeNightModeMask(nightModeMask)
+        applyChanges()
+    }
+
+    private fun applyChanges() {
         onSettingsChanged.applySettingsChanges()
     }
 }
