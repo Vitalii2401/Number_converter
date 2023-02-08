@@ -8,10 +8,11 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.example.myapplication.R
+import com.example.myapplication.ui.contract.HasCustomTitle
 import com.example.myapplication.utility.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
 
     interface OnSettingsChanged {
 
@@ -34,6 +35,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         setupPreferences()
     }
+
+    override fun getCustomTitle(): Int = R.string.fragment_settings_name
 
     private fun setupPreferences() {
 
@@ -135,5 +138,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun applyChanges() {
         onSettingsChanged.applySettingsChanges()
+    }
+
+    companion object {
+
+        fun newInstance(): SettingsFragment = SettingsFragment()
     }
 }
