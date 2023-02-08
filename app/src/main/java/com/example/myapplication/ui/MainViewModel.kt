@@ -1,7 +1,6 @@
 package com.example.myapplication.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.domain.usecase.ChangeAppNightModeMaskUseCase
 import com.example.myapplication.domain.usecase.GetAppLanguageUseCase
 import com.example.myapplication.domain.usecase.GetAppNightModeMaskUseCase
 import com.example.myapplication.domain.usecase.GetAppThemeUseCase
