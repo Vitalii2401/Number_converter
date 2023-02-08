@@ -15,9 +15,6 @@ import com.example.myapplication.ui.contract.HasCustomTitle
 import com.example.myapplication.ui.numberconverter.NumberConverterFragment
 import com.example.myapplication.ui.settings.SettingsFragment
 import com.example.myapplication.ui.settings.SettingsFragment.OnSettingsChanged
-import com.example.myapplication.utility.THEME_BLUE
-import com.example.myapplication.utility.THEME_ORANGE
-import com.example.myapplication.utility.THEME_VIOLET
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
@@ -83,9 +80,9 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
         AppCompatDelegate.setDefaultNightMode(mainViewModel.currentNightModeMask)
 
         when (mainViewModel.currentTheme) {
-            THEME_ORANGE -> setTheme(R.style.Theme_NumberConverterOrange)
-            THEME_BLUE -> setTheme(R.style.Theme_NumberConverterBlue)
-            THEME_VIOLET -> setTheme(R.style.Theme_NumberConverterPurple)
+            SettingsFragment.THEME_ORANGE -> setTheme(R.style.Theme_NumberConverterOrange)
+            SettingsFragment.THEME_BLUE -> setTheme(R.style.Theme_NumberConverterBlue)
+            SettingsFragment.THEME_VIOLET -> setTheme(R.style.Theme_NumberConverterPurple)
             else -> setTheme(R.style.Theme_NumberConverterGreen)
         }
     }
