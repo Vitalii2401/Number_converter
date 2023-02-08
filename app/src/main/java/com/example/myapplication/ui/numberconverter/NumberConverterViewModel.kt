@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.domain.usecase.*
-import com.example.myapplication.utility.PRECISION
 
 class NumberConverterViewModel(
     private val binToOctUseCase: BinToOctUseCase,
@@ -143,5 +142,9 @@ class NumberConverterViewModel(
                 _dec.value = hexToDecUseCase.execute(_hex.value.toString())
             }
         }
+    }
+
+    companion object {
+        private const val PRECISION = 10
     }
 }

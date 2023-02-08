@@ -8,10 +8,10 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.example.myapplication.R
-import com.example.myapplication.utility.*
+import com.example.myapplication.ui.contract.HasCustomTitle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
 
     interface OnSettingsChanged {
 
@@ -35,12 +35,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupPreferences()
     }
 
+    override fun getCustomTitle(): Int = R.string.fragment_settings_name
+
     private fun setupPreferences() {
 
         /* Find preferences */
-        val languagePreference = findPreference<ListPreference>(PREF_TITLE_LANG)
-        val themePreference = findPreference<ListPreference>(PREF_TITLE_THEME)
-        val nightModePreference = findPreference<SwitchPreference>(PREF_TITLE_NIGHT_MODE)
+        val languagePreference = findPreference<ListPreference>(KEY_PREF_LANGUAGE)
+        val themePreference = findPreference<ListPreference>(KEY_PREF_THEME)
+        val nightModePreference = findPreference<SwitchPreference>(KEY_PREF_NIGHT_MODE)
 
         languagePreference?.let {
             initLanguagePref(settingsViewModel.currentLanguage, it)
@@ -135,5 +137,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun applyChanges() {
         onSettingsChanged.applySettingsChanges()
+    }
+
+    companion object {
+
+        private const val KEY_PREF_LANGUAGE = "appLanguage"
+        private const val KEY_PREF_THEME = "appTheme"
+        private const val KEY_PREF_NIGHT_MODE = "nightMode"
+
+        private const val LANGUAGE_EN = "en"
+        private const val LANGUAGE_UK = "uk"
+
+        const val THEME_ORANGE = "Orange"
+        const val THEME_GREEN = "Green"
+        const val THEME_BLUE = "Blue"
+        const val THEME_VIOLET = "Violet"
+
+        fun newInstance(): SettingsFragment = SettingsFragment()
     }
 }

@@ -15,25 +15,24 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.Lifecycle
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
+import com.example.myapplication.ui.contract.CustomMenu
+import com.example.myapplication.ui.contract.HasCustomMenu
+import com.example.myapplication.ui.contract.navigator
 import com.example.myapplication.utility.setAllOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
+class NumberConverterFragment : Fragment(R.layout.fragment_number_converter), HasCustomMenu {
 
     private lateinit var binding: FragmentNumberConverterBinding
     private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
     private val clipboard by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
 
     /* Fragment */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNumberConverterBinding.bind(view)
@@ -45,16 +44,21 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         setup()
     }
 
-    /* Options menu */
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.settings_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+    override fun getCustomMenu(): CustomMenu =
+        CustomMenu(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.settings_menu, menu)
+                }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        findNavController().navigate(R.id.settingsFragment)
-        return true
-    }
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    navigator().showSettingsScreen()
+                    return true
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
 
     /* Keyboard clicks */
     private fun keyboardClicks() {
@@ -291,5 +295,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         const val MODE_HEX = "hex"
 
         const val RESULT = "result"
+
+        fun newInstance(): NumberConverterFragment = NumberConverterFragment()
     }
 }
