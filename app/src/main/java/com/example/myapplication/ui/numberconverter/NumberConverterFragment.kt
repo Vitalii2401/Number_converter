@@ -44,6 +44,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter), Ha
         setup()
     }
 
+    /* HasCustomMenu */
     override fun getCustomMenu(): CustomMenu =
         CustomMenu(
             object : MenuProvider {
