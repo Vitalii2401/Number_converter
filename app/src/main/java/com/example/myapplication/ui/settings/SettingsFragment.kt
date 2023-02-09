@@ -21,6 +21,7 @@ class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
     private val settingsViewModel by viewModel<SettingsViewModel>()
     private lateinit var onSettingsChanged: OnSettingsChanged
 
+    /* Fragment */
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -35,11 +36,10 @@ class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
         setupPreferences()
     }
 
+    /* HasCustomTitle */
     override fun getCustomTitle(): Int = R.string.fragment_settings_name
 
     private fun setupPreferences() {
-
-        /* Find preferences */
         val languagePreference = findPreference<ListPreference>(KEY_PREF_LANGUAGE)
         val themePreference = findPreference<ListPreference>(KEY_PREF_THEME)
         val nightModePreference = findPreference<SwitchPreference>(KEY_PREF_NIGHT_MODE)

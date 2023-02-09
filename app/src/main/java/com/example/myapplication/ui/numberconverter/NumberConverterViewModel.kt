@@ -43,12 +43,7 @@ class NumberConverterViewModel(
         _isDigitLimit.value = false
     }
 
-    private fun checkDigitLimit(): Boolean {
-        _isDigitLimit.value = (_hex.value?.length ?: 0) + 1 >= 64
-        return _isDigitLimit.value as Boolean
-    }
-
-    /* Add */
+    /* Add value */
     fun addValue(value: String) {
         if (checkDigitLimit()) {
             return
@@ -74,7 +69,7 @@ class NumberConverterViewModel(
         isDotAdded = true
     }
 
-    /* Delete */
+    /* Delete value */
     fun deleteValue() {
         getCurrentMode().value = getCurrentValue().dropLast(1)
 
@@ -106,6 +101,11 @@ class NumberConverterViewModel(
 
         isDotAdded = false
         checkDigitLimit()
+    }
+
+    private fun checkDigitLimit(): Boolean {
+        _isDigitLimit.value = (_hex.value?.length ?: 0) + 1 >= 64
+        return _isDigitLimit.value as Boolean
     }
 
     /* Get value */

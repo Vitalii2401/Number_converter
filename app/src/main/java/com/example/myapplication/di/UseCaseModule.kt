@@ -8,27 +8,63 @@ val useCaseModule = module {
     factory<ConvertToDecUseCase> { ConvertToDecUseCase() }
     factory<ConvertDecToUseCase> { ConvertDecToUseCase() }
 
-    factory<BinToOctUseCase> { BinToOctUseCase(get(), get()) }
-    factory<BinToDecUseCase> { BinToDecUseCase(get()) }
-    factory<BinToHexUseCase> { BinToHexUseCase(get(), get()) }
+    /* Binary */
+    factory<BinToOctUseCase> {
+        BinToOctUseCase(
+            convertToDecUseCase = get(),
+            convertDecToUseCase = get()
+        )
+    }
+    factory<BinToDecUseCase> { BinToDecUseCase(convertToDecUseCase = get()) }
+    factory<BinToHexUseCase> {
+        BinToHexUseCase(
+            convertToDecUseCase = get(),
+            convertDecToUseCase = get()
+        )
+    }
 
-    factory<OctToBinUseCase> { OctToBinUseCase(get(), get()) }
-    factory<OctToDecUseCase> { OctToDecUseCase(get()) }
-    factory<OctToHexUseCase> { OctToHexUseCase(get(), get()) }
+    /* Octal */
+    factory<OctToBinUseCase> {
+        OctToBinUseCase(
+            convertToDecUseCase = get(),
+            convertDecToUseCase = get()
+        )
+    }
+    factory<OctToDecUseCase> { OctToDecUseCase(convertToDecUseCase = get()) }
+    factory<OctToHexUseCase> {
+        OctToHexUseCase(
+            convertToDecUseCase = get(),
+            convertDecToUseCase = get()
+        )
+    }
 
-    factory<DecToBinUseCase> { DecToBinUseCase(get()) }
-    factory<DecToOctUseCase> { DecToOctUseCase(get()) }
-    factory<DecToHexUseCase> { DecToHexUseCase(get()) }
+    /* Decimal */
+    factory<DecToBinUseCase> { DecToBinUseCase(convertDecToUseCase = get()) }
+    factory<DecToOctUseCase> { DecToOctUseCase(convertDecToUseCase = get()) }
+    factory<DecToHexUseCase> { DecToHexUseCase(convertDecToUseCase = get()) }
 
-    factory<HexToBinUseCase> { HexToBinUseCase(get(), get()) }
-    factory<HexToDecUseCase> { HexToDecUseCase(get()) }
-    factory<HexToOctUseCase> { HexToOctUseCase(get(), get()) }
+    /* Hexadecimal */
+    factory<HexToBinUseCase> {
+        HexToBinUseCase(
+            convertToDecUseCase = get(),
+            convertDecToUseCase = get()
+        )
+    }
+    factory<HexToDecUseCase> { HexToDecUseCase(convertToDecUseCase = get()) }
+    factory<HexToOctUseCase> {
+        HexToOctUseCase(
+            convertToDecUseCase = get(),
+            convertDecToUseCase = get()
+        )
+    }
 
-    factory<GetAppThemeUseCase> { GetAppThemeUseCase(get()) }
+    /* Get app settings */
+    factory<GetAppThemeUseCase> { GetAppThemeUseCase(repository = get()) }
+    factory<GetAppNightModeMaskUseCase> { GetAppNightModeMaskUseCase(repository = get()) }
+    factory<GetAppLanguageUseCase> { GetAppLanguageUseCase(repository = get()) }
 
-    factory<ChangeAppThemeUseCase> { ChangeAppThemeUseCase(get()) }
-    factory<ChangeAppLanguageUseCase> { ChangeAppLanguageUseCase(get()) }
-    factory<ChangeAppNightModeMaskUseCase> { ChangeAppNightModeMaskUseCase(get()) }
-    factory<GetAppNightModeMaskUseCase> { GetAppNightModeMaskUseCase(get()) }
-    factory<GetAppLanguageUseCase> { GetAppLanguageUseCase(get()) }
+    /* Change app settings */
+    factory<ChangeAppThemeUseCase> { ChangeAppThemeUseCase(repository = get()) }
+    factory<ChangeAppLanguageUseCase> { ChangeAppLanguageUseCase(repository = get()) }
+    factory<ChangeAppNightModeMaskUseCase> { ChangeAppNightModeMaskUseCase(repository = get()) }
 }

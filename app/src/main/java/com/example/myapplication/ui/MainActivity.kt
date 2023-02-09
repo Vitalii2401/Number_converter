@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
 
     private val mainViewModel by viewModel<MainViewModel>()
 
+    /* Activity */
     override fun onCreate(savedInstanceState: Bundle?) {
         setAppSettings()
         super.onCreate(savedInstanceState)
@@ -56,10 +57,17 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
         supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentListener)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
+    /* OnSettingsChanged */
     override fun applySettingsChanges() {
         recreate()
     }
 
+    /* FragmentNavigator */
     override fun showSettingsScreen() {
         launchFragment(SettingsFragment.newInstance())
     }
@@ -81,6 +89,7 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
             .commit()
     }
 
+    /* Setup app theme and language */
     private fun setAppSettings() {
         AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(mainViewModel.currentLanguage))
         AppCompatDelegate.setDefaultNightMode(mainViewModel.currentNightModeMask)
@@ -93,11 +102,7 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
-    }
-
+    /* Update action bar */
     private fun updateUi() {
         val fragment = currentFragment
 
