@@ -1,11 +1,9 @@
 package com.example.myapplication.ui.numberconverter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.domain.usecase.*
-import com.example.myapplication.utility.PRECISION
 
 class NumberConverterViewModel(
     private val binToOctUseCase: BinToOctUseCase,
@@ -45,20 +43,7 @@ class NumberConverterViewModel(
         _isDigitLimit.value = false
     }
 
-    private fun getCurrentMode(): MutableLiveData<String> = when (mode) {
-        NumberConverterFragment.MODE_OCT -> _oct
-        NumberConverterFragment.MODE_DEC -> _dec
-        NumberConverterFragment.MODE_HEX -> _hex
-        else -> _bin
-    }
-
-    private fun getCurrentValue(): String = getCurrentMode().value.toString()
-
-    private fun checkDigitLimit(): Boolean {
-        _isDigitLimit.value = (_hex.value?.length ?: 0) + 1 >= 64
-        return _isDigitLimit.value as Boolean
-    }
-
+    /* Add value */
     fun addValue(value: String) {
         if (checkDigitLimit()) {
             return
@@ -73,7 +58,7 @@ class NumberConverterViewModel(
     }
 
     fun addDot() {
-        if(isDotAdded || getCurrentValue().isEmpty())
+        if (isDotAdded || getCurrentValue().isEmpty())
             return
 
         _bin.value += "."
@@ -84,15 +69,16 @@ class NumberConverterViewModel(
         isDotAdded = true
     }
 
+    /* Delete value */
     fun deleteValue() {
         getCurrentMode().value = getCurrentValue().dropLast(1)
 
-        if(getCurrentValue().isEmpty()) {
+        if (getCurrentValue().isEmpty()) {
             deleteAllValue()
             return
         }
 
-        if(!getCurrentValue().contains(".")){
+        if (!getCurrentValue().contains(".")) {
             isDotAdded = false
         } else if (getCurrentValue().last() == '.') {
             _bin.value = _bin.value.toString().substringBefore(".") + "."
@@ -117,6 +103,22 @@ class NumberConverterViewModel(
         checkDigitLimit()
     }
 
+    private fun checkDigitLimit(): Boolean {
+        _isDigitLimit.value = (_hex.value?.length ?: 0) + 1 >= 64
+        return _isDigitLimit.value as Boolean
+    }
+
+    /* Get value */
+    private fun getCurrentMode(): MutableLiveData<String> = when (mode) {
+        NumberConverterFragment.MODE_OCT -> _oct
+        NumberConverterFragment.MODE_DEC -> _dec
+        NumberConverterFragment.MODE_HEX -> _hex
+        else -> _bin
+    }
+
+    private fun getCurrentValue(): String = getCurrentMode().value.toString()
+
+    /* Convert */
     private fun convert() {
         when (mode) {
             NumberConverterFragment.MODE_BIN -> {
@@ -140,5 +142,9 @@ class NumberConverterViewModel(
                 _dec.value = hexToDecUseCase.execute(_hex.value.toString())
             }
         }
+    }
+
+    companion object {
+        private const val PRECISION = 10
     }
 }

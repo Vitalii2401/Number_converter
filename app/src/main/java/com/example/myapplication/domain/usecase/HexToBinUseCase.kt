@@ -11,6 +11,5 @@ class HexToBinUseCase(
             2,
             256
         )
-
     }
 }

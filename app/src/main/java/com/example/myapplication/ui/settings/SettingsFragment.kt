@@ -1,7 +1,6 @@
 package com.example.myapplication.ui.settings
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
@@ -9,10 +8,27 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.example.myapplication.R
-import com.example.myapplication.utility.*
-import java.util.*
+import com.example.myapplication.ui.contract.HasCustomTitle
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
+
+    interface OnSettingsChanged {
+
+        fun applySettingsChanges()
+    }
+
+    private val settingsViewModel by viewModel<SettingsViewModel>()
+    private lateinit var onSettingsChanged: OnSettingsChanged
+
+    /* Fragment */
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnSettingsChanged) {
+            onSettingsChanged = context
+        }
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -20,28 +36,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupPreferences()
     }
 
-    private fun getSharedPref(): SharedPreferences =
-        requireContext().getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
-
-    private fun isUsingNightModeResources(): Boolean =
-        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> true
-            else -> false
-        }
+    /* HasCustomTitle */
+    override fun getCustomTitle(): Int = R.string.fragment_settings_name
 
     private fun setupPreferences() {
-
-        /* Get current preferences */
-        val currentLanguage = getSharedPref().getString(PREF_TITLE_LANG, Locale.getDefault().language)
-        val currentTheme = getSharedPref().getString(PREF_TITLE_THEME, THEME_DEFAULT)
-
-        /* Find preferences */
-        val languagePreference = findPreference<ListPreference>(PREF_TITLE_LANG)
-        val themePreference = findPreference<ListPreference>(PREF_TITLE_THEME)
-        val nightModePreference = findPreference<SwitchPreference>(PREF_TITLE_NIGHT_MODE)
+        val languagePreference = findPreference<ListPreference>(KEY_PREF_LANGUAGE)
+        val themePreference = findPreference<ListPreference>(KEY_PREF_THEME)
+        val nightModePreference = findPreference<SwitchPreference>(KEY_PREF_NIGHT_MODE)
 
         languagePreference?.let {
-            initLanguagePref(currentLanguage, it)
+            initLanguagePref(settingsViewModel.currentLanguage, it)
             it.setOnPreferenceChangeListener { _, newValue ->
                 changeLanguage(newValue.toString())
                 true
@@ -49,7 +53,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         themePreference?.let {
-            initThemePref(currentTheme, it)
+            initThemePref(settingsViewModel.currentTheme, it)
             it.setOnPreferenceChangeListener { _, newValue ->
                 changeTheme(newValue.toString())
                 true
@@ -58,17 +62,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         nightModePreference?.let {
             initNightModePref(it)
-            it.setOnPreferenceChangeListener { _ , newValue ->
+            it.setOnPreferenceChangeListener { _, newValue ->
                 changeNightMode(newValue as Boolean)
                 true
             }
         }
     }
 
+    private fun isUsingNightModeResources(): Boolean =
+        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            else -> false
+        }
+
     /* Init preferences */
     private fun initLanguagePref(language: String?, languageListPref: ListPreference) {
         val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
-        val languageCode = when(language) {
+        val languageCode = when (language) {
             LANGUAGE_UK -> arrayLanguage[1]
             else -> arrayLanguage[0]
         }
@@ -87,19 +97,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun initNightModePref(nightModePref: SwitchPreference) {
-        nightModePref.isChecked= isUsingNightModeResources()
+        nightModePref.isChecked = isUsingNightModeResources()
     }
 
     /* Change preferences */
     private fun changeLanguage(newLanguage: String) {
         val arrayLanguage = requireContext().resources.getStringArray(R.array.language_array)
-        val languageCode = when(newLanguage) {
+        val languageCode = when (newLanguage) {
             arrayLanguage[1] -> LANGUAGE_UK
             else -> LANGUAGE_EN
         }
 
-        getSharedPref().put(PREF_TITLE_LANG, languageCode)
-        requireActivity().recreate()
+        settingsViewModel.changeLanguage(languageCode)
+        applyChanges()
     }
 
     private fun changeTheme(newTheme: String) {
@@ -111,8 +121,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             else -> THEME_GREEN
         }
 
-        getSharedPref().put(PREF_TITLE_THEME, theme)
-        requireActivity().recreate()
+        settingsViewModel.changeTheme(theme)
+        applyChanges()
     }
 
     private fun changeNightMode(isNightMode: Boolean) {
@@ -121,7 +131,28 @@ class SettingsFragment : PreferenceFragmentCompat() {
             else -> AppCompatDelegate.MODE_NIGHT_NO
         }
 
-        getSharedPref().put(PREF_TITLE_NIGHT_MODE, nightModeMask)
-        AppCompatDelegate.setDefaultNightMode(nightModeMask)
+        settingsViewModel.changeNightModeMask(nightModeMask)
+        applyChanges()
+    }
+
+    private fun applyChanges() {
+        onSettingsChanged.applySettingsChanges()
+    }
+
+    companion object {
+
+        private const val KEY_PREF_LANGUAGE = "appLanguage"
+        private const val KEY_PREF_THEME = "appTheme"
+        private const val KEY_PREF_NIGHT_MODE = "nightMode"
+
+        private const val LANGUAGE_EN = "en"
+        private const val LANGUAGE_UK = "uk"
+
+        const val THEME_ORANGE = "Orange"
+        const val THEME_GREEN = "Green"
+        const val THEME_BLUE = "Blue"
+        const val THEME_VIOLET = "Violet"
+
+        fun newInstance(): SettingsFragment = SettingsFragment()
     }
 }

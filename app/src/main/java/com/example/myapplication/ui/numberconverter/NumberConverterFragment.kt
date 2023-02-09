@@ -6,93 +6,64 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
-import android.view.*
-import androidx.fragment.app.Fragment
-import android.widget.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
-import androidx.navigation.fragment.findNavController
+import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNumberConverterBinding
+import com.example.myapplication.ui.contract.CustomMenu
+import com.example.myapplication.ui.contract.HasCustomMenu
+import com.example.myapplication.ui.contract.navigator
 import com.example.myapplication.utility.setAllOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
+class NumberConverterFragment : Fragment(R.layout.fragment_number_converter), HasCustomMenu {
 
     private lateinit var binding: FragmentNumberConverterBinding
     private val numberConverterViewModel by viewModel<NumberConverterViewModel>()
     private val clipboard by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
 
-    /*-- Fragment --*/
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
+    /* Fragment */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNumberConverterBinding.bind(view)
 
-        binding.textAnswerBin.movementMethod = ScrollingMovementMethod()
-        binding.textAnswerOct.movementMethod = ScrollingMovementMethod()
-        binding.textAnswerDec.movementMethod = ScrollingMovementMethod()
-        binding.textAnswerHex.movementMethod = ScrollingMovementMethod()
-
-
-        handleKeyboardClicks()
+        keyboardClicks()
         updateAnswers()
         selectMode()
-        updateUiAccordingToMode()
-        longClick()
+        copyAnswer()
+        setup()
     }
 
-    private fun longClick() {
+    /* HasCustomMenu */
+    override fun getCustomMenu(): CustomMenu =
+        CustomMenu(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.settings_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    navigator().showSettingsScreen()
+                    return true
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
+
+    /* Keyboard clicks */
+    private fun keyboardClicks() {
         with(binding) {
-            textAnswerBin.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-
-            textAnswerOct.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-
-            textAnswerDec.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-
-            textAnswerHex.setOnLongClickListener {
-                copyToClipboard((it as TextView).text.toString())
-                true
-            }
-        }
-    }
-
-    private fun copyToClipboard(text: String) {
-        clipboard.setPrimaryClip(ClipData.newPlainText(RESULT, text))
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
-            Toast.makeText(requireContext(), getString(R.string.toast_clipboard, text), Toast.LENGTH_SHORT)
-                .show()
-    }
-
-    /*-- Options menu --*/
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.settings_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        findNavController().navigate(R.id.settingsFragment)
-        return true
-    }
-
-    /*-- Custom fun --*/
-    private fun handleKeyboardClicks() {
-        with(binding) {
-
             btn0.setOnClickListener { numberConverterViewModel.addValue("0") }
             btn1.setOnClickListener { numberConverterViewModel.addValue("1") }
             btn2.setOnClickListener { numberConverterViewModel.addValue("2") }
@@ -116,6 +87,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
     }
 
+    /* Update answers */
     private fun updateAnswers() {
         numberConverterViewModel.bin.observe(viewLifecycleOwner) {
             binding.textAnswerBin.text = it.ifEmpty { "0" }
@@ -154,6 +126,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         return if (widthView > widthText || widthView == 0) 0 else widthText - widthView
     }
 
+    /* Select mode and update UI */
     private fun selectMode() {
         with(binding) {
             groupModeBin.setAllOnClickListener {
@@ -270,6 +243,52 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         }
     }
 
+    /* Copy answer to clipboard */
+    private fun copyAnswer() {
+        with(binding) {
+            textAnswerBin.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerOct.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerDec.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+
+            textAnswerHex.setOnLongClickListener {
+                copyToClipboard((it as TextView).text.toString())
+                true
+            }
+        }
+    }
+
+    private fun copyToClipboard(text: String) {
+        clipboard.setPrimaryClip(ClipData.newPlainText(RESULT, text))
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.toast_clipboard, text),
+                Toast.LENGTH_SHORT
+            ).show()
+    }
+
+    /* Setup */
+    private fun setup() {
+        binding.textAnswerBin.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerOct.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerDec.movementMethod = ScrollingMovementMethod()
+        binding.textAnswerHex.movementMethod = ScrollingMovementMethod()
+
+        updateUiAccordingToMode()
+    }
+
     companion object {
         const val MODE_BIN = "bin"
         const val MODE_OCT = "oct"
@@ -277,5 +296,7 @@ class NumberConverterFragment : Fragment(R.layout.fragment_number_converter) {
         const val MODE_HEX = "hex"
 
         const val RESULT = "result"
+
+        fun newInstance(): NumberConverterFragment = NumberConverterFragment()
     }
 }
