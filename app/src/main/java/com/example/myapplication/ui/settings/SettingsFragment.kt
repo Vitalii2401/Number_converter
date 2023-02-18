@@ -15,9 +15,11 @@ class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
 
     interface OnSettingsChanged {
 
-        fun applySettingsChanges()
+        fun applyThemeChange()
 
         fun applyLanguageChange()
+
+        fun applyNightModeChange()
     }
 
     private val settingsViewModel by viewModel<SettingsViewModel>()
@@ -124,7 +126,7 @@ class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
         }
 
         settingsViewModel.changeTheme(theme)
-        applyChanges()
+        onSettingsChanged.applyThemeChange()
     }
 
     private fun changeNightMode(isNightMode: Boolean) {
@@ -134,11 +136,7 @@ class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
         }
 
         settingsViewModel.changeNightModeMask(nightModeMask)
-        applyChanges()
-    }
-
-    private fun applyChanges() {
-        onSettingsChanged.applySettingsChanges()
+        onSettingsChanged.applyNightModeChange()
     }
 
     companion object {

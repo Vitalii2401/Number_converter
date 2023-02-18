@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
 
     /* Activity */
     override fun onCreate(savedInstanceState: Bundle?) {
-        setAppSettings()
+        setAppTheme()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -63,13 +63,17 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
     }
 
     /* OnSettingsChanged */
-    override fun applySettingsChanges() {
+    override fun applyThemeChange() {
         recreate()
     }
 
     override fun applyLanguageChange() {
         val locale = LocaleListCompat.forLanguageTags(mainViewModel.currentLanguage)
         AppCompatDelegate.setApplicationLocales(locale)
+    }
+
+    override fun applyNightModeChange() {
+        AppCompatDelegate.setDefaultNightMode(mainViewModel.currentNightModeMask)
     }
 
     /* FragmentNavigator */
@@ -94,10 +98,8 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
             .commit()
     }
 
-    /* Setup app theme and language */
-    private fun setAppSettings() {
-        AppCompatDelegate.setDefaultNightMode(mainViewModel.currentNightModeMask)
-
+    /* Setup app theme */
+    private fun setAppTheme() {
         when (mainViewModel.currentTheme) {
             SettingsFragment.THEME_ORANGE -> setTheme(R.style.Theme_NumberConverterOrange)
             SettingsFragment.THEME_BLUE -> setTheme(R.style.Theme_NumberConverterBlue)
