@@ -4,16 +4,19 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import androidx.core.app.LocaleManagerCompat
 import com.example.myapplication.ui.settings.SettingsFragment
-import java.util.*
 
 class AppSettings(private val application: Application) {
 
     private val sharedPreferences: SharedPreferences
         get() = application.getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
 
+    private val defaultLocale
+        get() = LocaleManagerCompat.getSystemLocales(application)[0]?.language
+
     fun getLanguage(): String {
-        return sharedPreferences.getString(PREF_TITLE_LANG, Locale.getDefault().language).toString()
+        return sharedPreferences.getString(PREF_TITLE_LANG, defaultLocale).toString()
     }
 
     fun getTheme(): String {

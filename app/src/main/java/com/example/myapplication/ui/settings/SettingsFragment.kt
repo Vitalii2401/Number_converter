@@ -16,6 +16,8 @@ class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
     interface OnSettingsChanged {
 
         fun applySettingsChanges()
+
+        fun applyLanguageChange()
     }
 
     private val settingsViewModel by viewModel<SettingsViewModel>()
@@ -109,7 +111,7 @@ class SettingsFragment : PreferenceFragmentCompat(), HasCustomTitle {
         }
 
         settingsViewModel.changeLanguage(languageCode)
-        applyChanges()
+        onSettingsChanged.applyLanguageChange()
     }
 
     private fun changeTheme(newTheme: String) {
