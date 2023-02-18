@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
         recreate()
     }
 
+    override fun applyLanguageChange() {
+        val locale = LocaleListCompat.forLanguageTags(mainViewModel.currentLanguage)
+        AppCompatDelegate.setApplicationLocales(locale)
+    }
+
     /* FragmentNavigator */
     override fun showSettingsScreen() {
         launchFragment(SettingsFragment.newInstance())
@@ -91,7 +96,6 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
 
     /* Setup app theme and language */
     private fun setAppSettings() {
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(mainViewModel.currentLanguage))
         AppCompatDelegate.setDefaultNightMode(mainViewModel.currentNightModeMask)
 
         when (mainViewModel.currentTheme) {
