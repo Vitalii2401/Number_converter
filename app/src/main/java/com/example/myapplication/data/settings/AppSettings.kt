@@ -3,17 +3,20 @@ package com.example.myapplication.data.settings
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.LocaleManagerCompat
 import com.example.myapplication.ui.settings.SettingsFragment
-import java.util.*
 
 class AppSettings(private val application: Application) {
 
     private val sharedPreferences: SharedPreferences
         get() = application.getSharedPreferences(PREF_DB_NAME, Context.MODE_PRIVATE)
 
+    private val defaultLocale
+        get() = LocaleManagerCompat.getSystemLocales(application)[0]?.language
+
     fun getLanguage(): String {
-        return sharedPreferences.getString(PREF_TITLE_LANG, Locale.getDefault().language).toString()
+        return sharedPreferences.getString(PREF_TITLE_LANG, defaultLocale).toString()
     }
 
     fun getTheme(): String {
@@ -37,12 +40,12 @@ class AppSettings(private val application: Application) {
     }
 
     companion object {
-        private const val PREF_DB_NAME = "app"
+        const val PREF_DB_NAME = "app"
         private const val PREF_TITLE_LANG = "appLanguage"
         private const val PREF_TITLE_THEME = "appTheme"
-        private const val PREF_TITLE_NIGHT_MODE = "nightMode"
+        const val PREF_TITLE_NIGHT_MODE = "nightMode"
 
         private const val THEME_DEFAULT = SettingsFragment.THEME_GREEN
-        private const val NIGHT_MODE_DEFAULT = Configuration.UI_MODE_NIGHT_MASK
+        const val NIGHT_MODE_DEFAULT = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
 }

@@ -1,7 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="Theme.NumberConverterGreen" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <!-- Animation -->
+    <style name="Theme.NumberConverterBase" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:windowAnimationStyle">@style/WindowAnimations</item>
+    </style>
+
+    <style name="WindowAnimations">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <!-- Default application theme -->
+    <style name="Theme.NumberConverterGreen" parent="Theme.NumberConverterBase">
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary_green_lt</item>
@@ -21,7 +31,7 @@
     </style>
 
     <!-- Theme orange -->
-    <style name="Theme.NumberConverterOrange" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="Theme.NumberConverterOrange" parent="Theme.NumberConverterBase">
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary_orange_lt</item>
@@ -41,7 +51,7 @@
     </style>
 
     <!-- Theme blue -->
-    <style name="Theme.NumberConverterBlue" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="Theme.NumberConverterBlue" parent="Theme.NumberConverterBase">
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary_blue_lt</item>
@@ -61,7 +71,7 @@
     </style>
 
     <!-- Theme purple -->
-    <style name="Theme.NumberConverterPurple" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="Theme.NumberConverterPurple" parent="Theme.NumberConverterBase">
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary_purple_lt</item>
