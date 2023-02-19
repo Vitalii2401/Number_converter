@@ -2,6 +2,7 @@ package com.example.myapplication.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
@@ -21,6 +22,12 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            goBack()
+        }
     }
 
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
@@ -50,6 +57,7 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
         }
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
+        onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
 
     override fun onDestroy() {
@@ -58,7 +66,7 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
+        goBack()
         return true
     }
 
@@ -82,7 +90,12 @@ class MainActivity : AppCompatActivity(), FragmentNavigator, OnSettingsChanged {
     }
 
     override fun goBack() {
-        onSupportNavigateUp()
+        if (supportFragmentManager.backStackEntryCount != 0) {
+            supportFragmentManager.popBackStack()
+            return
+        }
+
+        finish()
     }
 
     private fun launchFragment(fragment: Fragment) {
